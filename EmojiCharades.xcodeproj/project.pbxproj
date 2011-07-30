@@ -1,0 +1,478 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		E7AF37A713E4B98300DB58CA /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E7AF37A613E4B98300DB58CA /* UIKit.framework */; };
+		E7AF37A913E4B98300DB58CA /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E7AF37A813E4B98300DB58CA /* Foundation.framework */; };
+		E7AF37AB13E4B98300DB58CA /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E7AF37AA13E4B98300DB58CA /* CoreGraphics.framework */; };
+		E7AF37AD13E4B98300DB58CA /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E7AF37AC13E4B98300DB58CA /* CoreData.framework */; };
+		E7AF37B313E4B98300DB58CA /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = E7AF37B113E4B98300DB58CA /* InfoPlist.strings */; };
+		E7AF37B513E4B98300DB58CA /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = E7AF37B413E4B98300DB58CA /* main.m */; };
+		E7AF37B913E4B98300DB58CA /* EmojiCharadesAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = E7AF37B813E4B98300DB58CA /* EmojiCharadesAppDelegate.m */; };
+		E7AF37BC13E4B98300DB58CA /* EmojiCharades.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = E7AF37BA13E4B98300DB58CA /* EmojiCharades.xcdatamodeld */; };
+		E7AF37BF13E4B98300DB58CA /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = E7AF37BD13E4B98300DB58CA /* MainWindow.xib */; };
+		E7AF37C213E4B98300DB58CA /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E7AF37C113E4B98300DB58CA /* RootViewController.m */; };
+		E7AF37C513E4B98300DB58CA /* RootViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E7AF37C313E4B98300DB58CA /* RootViewController.xib */; };
+		E7AF37CD13E4B98300DB58CA /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E7AF37CC13E4B98300DB58CA /* SenTestingKit.framework */; };
+		E7AF37CE13E4B98300DB58CA /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E7AF37A613E4B98300DB58CA /* UIKit.framework */; };
+		E7AF37CF13E4B98300DB58CA /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E7AF37A813E4B98300DB58CA /* Foundation.framework */; };
+		E7AF37D013E4B98300DB58CA /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E7AF37AA13E4B98300DB58CA /* CoreGraphics.framework */; };
+		E7AF37D113E4B98300DB58CA /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E7AF37AC13E4B98300DB58CA /* CoreData.framework */; };
+		E7AF37D913E4B98300DB58CA /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = E7AF37D713E4B98300DB58CA /* InfoPlist.strings */; };
+		E7AF37DB13E4B98300DB58CA /* EmojiCharadesTests.h in Resources */ = {isa = PBXBuildFile; fileRef = E7AF37DA13E4B98300DB58CA /* EmojiCharadesTests.h */; };
+		E7AF37DD13E4B98300DB58CA /* EmojiCharadesTests.m in Sources */ = {isa = PBXBuildFile; fileRef = E7AF37DC13E4B98300DB58CA /* EmojiCharadesTests.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		E7AF37D213E4B98300DB58CA /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = E7AF379913E4B98200DB58CA /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = E7AF37A113E4B98300DB58CA;
+			remoteInfo = EmojiCharades;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		E7AF37A213E4B98300DB58CA /* EmojiCharades.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EmojiCharades.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		E7AF37A613E4B98300DB58CA /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		E7AF37A813E4B98300DB58CA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		E7AF37AA13E4B98300DB58CA /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		E7AF37AC13E4B98300DB58CA /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		E7AF37B013E4B98300DB58CA /* EmojiCharades-Info.plist */ = {isa = PBXFileReference; path = "EmojiCharades-Info.plist"; sourceTree = "<group>"; };
+		E7AF37B213E4B98300DB58CA /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		E7AF37B413E4B98300DB58CA /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		E7AF37B613E4B98300DB58CA /* EmojiCharades-Prefix.pch */ = {isa = PBXFileReference; path = "EmojiCharades-Prefix.pch"; sourceTree = "<group>"; };
+		E7AF37B713E4B98300DB58CA /* EmojiCharadesAppDelegate.h */ = {isa = PBXFileReference; path = EmojiCharadesAppDelegate.h; sourceTree = "<group>"; };
+		E7AF37B813E4B98300DB58CA /* EmojiCharadesAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EmojiCharadesAppDelegate.m; sourceTree = "<group>"; };
+		E7AF37BB13E4B98300DB58CA /* EmojiCharades.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = EmojiCharades.xcdatamodel; sourceTree = "<group>"; };
+		E7AF37BE13E4B98300DB58CA /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainWindow.xib; sourceTree = "<group>"; };
+		E7AF37C013E4B98300DB58CA /* RootViewController.h */ = {isa = PBXFileReference; path = RootViewController.h; sourceTree = "<group>"; };
+		E7AF37C113E4B98300DB58CA /* RootViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RootViewController.m; sourceTree = "<group>"; };
+		E7AF37C413E4B98300DB58CA /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/RootViewController.xib; sourceTree = "<group>"; };
+		E7AF37CB13E4B98300DB58CA /* EmojiCharadesTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = EmojiCharadesTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
+		E7AF37CC13E4B98300DB58CA /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
+		E7AF37D613E4B98300DB58CA /* EmojiCharadesTests-Info.plist */ = {isa = PBXFileReference; path = "EmojiCharadesTests-Info.plist"; sourceTree = "<group>"; };
+		E7AF37D813E4B98300DB58CA /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		E7AF37DA13E4B98300DB58CA /* EmojiCharadesTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EmojiCharadesTests.h; sourceTree = "<group>"; };
+		E7AF37DC13E4B98300DB58CA /* EmojiCharadesTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EmojiCharadesTests.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		E7AF379F13E4B98300DB58CA /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E7AF37A713E4B98300DB58CA /* UIKit.framework in Frameworks */,
+				E7AF37A913E4B98300DB58CA /* Foundation.framework in Frameworks */,
+				E7AF37AB13E4B98300DB58CA /* CoreGraphics.framework in Frameworks */,
+				E7AF37AD13E4B98300DB58CA /* CoreData.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E7AF37C713E4B98300DB58CA /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E7AF37CD13E4B98300DB58CA /* SenTestingKit.framework in Frameworks */,
+				E7AF37CE13E4B98300DB58CA /* UIKit.framework in Frameworks */,
+				E7AF37CF13E4B98300DB58CA /* Foundation.framework in Frameworks */,
+				E7AF37D013E4B98300DB58CA /* CoreGraphics.framework in Frameworks */,
+				E7AF37D113E4B98300DB58CA /* CoreData.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		E7AF379713E4B98200DB58CA = {
+			isa = PBXGroup;
+			children = (
+				E7AF37AE13E4B98300DB58CA /* EmojiCharades */,
+				E7AF37D413E4B98300DB58CA /* EmojiCharadesTests */,
+				E7AF37A513E4B98300DB58CA /* Frameworks */,
+				E7AF37A313E4B98300DB58CA /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		E7AF37A313E4B98300DB58CA /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				E7AF37A213E4B98300DB58CA /* EmojiCharades.app */,
+				E7AF37CB13E4B98300DB58CA /* EmojiCharadesTests.octest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		E7AF37A513E4B98300DB58CA /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				E7AF37A613E4B98300DB58CA /* UIKit.framework */,
+				E7AF37A813E4B98300DB58CA /* Foundation.framework */,
+				E7AF37AA13E4B98300DB58CA /* CoreGraphics.framework */,
+				E7AF37AC13E4B98300DB58CA /* CoreData.framework */,
+				E7AF37CC13E4B98300DB58CA /* SenTestingKit.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		E7AF37AE13E4B98300DB58CA /* EmojiCharades */ = {
+			isa = PBXGroup;
+			children = (
+				E7AF37B713E4B98300DB58CA /* EmojiCharadesAppDelegate.h */,
+				E7AF37B813E4B98300DB58CA /* EmojiCharadesAppDelegate.m */,
+				E7AF37BD13E4B98300DB58CA /* MainWindow.xib */,
+				E7AF37C013E4B98300DB58CA /* RootViewController.h */,
+				E7AF37C113E4B98300DB58CA /* RootViewController.m */,
+				E7AF37C313E4B98300DB58CA /* RootViewController.xib */,
+				E7AF37BA13E4B98300DB58CA /* EmojiCharades.xcdatamodeld */,
+				E7AF37AF13E4B98300DB58CA /* Supporting Files */,
+			);
+			path = EmojiCharades;
+			sourceTree = "<group>";
+		};
+		E7AF37AF13E4B98300DB58CA /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				E7AF37B013E4B98300DB58CA /* EmojiCharades-Info.plist */,
+				E7AF37B113E4B98300DB58CA /* InfoPlist.strings */,
+				E7AF37B413E4B98300DB58CA /* main.m */,
+				E7AF37B613E4B98300DB58CA /* EmojiCharades-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		E7AF37D413E4B98300DB58CA /* EmojiCharadesTests */ = {
+			isa = PBXGroup;
+			children = (
+				E7AF37DA13E4B98300DB58CA /* EmojiCharadesTests.h */,
+				E7AF37DC13E4B98300DB58CA /* EmojiCharadesTests.m */,
+				E7AF37D513E4B98300DB58CA /* Supporting Files */,
+			);
+			path = EmojiCharadesTests;
+			sourceTree = "<group>";
+		};
+		E7AF37D513E4B98300DB58CA /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				E7AF37D613E4B98300DB58CA /* EmojiCharadesTests-Info.plist */,
+				E7AF37D713E4B98300DB58CA /* InfoPlist.strings */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		E7AF37A113E4B98300DB58CA /* EmojiCharades */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = E7AF37E013E4B98300DB58CA /* Build configuration list for PBXNativeTarget "EmojiCharades" */;
+			buildPhases = (
+				E7AF379E13E4B98300DB58CA /* Sources */,
+				E7AF379F13E4B98300DB58CA /* Frameworks */,
+				E7AF37A013E4B98300DB58CA /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = EmojiCharades;
+			productName = EmojiCharades;
+			productReference = E7AF37A213E4B98300DB58CA /* EmojiCharades.app */;
+			productType = "com.apple.product-type.application";
+		};
+		E7AF37CA13E4B98300DB58CA /* EmojiCharadesTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = E7AF37E313E4B98300DB58CA /* Build configuration list for PBXNativeTarget "EmojiCharadesTests" */;
+			buildPhases = (
+				E7AF37C613E4B98300DB58CA /* Sources */,
+				E7AF37C713E4B98300DB58CA /* Frameworks */,
+				E7AF37C813E4B98300DB58CA /* Resources */,
+				E7AF37C913E4B98300DB58CA /* ShellScript */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				E7AF37D313E4B98300DB58CA /* PBXTargetDependency */,
+			);
+			name = EmojiCharadesTests;
+			productName = EmojiCharadesTests;
+			productReference = E7AF37CB13E4B98300DB58CA /* EmojiCharadesTests.octest */;
+			productType = "com.apple.product-type.bundle";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		E7AF379913E4B98200DB58CA /* Project object */ = {
+			isa = PBXProject;
+			buildConfigurationList = E7AF379C13E4B98200DB58CA /* Build configuration list for PBXProject "EmojiCharades" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = E7AF379713E4B98200DB58CA;
+			productRefGroup = E7AF37A313E4B98300DB58CA /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				E7AF37A113E4B98300DB58CA /* EmojiCharades */,
+				E7AF37CA13E4B98300DB58CA /* EmojiCharadesTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		E7AF37A013E4B98300DB58CA /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E7AF37B313E4B98300DB58CA /* InfoPlist.strings in Resources */,
+				E7AF37BF13E4B98300DB58CA /* MainWindow.xib in Resources */,
+				E7AF37C513E4B98300DB58CA /* RootViewController.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E7AF37C813E4B98300DB58CA /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E7AF37D913E4B98300DB58CA /* InfoPlist.strings in Resources */,
+				E7AF37DB13E4B98300DB58CA /* EmojiCharadesTests.h in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		E7AF37C913E4B98300DB58CA /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Run the unit tests in this test bundle.\n\"${SYSTEM_DEVELOPER_DIR}/Tools/RunUnitTests\"\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		E7AF379E13E4B98300DB58CA /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E7AF37B513E4B98300DB58CA /* main.m in Sources */,
+				E7AF37B913E4B98300DB58CA /* EmojiCharadesAppDelegate.m in Sources */,
+				E7AF37BC13E4B98300DB58CA /* EmojiCharades.xcdatamodeld in Sources */,
+				E7AF37C213E4B98300DB58CA /* RootViewController.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E7AF37C613E4B98300DB58CA /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E7AF37DD13E4B98300DB58CA /* EmojiCharadesTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		E7AF37D313E4B98300DB58CA /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = E7AF37A113E4B98300DB58CA /* EmojiCharades */;
+			targetProxy = E7AF37D213E4B98300DB58CA /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		E7AF37B113E4B98300DB58CA /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				E7AF37B213E4B98300DB58CA /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		E7AF37BD13E4B98300DB58CA /* MainWindow.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				E7AF37BE13E4B98300DB58CA /* en */,
+			);
+			name = MainWindow.xib;
+			sourceTree = "<group>";
+		};
+		E7AF37C313E4B98300DB58CA /* RootViewController.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				E7AF37C413E4B98300DB58CA /* en */,
+			);
+			name = RootViewController.xib;
+			sourceTree = "<group>";
+		};
+		E7AF37D713E4B98300DB58CA /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				E7AF37D813E4B98300DB58CA /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		E7AF37DE13E4B98300DB58CA /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvmgcc42;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		E7AF37DF13E4B98300DB58CA /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_VERSION = com.apple.compilers.llvmgcc42;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		E7AF37E113E4B98300DB58CA /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "EmojiCharades/EmojiCharades-Prefix.pch";
+				INFOPLIST_FILE = "EmojiCharades/EmojiCharades-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		E7AF37E213E4B98300DB58CA /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "EmojiCharades/EmojiCharades-Prefix.pch";
+				INFOPLIST_FILE = "EmojiCharades/EmojiCharades-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+		E7AF37E413E4B98300DB58CA /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/EmojiCharades.app/EmojiCharades";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(DEVELOPER_LIBRARY_DIR)/Frameworks",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "EmojiCharades/EmojiCharades-Prefix.pch";
+				INFOPLIST_FILE = "EmojiCharadesTests/EmojiCharadesTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Debug;
+		};
+		E7AF37E513E4B98300DB58CA /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/EmojiCharades.app/EmojiCharades";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(DEVELOPER_LIBRARY_DIR)/Frameworks",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "EmojiCharades/EmojiCharades-Prefix.pch";
+				INFOPLIST_FILE = "EmojiCharadesTests/EmojiCharadesTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		E7AF379C13E4B98200DB58CA /* Build configuration list for PBXProject "EmojiCharades" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E7AF37DE13E4B98300DB58CA /* Debug */,
+				E7AF37DF13E4B98300DB58CA /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		E7AF37E013E4B98300DB58CA /* Build configuration list for PBXNativeTarget "EmojiCharades" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E7AF37E113E4B98300DB58CA /* Debug */,
+				E7AF37E213E4B98300DB58CA /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		E7AF37E313E4B98300DB58CA /* Build configuration list for PBXNativeTarget "EmojiCharadesTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E7AF37E413E4B98300DB58CA /* Debug */,
+				E7AF37E513E4B98300DB58CA /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		E7AF37BA13E4B98300DB58CA /* EmojiCharades.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				E7AF37BB13E4B98300DB58CA /* EmojiCharades.xcdatamodel */,
+			);
+			currentVersion = E7AF37BB13E4B98300DB58CA /* EmojiCharades.xcdatamodel */;
+			path = EmojiCharades.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
+	};
+	rootObject = E7AF379913E4B98200DB58CA /* Project object */;
+}
