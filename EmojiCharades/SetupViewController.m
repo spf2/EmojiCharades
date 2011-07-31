@@ -10,6 +10,15 @@
 
 @implementation SetupViewController
 
+@synthesize doneButton;
+@synthesize warningLabel;
+@synthesize delegate;
+@synthesize userNameTextField;
+
+- (IBAction)userNameDone:(id)sender {
+    [delegate addedUserName:userNameTextField.text];
+}
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -27,6 +36,22 @@
     // Release any cached data, images, etc that aren't in use.
 }
 
+- (BOOL)textFieldShouldReturn:(UITextField *)theTextField {
+    if (theTextField == self.userNameTextField) {
+        [theTextField resignFirstResponder];
+    }
+    return YES;
+}
+
+- (void)showWarning:(NSString *)message {
+    warningLabel.text = message;
+    userNameTextField.text = @"";
+}
+
+- (IBAction)userNameEditingDidBegin:(id)sender {
+    warningLabel.text = @"";
+}
+
 #pragma mark - View lifecycle
 
 - (void)viewDidLoad
@@ -37,7 +62,10 @@
 
 - (void)viewDidUnload
 {
+    [self setDoneButton:nil];
+    [self setWarningLabel:nil];
     [super viewDidUnload];
+    self.userNameTextField = nil;
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
 }
@@ -48,4 +76,12 @@
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 
+- (void)dealloc {
+    [userNameTextField release];
+    [doneButton release];
+    [warningLabel release];
+    [super dealloc];
+}
+- (IBAction)userNameChanged:(id)sender {
+}
 @end

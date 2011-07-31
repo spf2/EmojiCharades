@@ -6,7 +6,9 @@
 //  Copyright 2011 __MyCompanyName__. All rights reserved.
 //
 
+#import "EmojiCharadesAppDelegate.h"
 #import "RootViewController.h"
+#import "SetupViewController.h"
 
 @interface RootViewController ()
 - (void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath;
@@ -16,12 +18,17 @@
 
 @synthesize fetchedResultsController = __fetchedResultsController;
 @synthesize managedObjectContext = __managedObjectContext;
+@synthesize emojiCharadesDelegate;
+@synthesize setupController;
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    // Set up the edit and add buttons.
-    self.navigationItem.leftBarButtonItem = self.editButtonItem;
+    
+    self.emojiCharadesDelegate = (EmojiCharadesAppDelegate *)[UIApplication sharedApplication].delegate;
+    if (self.emojiCharadesDelegate.needsSetup) {
+        [self userSetup];
+    }
 
     UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(insertNewObject)];
     self.navigationItem.rightBarButtonItem = addButton;
@@ -47,6 +54,29 @@
 {
 	[super viewDidDisappear:animated];
 }
+
+
+- (void)userSetup
+{
+    self.setupController = [[SetupViewController alloc]
+                            initWithNibName:@"SetupViewController" bundle:nil];
+    [self.setupController setModalTransitionStyle:UIModalTransitionStyleCoverVertical];
+    self.setupController.delegate = self;
+    [self presentModalViewController:self.setupController animated:YES];
+}
+
+- (void)addedUserName:(NSString *)name {
+    [self.emojiCharadesDelegate tryToSetUserName:name notify:self];
+}
+
+- (void)userSetupDone:(NSString *)error {
+    if (error == nil) {
+        [self dismissModalViewControllerAnimated:YES];
+    } else {
+        [self.setupController showWarning:error];
+    }
+}
+
 
 /*
  // Override to allow orientations other than the default portrait orientation.
@@ -83,14 +113,11 @@
     return cell;
 }
 
-/*
 // Override to support conditional editing of the table view.
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    // Return NO if you do not want the specified item to be editable.
     return YES;
 }
-*/
 
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -102,13 +129,7 @@
         
         // Save the context.
         NSError *error = nil;
-        if (![context save:&error])
-        {
-            /*
-             Replace this implementation with code to handle the error appropriately.
-             
-             abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development. If it is not possible to recover from the error, display an alert panel that instructs the user to quit the application by pressing the Home button.
-             */
+        if (![context save:&error]) {
             NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
             abort();
         }
@@ -158,7 +179,7 @@
 - (void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath
 {
     NSManagedObject *managedObject = [self.fetchedResultsController objectAtIndexPath:indexPath];
-    cell.textLabel.text = [[managedObject valueForKey:@"timeStamp"] description];
+    cell.textLabel.text = [[managedObject valueForKey:@"hint"] description];
 }
 
 - (void)insertNewObject
@@ -170,17 +191,11 @@
     
     // If appropriate, configure the new managed object.
     // Normally you should use accessor methods, but using KVC here avoids the need to add a custom class to the template.
-    [newManagedObject setValue:[NSDate date] forKey:@"timeStamp"];
+    [newManagedObject setValue:[NSDate date] forKey:@"created_at"];
     
     // Save the context.
     NSError *error = nil;
-    if (![context save:&error])
-    {
-        /*
-         Replace this implementation with code to handle the error appropriately.
-         
-         abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development. If it is not possible to recover from the error, display an alert panel that instructs the user to quit the application by pressing the Home button.
-         */
+    if (![context save:&error]) {
         NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
         abort();
     }
@@ -201,14 +216,14 @@
     // Create the fetch request for the entity.
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
     // Edit the entity name as appropriate.
-    NSEntityDescription *entity = [NSEntityDescription entityForName:@"Event" inManagedObjectContext:self.managedObjectContext];
+    NSEntityDescription *entity = [NSEntityDescription
+                                   entityForName:@"Game"
+                                   inManagedObjectContext:self.managedObjectContext];
     [fetchRequest setEntity:entity];
-    
-    // Set the batch size to a suitable number.
     [fetchRequest setFetchBatchSize:20];
-    
-    // Edit the sort key as appropriate.
-    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"timeStamp" ascending:NO];
+    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc]
+                                        initWithKey:@"created_at"
+                                        ascending:NO];
     NSArray *sortDescriptors = [[NSArray alloc] initWithObjects:sortDescriptor, nil];
     
     [fetchRequest setSortDescriptors:sortDescriptors];
@@ -225,13 +240,7 @@
     [sortDescriptors release];
 
 	NSError *error = nil;
-	if (![self.fetchedResultsController performFetch:&error])
-        {
-	    /*
-	     Replace this implementation with code to handle the error appropriately.
-
-	     abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development. If it is not possible to recover from the error, display an alert panel that instructs the user to quit the application by pressing the Home button.
-	     */
+	if (![self.fetchedResultsController performFetch:&error]) {
 	    NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
 	    abort();
 	}
