@@ -11,8 +11,9 @@
 #import <CoreData/CoreData.h>
 #import "SetupViewController.h"
 #import "EmojiCharadesAppDelegate.h"
+#import <RestKit/RestKit.h>
 
-@interface RootViewController : UITableViewController <NSFetchedResultsControllerDelegate,SetupViewDelegate, UserSetupDelegate>
+@interface RootViewController : UITableViewController <NSFetchedResultsControllerDelegate,RKObjectLoaderDelegate>
 
 @property (nonatomic, retain) NSFetchedResultsController *fetchedResultsController;
 @property (nonatomic, retain) NSManagedObjectContext *managedObjectContext;
@@ -21,5 +22,6 @@
 
 - (void)userSetup;
 - (void)addedUserName:(NSString *)name;
+- (void)loadGamesFromService;
 
 @end

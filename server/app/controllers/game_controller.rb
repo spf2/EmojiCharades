@@ -3,7 +3,7 @@ class GameController < ApplicationController
 
   def index
     games = Game.all
-    render :xml => games.to_xml(:include => {
+    render :json => games.to_json(:include => {
                                   :owner => {},
                                   :turns => { :include => :user }
                                 })
@@ -12,11 +12,11 @@ class GameController < ApplicationController
   def create
     game = Game.new(params[:game])
     game.save!
-    render :xml => game
+    render :json => game
   end
 
   def show
     game = Game.find(params[:id])
-    render :xml => game.to_xml
+    render :json => game.to_json
   end
 end

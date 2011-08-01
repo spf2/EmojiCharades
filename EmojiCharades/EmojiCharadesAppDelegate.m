@@ -11,6 +11,12 @@
 #import "RootViewController.h"
 #import "SetupViewController.h"
 #import "SMXMLDocument.h"
+#import "RestKit/RestKit.h"
+#import "Restkit/CoreData/CoreData.h"
+#import "ECUser.h"
+#import "ECGame.h"
+#import "ECTurn.h"
+#import "Constants.h"
 
 @implementation EmojiCharadesAppDelegate
 
@@ -19,6 +25,7 @@
 @synthesize managedObjectModel = __managedObjectModel;
 @synthesize persistentStoreCoordinator = __persistentStoreCoordinator;
 @synthesize navigationController = _navigationController;
+
 @synthesize receivedData;
 @synthesize urlConnection;
 @synthesize userCache;
@@ -26,17 +33,26 @@
 @synthesize serviceURL;
 @synthesize userName;
 
-NSString * const DateFormat = @"yyyy-MM-dd'T'HH:mm:ss'Z'";
-
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // Override point for customization after application launch.
     // Add the navigation controller's view to the window and display.
+    self.dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:ECDateFormat];
+    [self configure];
+
+    RKObjectManager *objectManager = [RKObjectManager objectManagerWithBaseURL:self.serviceURL];
+    [RKRequestQueue sharedQueue].showsNetworkActivityIndicatorWhenBusy = YES;
+    NSString *databaseName = @"EmojiCharades.sqlite";
+    objectManager.objectStore = [RKManagedObjectStore objectStoreWithStoreFilename:databaseName];
+    [ECUser setupMappingWithObjectManager:objectManager];
+    [ECGame setupMappingWithObjectManager:objectManager];
+    [ECTurn setupMappingWithObjectManager:objectManager];
+
+    // Start visuals
     self.window.rootViewController = self.navigationController;
     [self.window makeKeyAndVisible];
-    self.dateFormatter = [[NSDateFormatter alloc] init];
-    [dateFormatter setDateFormat:DateFormat];
-    [self configure];
+    
     return YES;
 }
 
@@ -52,7 +68,7 @@ NSString * const DateFormat = @"yyyy-MM-dd'T'HH:mm:ss'Z'";
 
 - (BOOL)needsSetup
 {
-    return self.userName == nil;
+    return (self.userName == nil);
 }
 
 - (void)showError:(NSString *)message
@@ -66,195 +82,22 @@ NSString * const DateFormat = @"yyyy-MM-dd'T'HH:mm:ss'Z'";
     [alert release];    
 }
 
-- (void)tryToSetUserName:(NSString *)userName notify:(id<UserSetupDelegate>) delegate {
-
+/*
+- (void)tryToSetUserName:(NSString *)name notify:(id<SetupUserDelegate>) delegate {
+    chainedSetupUserDelegate = delegate;
+    userName = name; 
+    [service setupUser:name delegate:self];
 }
 
-
-- (void)populateGames
-{
-    
-    NSString *uri = [NSString stringWithFormat:@"%@/game.xml", self.serviceURL];
-    NSURLRequest *request = [NSURLRequest 
-                             requestWithURL:[NSURL URLWithString:uri]
-                             cachePolicy:NSURLRequestUseProtocolCachePolicy
-                             timeoutInterval:60.0];
-    urlConnection = [[NSURLConnection alloc] initWithRequest:request delegate:self];
-    if (urlConnection) {
-        receivedData = [[NSMutableData data] retain];
-    } else {
-        NSLog(@"Could not fetch data from: %@", request.URL);
-        [self showError:@"Could not fetch data"];
+- (void)setupUserDone:(NSString *)error {
+    if (error == nil) {
+        // write to properties
     }
+    [chainedSetupUserDelegate setupUserDone:error];
 }
+*/
 
-- (void) mergeDataFromService
-{    
-    NSError *error;
-    NSMutableDictionary *currentGames = [[NSMutableDictionary alloc] init];
-    NSMutableDictionary *currentUsers = [[NSMutableDictionary alloc] init];
-    SMXMLDocument *document = [SMXMLDocument documentWithData:receivedData error:&error];
-    for (SMXMLElement *gameElem in [document.root childrenNamed:@"game"]) {
-        NSString *gameId = [[gameElem childNamed:@"id"] value];
-        [currentGames setObject:gameElem forKey:gameId];
-        NSString *userId = [[gameElem childNamed:@"owner-id"] value];
-        [currentUsers setObject:[gameElem childNamed:@"owner"] forKey:userId];
-        for (SMXMLElement *turnElem in [[gameElem childNamed:@"turns"] childrenNamed:@"turn"]) {
-            NSString *turnUserId = [[turnElem childNamed:@"user-id"] value];
-            [currentUsers setObject:[turnElem childNamed:@"user"] forKey:turnUserId];
-        }
-    }
-    NSLog(@"%d games, %d users from server", [currentGames count], [currentUsers count]);
-    
-    NSManagedObjectContext *context = [self managedObjectContext];
-    [context lock];
-    NSEntityDescription *userEntity = [NSEntityDescription 
-                                       entityForName:@"User"
-                                       inManagedObjectContext:context];
-    NSEntityDescription *gameEntity = [NSEntityDescription 
-                                       entityForName:@"Game"
-                                       inManagedObjectContext:context];
-    
-    self.userCache = [[NSMutableDictionary alloc] init];
-    [self performMerge:currentUsers withEntity:userEntity];
-    [self performMerge:currentGames withEntity:gameEntity];
-    [self.userCache removeAllObjects];
-    
-    if (![context save:&error]) {
-        NSLog(@"Whoops, couldn't save: %@", [error localizedDescription]);
-        [self showError:@"Couldn't save"];
-    }
-    [context unlock];
-}
 
-- (void) performMerge:(NSMutableDictionary *)currentDict
-           withEntity:(NSEntityDescription *)entity
-{
-    BOOL isGame = [[entity name] isEqualToString:@"Game"];
-    NSInteger numSkipped = 0, numUpdated = 0, numCreated = 0;
-    NSManagedObjectContext *context = [self managedObjectContext];
-    NSError* error;
-    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"id IN %@", [currentDict allKeys]];
-    [fetchRequest setPredicate:predicate];
-    [fetchRequest setEntity:entity];
-    NSArray *fetchedObjs = [context executeFetchRequest:fetchRequest error:&error];
-    NSEnumerator *fetchedObjsEnum = fetchedObjs.objectEnumerator;
-    NSManagedObject *fetchedObj;
-    while ((fetchedObj = fetchedObjsEnum.nextObject)) {
-        NSString *objId = [[fetchedObj valueForKey:@"id"] stringValue];
-        SMXMLElement *serverElem = [currentDict objectForKey:objId];
-        NSString *serverUpdatedAtStr = [[serverElem childNamed:@"updated-at"] value];
-        NSDate *serverUpdatedAt = [dateFormatter dateFromString:serverUpdatedAtStr];
-        NSDate *fetchedUpdatedAt = [fetchedObj valueForKey:@"updated_at"];
-        NSComparisonResult result = [serverUpdatedAt compare:fetchedUpdatedAt];
-        if (result != NSOrderedSame) {
-            if (isGame) {
-                [self saveGame:serverElem gameObj:fetchedObj];
-            } else {
-                [self saveUser:serverElem userObj:fetchedObj];
-            }
-            numUpdated++;
-        } else {
-            numSkipped++;
-        }
-        [currentDict removeObjectForKey:objId]; 
-    }
-    
-    NSEnumerator *currentElemEnum = [currentDict objectEnumerator];
-    SMXMLElement *currentElem;
-    while (currentElem = [currentElemEnum nextObject]) {
-        if (isGame) {
-            [self saveGame:currentElem gameObj:NULL];
-        } else {
-            [self saveUser:currentElem userObj:NULL];
-        }
-        numCreated++;
-    }
-    NSLog(@"%@ skipped: %d updated: %d created: %d", 
-          [entity name], numSkipped, numUpdated, numCreated);
-}
-
-- (void) saveGame:(SMXMLElement *)gameElem gameObj:(NSManagedObject *)game
-{
-    NSManagedObjectContext *context = self.managedObjectContext;
-    if (!game) {
-        game = [NSEntityDescription
-                insertNewObjectForEntityForName:@"Game" 
-                inManagedObjectContext:context];
-    }
-    [game setValue:[[gameElem childNamed:@"hint"] value] forKey:@"hint"];
-    [game setValue:[dateFormatter dateFromString:[[gameElem childNamed:@"updated-at"] value]] 
-            forKey:@"updated_at"];
-    [game setValue:[dateFormatter dateFromString:[[gameElem childNamed:@"created-at"] value]]
-            forKey:@"created_at"];
-    NSString *doneAtStr = [[gameElem childNamed:@"done-at"] value];
-    if (doneAtStr) {
-        [game setValue:[dateFormatter dateFromString:doneAtStr] forKey:@"done_at"];
-    }
-    NSString *gameId = [[gameElem childNamed:@"id"] value];
-    [game setValue:[NSNumber numberWithInteger:[gameId integerValue]] forKey:@"id"];
-    NSManagedObject *user = [self.userCache objectForKey:[[gameElem childNamed:@"owner-id"] value]];
-    [game setValue:user forKey:@"owner"];
-    NSSet *turns = [game valueForKey:@"turns"];
-    NSMutableSet *turnIds = [[NSMutableSet alloc] init];
-    NSEnumerator *turnsEnum = [turns objectEnumerator];
-    NSManagedObject *turn;
-    while (turn = [turnsEnum nextObject]) {
-        [turnIds addObject:[turn valueForKey:@"id"]];
-    }
-    
-    for (SMXMLElement *turnElem in [gameElem childrenNamed:@"turn"]) {
-        NSString *turnId = [[turnElem childNamed:@"id"] value];
-        if ([turnIds containsObject:turnId]) continue;
-        NSManagedObject *turn = [NSEntityDescription
-                                 insertNewObjectForEntityForName:@"Turn" 
-                                 inManagedObjectContext:context];
-        [turn setValue:[NSNumber numberWithInteger:[turnId integerValue]] forKey:@"id"];
-        [turn setValue:[[turnElem childNamed:@"guess"] value] forKey:@"guess"];
-        [turn setValue:[dateFormatter dateFromString:[[turnElem childNamed:@"updated-at"] value]] forKey:@"updated_at"];
-        [turn setValue:[dateFormatter dateFromString:[[turnElem childNamed:@"created-at"] value]] forKey:@"created_at"];
-        user = [self.userCache objectForKey:[[turnElem childNamed:@"user-id"] value]];
-        [turn setValue:user forKey:@"user"];
-        [turn setValue:game forKey:@"game"];
-    }
-}
-
-- (void) saveUser: (SMXMLElement *)userElem userObj:(NSManagedObject *)user
-{
-    NSManagedObjectContext *context = [self managedObjectContext];
-    if (!user) {
-        user = [NSEntityDescription
-                insertNewObjectForEntityForName:@"User" 
-                inManagedObjectContext:context];
-    }
-    [user setValue:[[userElem childNamed:@"name"] value] forKey:@"name"];
-    [user setValue:[dateFormatter dateFromString:[[userElem childNamed:@"updated-at"] value]]
-            forKey:@"updated_at"];
-    [user setValue:[dateFormatter dateFromString:[[userElem childNamed:@"created-at"] value]]
-            forKey:@"created_at"];
-    NSString *userId = [[userElem childNamed:@"id"] value];
-    [user setValue:[NSNumber numberWithInteger:[userId integerValue]] forKey:@"id"];
-    [self.userCache setObject:user forKey:userId];
-}
-
--(void)connection:(NSURLConnection *)connection didReceiveResponse: (NSURLResponse *)response
-{
-    [receivedData setLength:0];
-}
-
--(void)connection:(NSURLConnection *)connection didReceiveData: (NSData *)data
-{
-    [receivedData appendData:data];     
-}
-
--(void)connectionDidFinishLoading:(NSURLConnection *)connection
-{
-    NSLog( @"Succeeded! Received %d bytes of data", [receivedData length] );
-    [self mergeDataFromService];
-    [urlConnection release];
-    [receivedData release];
-}
 
 - (void)applicationWillResignActive:(UIApplication *)application
 {

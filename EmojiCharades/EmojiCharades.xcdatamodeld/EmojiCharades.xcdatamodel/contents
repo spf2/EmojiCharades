@@ -1,34 +1,34 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model name="" userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="562" systemVersion="11A2063" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
-    <entity name="Game">
-        <attribute name="created_at" attributeType="Date"/>
-        <attribute name="done_at" optional="YES" attributeType="Date"/>
+    <entity name="ECGame">
+        <attribute name="createdAt" attributeType="Date"/>
+        <attribute name="doneAt" optional="YES" attributeType="Date"/>
+        <attribute name="gameID" attributeType="Integer 32" defaultValueString="0" indexed="YES"/>
         <attribute name="hint" attributeType="String"/>
-        <attribute name="id" attributeType="Integer 32" defaultValueString="0" indexed="YES"/>
-        <attribute name="updated_at" attributeType="Date"/>
-        <relationship name="owner" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="User" inverseName="games" inverseEntity="User"/>
-        <relationship name="turns" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Turn" inverseName="game" inverseEntity="Turn"/>
+        <attribute name="updatedAt" attributeType="Date"/>
+        <relationship name="owner" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="ECUser" inverseName="games" inverseEntity="ECUser"/>
+        <relationship name="turns" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="ECTurn" inverseName="game" inverseEntity="ECTurn"/>
     </entity>
-    <entity name="Turn">
-        <attribute name="created_at" attributeType="Date" indexed="YES"/>
+    <entity name="ECTurn">
+        <attribute name="createdAt" attributeType="Date" indexed="YES"/>
         <attribute name="guess" attributeType="String"/>
-        <attribute name="id" attributeType="Integer 32" defaultValueString="0" indexed="YES"/>
         <attribute name="score" optional="YES" attributeType="Integer 32" defaultValueString="0"/>
-        <attribute name="updated_at" attributeType="Date"/>
-        <relationship name="game" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Game" inverseName="turns" inverseEntity="Game"/>
-        <relationship name="user" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="User" inverseName="turns" inverseEntity="User"/>
+        <attribute name="turnID" attributeType="Integer 32" defaultValueString="0" indexed="YES"/>
+        <attribute name="updatedAt" attributeType="Date"/>
+        <relationship name="game" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="ECGame" inverseName="turns" inverseEntity="ECGame"/>
+        <relationship name="user" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="ECUser" inverseName="turns" inverseEntity="ECUser"/>
     </entity>
-    <entity name="User">
-        <attribute name="created_at" attributeType="Date"/>
-        <attribute name="id" attributeType="Integer 32" defaultValueString="0" indexed="YES"/>
+    <entity name="ECUser">
+        <attribute name="createdAt" attributeType="Date"/>
         <attribute name="name" attributeType="String"/>
-        <attribute name="updated_at" attributeType="Date"/>
-        <relationship name="games" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Game" inverseName="owner" inverseEntity="Game"/>
-        <relationship name="turns" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Turn" inverseName="user" inverseEntity="Turn"/>
+        <attribute name="updatedAt" attributeType="Date"/>
+        <attribute name="userID" attributeType="Integer 32" defaultValueString="0" indexed="YES"/>
+        <relationship name="games" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="ECGame" inverseName="owner" inverseEntity="ECGame"/>
+        <relationship name="turns" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="ECTurn" inverseName="user" inverseEntity="ECTurn"/>
     </entity>
     <elements>
-        <element name="Game" positionX="286" positionY="612" width="128" height="150"/>
-        <element name="Turn" positionX="531" positionY="288" width="128" height="150"/>
-        <element name="User" positionX="160" positionY="192" width="128" height="135"/>
+        <element name="ECGame" positionX="286" positionY="612" width="128" height="150"/>
+        <element name="ECTurn" positionX="531" positionY="288" width="128" height="150"/>
+        <element name="ECUser" positionX="160" positionY="192" width="128" height="135"/>
     </elements>
 </model>

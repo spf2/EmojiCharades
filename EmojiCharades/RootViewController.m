@@ -9,6 +9,7 @@
 #import "EmojiCharadesAppDelegate.h"
 #import "RootViewController.h"
 #import "SetupViewController.h"
+#import "ECGame.h"
 
 @interface RootViewController ()
 - (void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath;
@@ -27,9 +28,11 @@
     
     self.emojiCharadesDelegate = (EmojiCharadesAppDelegate *)[UIApplication sharedApplication].delegate;
     if (self.emojiCharadesDelegate.needsSetup) {
-        [self userSetup];
+//        [self userSetup];
     }
-
+    
+    [self loadGamesFromService];
+    
     UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(insertNewObject)];
     self.navigationItem.rightBarButtonItem = addButton;
     [addButton release];
@@ -55,18 +58,44 @@
 	[super viewDidDisappear:animated];
 }
 
+- (void)loadGamesFromService {
+    // Load the object model via RestKit	
+    RKObjectManager* objectManager = [RKObjectManager sharedManager];
+    [objectManager loadObjectsAtResourcePath:@"/game.json" delegate:self block:^(RKObjectLoader* loader) {
+        loader.objectMapping = [objectManager.mappingProvider objectMappingForClass:ECUser.class];
+    }];
+}
+
+#pragma mark RKObjectLoaderDelegate methods
+
+- (void)objectLoader:(RKObjectLoader*)objectLoader didLoadObjects:(NSArray*)objects {
+	[[NSUserDefaults standardUserDefaults] setObject:[NSDate date] forKey:@"LastUpdatedAt"];
+	[[NSUserDefaults standardUserDefaults] synchronize];
+	NSLog(@"Loaded games: %@", objects);
+}
+
+- (void)objectLoader:(RKObjectLoader*)objectLoader didFailWithError:(NSError*)error {
+	UIAlertView* alert = [[[UIAlertView alloc] initWithTitle:@"Error" 
+                                                     message:[error localizedDescription] 
+                                                    delegate:nil 
+                                           cancelButtonTitle:@"OK" otherButtonTitles:nil] autorelease];
+	[alert show];
+	NSLog(@"Hit error: %@", error);
+}
+
+
 
 - (void)userSetup
 {
     self.setupController = [[SetupViewController alloc]
                             initWithNibName:@"SetupViewController" bundle:nil];
     [self.setupController setModalTransitionStyle:UIModalTransitionStyleCoverVertical];
-    self.setupController.delegate = self;
+    //self.setupController.delegate = self;
     [self presentModalViewController:self.setupController animated:YES];
 }
 
 - (void)addedUserName:(NSString *)name {
-    [self.emojiCharadesDelegate tryToSetUserName:name notify:self];
+  //  [self.emojiCharadesDelegate tryToSetUserName:name notify:self];
 }
 
 - (void)userSetupDone:(NSString *)error {
@@ -76,7 +105,6 @@
         [self.setupController showWarning:error];
     }
 }
-
 
 /*
  // Override to allow orientations other than the default portrait orientation.
@@ -191,7 +219,7 @@
     
     // If appropriate, configure the new managed object.
     // Normally you should use accessor methods, but using KVC here avoids the need to add a custom class to the template.
-    [newManagedObject setValue:[NSDate date] forKey:@"created_at"];
+    [newManagedObject setValue:[NSDate date] forKey:@"createdAt"];
     
     // Save the context.
     NSError *error = nil;
@@ -217,12 +245,12 @@
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
     // Edit the entity name as appropriate.
     NSEntityDescription *entity = [NSEntityDescription
-                                   entityForName:@"Game"
+                                   entityForName:@"ECGame"
                                    inManagedObjectContext:self.managedObjectContext];
     [fetchRequest setEntity:entity];
     [fetchRequest setFetchBatchSize:20];
     NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc]
-                                        initWithKey:@"created_at"
+                                        initWithKey:@"createdAt"
                                         ascending:NO];
     NSArray *sortDescriptors = [[NSArray alloc] initWithObjects:sortDescriptor, nil];
     
