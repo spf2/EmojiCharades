@@ -13,6 +13,7 @@
 #import "SMXMLDocument.h"
 #import "RestKit/RestKit.h"
 #import "Restkit/CoreData/CoreData.h"
+
 #import "ECUser.h"
 #import "ECGame.h"
 #import "ECTurn.h"
@@ -40,6 +41,11 @@
     self.dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setDateFormat:ECDateFormat];
     [self configure];
+    
+    // Enable some verbose logging
+    RKLogConfigureByName("RestKit/UI", RKLogLevelTrace);
+    RKLogConfigureByName("RestKit/ObjectMapping", RKLogLevelTrace);
+    RKLogConfigureByName("RestKit/Network*", RKLogLevelDebug);
 
     RKObjectManager *objectManager = [RKObjectManager objectManagerWithBaseURL:self.serviceURL];
     [RKRequestQueue sharedQueue].showsNetworkActivityIndicatorWhenBusy = YES;
@@ -49,6 +55,13 @@
     [ECGame setupMappingWithObjectManager:objectManager];
     [ECTurn setupMappingWithObjectManager:objectManager];
 
+    RKObjectRouter *router = [[RKObjectRouter alloc] init];
+    [ECUser setupObjectRouter:router];
+    [ECGame setupObjectRouter:router];
+    [ECTurn setupObjectRouter:router];
+    [router release];
+    
+    
     // Start visuals
     self.window.rootViewController = self.navigationController;
     [self.window makeKeyAndVisible];

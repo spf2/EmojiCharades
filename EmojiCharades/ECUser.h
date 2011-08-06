@@ -17,6 +17,7 @@
 @property (nonatomic, retain) NSDate *updatedAt;
 @property (nonatomic, retain) NSString *name;
 
-+ (void)setupMappingWithObjectManager:(RKObjectManager *)objectManager;
++ (void) setupMappingWithObjectManager:(RKObjectManager *)objectManager;
++ (void) setupObjectRouter:(RKObjectRouter *)objectRouter;
 
 @end

@@ -61,8 +61,10 @@
 - (void)loadGamesFromService {
     // Load the object model via RestKit	
     RKObjectManager* objectManager = [RKObjectManager sharedManager];
-    [objectManager loadObjectsAtResourcePath:@"/game.json" delegate:self block:^(RKObjectLoader* loader) {
-        loader.objectMapping = [objectManager.mappingProvider objectMappingForClass:ECUser.class];
+    [objectManager loadObjectsAtResourcePath:@"/game" 
+                                    delegate:self 
+                                       block:^(RKObjectLoader* loader) {
+        loader.objectMapping = [objectManager.mappingProvider objectMappingForClass:ECGame.class];
     }];
 }
 
@@ -85,8 +87,7 @@
 
 
 
-- (void)userSetup
-{
+- (void)userSetup {
     self.setupController = [[SetupViewController alloc]
                             initWithNibName:@"SetupViewController" bundle:nil];
     [self.setupController setModalTransitionStyle:UIModalTransitionStyleCoverVertical];
@@ -206,8 +207,8 @@
 
 - (void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath
 {
-    NSManagedObject *managedObject = [self.fetchedResultsController objectAtIndexPath:indexPath];
-    cell.textLabel.text = [[managedObject valueForKey:@"hint"] description];
+    ECGame *game = [self.fetchedResultsController objectAtIndexPath:indexPath];
+    cell.textLabel.text = [NSString stringWithFormat: @"owner: %@", game.owner.name];
 }
 
 - (void)insertNewObject

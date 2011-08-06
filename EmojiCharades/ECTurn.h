@@ -17,9 +17,10 @@
 @property (nonatomic, retain) NSDate *createdAt;
 @property (nonatomic, retain) NSDate *updatedAt;
 @property (nonatomic, retain) NSString *guess;
-@property (nonatomic, retain) NSManagedObject *user;
+@property (nonatomic, retain) ECUser *user;
 @property (nonatomic, retain) NSNumber *result;
 
 + (void)setupMappingWithObjectManager:(RKObjectManager *)objectManager;
++ (void) setupObjectRouter:(RKObjectRouter *)objectRouter;
 
 @end

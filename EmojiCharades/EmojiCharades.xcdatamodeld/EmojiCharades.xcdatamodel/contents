@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model name="" userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="562" systemVersion="11A2063" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
-    <entity name="ECGame">
+    <entity name="ECGame" representedClassName="ECGame">
         <attribute name="createdAt" attributeType="Date"/>
         <attribute name="doneAt" optional="YES" attributeType="Date"/>
         <attribute name="gameID" attributeType="Integer 32" defaultValueString="0" indexed="YES"/>
@@ -9,7 +9,7 @@
         <relationship name="owner" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="ECUser" inverseName="games" inverseEntity="ECUser"/>
         <relationship name="turns" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="ECTurn" inverseName="game" inverseEntity="ECTurn"/>
     </entity>
-    <entity name="ECTurn">
+    <entity name="ECTurn" representedClassName="ECTurn">
         <attribute name="createdAt" attributeType="Date" indexed="YES"/>
         <attribute name="guess" attributeType="String"/>
         <attribute name="score" optional="YES" attributeType="Integer 32" defaultValueString="0"/>
@@ -18,7 +18,7 @@
         <relationship name="game" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="ECGame" inverseName="turns" inverseEntity="ECGame"/>
         <relationship name="user" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="ECUser" inverseName="turns" inverseEntity="ECUser"/>
     </entity>
-    <entity name="ECUser">
+    <entity name="ECUser" representedClassName="ECUser">
         <attribute name="createdAt" attributeType="Date"/>
         <attribute name="name" attributeType="String"/>
         <attribute name="updatedAt" attributeType="Date"/>

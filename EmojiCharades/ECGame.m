@@ -8,6 +8,7 @@
 
 #import "ECGame.h"
 #import "ECTurn.h"
+#import "ECUser.h"
 #import "Constants.h"
 
 @implementation ECGame
@@ -21,18 +22,25 @@
 @dynamic turns;
 
 + (void)setupMappingWithObjectManager:(RKObjectManager *)objectManager {
-    RKManagedObjectMapping* mapping = [RKManagedObjectMapping mappingForEntityWithName:@"ECGame"];
+    RKManagedObjectMapping* mapping = [RKManagedObjectMapping mappingForClass:ECGame.class];
     mapping.primaryKeyAttribute = @"gameID";
-    [mapping mapKeyPath:@"id" toAttribute:@"gameID"];
-    [mapping mapAttributes:@"hint", nil];
-    [mapping mapKeyPathsToAttributes:@"created_at", @"createdAt",
+    [mapping mapKeyPathsToAttributes:@"id", @"gameID",
+     @"hint", @"hint",
+     @"created_at", @"createdAt",
      @"updated_at", @"updatedAt",
      @"done_at", @"doneAt",
      nil];
-    [mapping mapRelationship:@"owner" withMapping:[RKObjectMapping mappingForClass:ECUser.class]];
-    [mapping hasMany:@"turns" withMapping:[RKObjectMapping mappingForClass:ECTurn.class]];
+    [mapping mapRelationship:@"owner" withMapping:[RKManagedObjectMapping mappingForClass:ECUser.class]];
+    [mapping hasMany:@"turns" withMapping:[RKManagedObjectMapping mappingForClass:ECTurn.class]];
     [mapping.dateFormatStrings addObject:ECDateFormat];
     [objectManager.mappingProvider registerMapping:mapping withRootKeyPath:@"game"];
+}
+
++ (void) setupObjectRouter:(RKObjectRouter *)objectRouter {
+    [objectRouter routeClass:ECGame.class toResourcePath:@"/game" forMethod:RKRequestMethodGET];
+    [objectRouter routeClass:ECGame.class toResourcePath:@"/game" forMethod:RKRequestMethodPOST];
+    [objectRouter routeClass:ECGame.class toResourcePath:@"/game/(gameID)" forMethod:RKRequestMethodPUT];
+    [objectRouter routeClass:ECGame.class toResourcePath:@"/game/(gameID)" forMethod:RKRequestMethodDELETE];
 }
 
 @end
