@@ -13,7 +13,6 @@
 		E720AF8413E5EC10007D1564 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E720AF8313E5EC10007D1564 /* MobileCoreServices.framework */; };
 		E720AF8613E5EC1A007D1564 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E720AF8513E5EC1A007D1564 /* SystemConfiguration.framework */; };
 		E720AF8813E5EC28007D1564 /* libxml2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = E720AF8713E5EC27007D1564 /* libxml2.dylib */; };
-		E74B6AD013E4D82600AA1A98 /* SMXMLDocument.m in Sources */ = {isa = PBXBuildFile; fileRef = E74B6ACF13E4D82600AA1A98 /* SMXMLDocument.m */; };
 		E7AF37A713E4B98300DB58CA /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E7AF37A613E4B98300DB58CA /* UIKit.framework */; };
 		E7AF37A913E4B98300DB58CA /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E7AF37A813E4B98300DB58CA /* Foundation.framework */; };
 		E7AF37AB13E4B98300DB58CA /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E7AF37AA13E4B98300DB58CA /* CoreGraphics.framework */; };
@@ -146,8 +145,6 @@
 		E720AF8313E5EC10007D1564 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 		E720AF8513E5EC1A007D1564 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		E720AF8713E5EC27007D1564 /* libxml2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libxml2.dylib; path = usr/lib/libxml2.dylib; sourceTree = SDKROOT; };
-		E74B6ACE13E4D82600AA1A98 /* SMXMLDocument.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMXMLDocument.h; sourceTree = "<group>"; };
-		E74B6ACF13E4D82600AA1A98 /* SMXMLDocument.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SMXMLDocument.m; sourceTree = "<group>"; };
 		E7AF37A213E4B98300DB58CA /* EmojiCharades.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EmojiCharades.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E7AF37A613E4B98300DB58CA /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		E7AF37A813E4B98300DB58CA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -256,8 +253,6 @@
 		E7AF37AE13E4B98300DB58CA /* EmojiCharades */ = {
 			isa = PBXGroup;
 			children = (
-				E74B6ACE13E4D82600AA1A98 /* SMXMLDocument.h */,
-				E74B6ACF13E4D82600AA1A98 /* SMXMLDocument.m */,
 				E7AF37B713E4B98300DB58CA /* EmojiCharadesAppDelegate.h */,
 				E7AF37B813E4B98300DB58CA /* EmojiCharadesAppDelegate.m */,
 				E7F809C613E5FD150077F0CE /* ECUser.h */,
@@ -527,7 +522,6 @@
 				E7AF37B913E4B98300DB58CA /* EmojiCharadesAppDelegate.m in Sources */,
 				E7AF37BC13E4B98300DB58CA /* EmojiCharades.xcdatamodeld in Sources */,
 				E7AF37C213E4B98300DB58CA /* RootViewController.m in Sources */,
-				E74B6AD013E4D82600AA1A98 /* SMXMLDocument.m in Sources */,
 				E720AF2213E5C2BF007D1564 /* SetupViewController.m in Sources */,
 				E7F809C813E5FD150077F0CE /* ECUser.m in Sources */,
 				E7F809CB13E67D420077F0CE /* ECGame.m in Sources */,

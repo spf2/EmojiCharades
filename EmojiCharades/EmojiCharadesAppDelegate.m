@@ -10,7 +10,6 @@
 
 #import "RootViewController.h"
 #import "SetupViewController.h"
-#import "SMXMLDocument.h"
 #import "RestKit/RestKit.h"
 #import "Restkit/CoreData/CoreData.h"
 
@@ -27,10 +26,6 @@
 @synthesize persistentStoreCoordinator = __persistentStoreCoordinator;
 @synthesize navigationController = _navigationController;
 
-@synthesize receivedData;
-@synthesize urlConnection;
-@synthesize userCache;
-@synthesize dateFormatter;
 @synthesize serviceURL;
 @synthesize userName;
 
@@ -38,8 +33,6 @@
 {
     // Override point for customization after application launch.
     // Add the navigation controller's view to the window and display.
-    self.dateFormatter = [[NSDateFormatter alloc] init];
-    [dateFormatter setDateFormat:ECDateFormat];
     [self configure];
     
     // Enable some verbose logging

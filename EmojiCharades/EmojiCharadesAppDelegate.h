@@ -7,8 +7,6 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "SMXMLDocument.h"
-
 
 @interface EmojiCharadesAppDelegate : NSObject <UIApplicationDelegate>
 
@@ -18,10 +16,6 @@
 @property (nonatomic, retain, readonly) NSPersistentStoreCoordinator *persistentStoreCoordinator;
 @property (nonatomic, retain) IBOutlet UINavigationController *navigationController;
 
-@property (nonatomic, assign) NSMutableData *receivedData;
-@property (nonatomic, assign) NSURLConnection *urlConnection;
-@property (nonatomic, assign) NSMutableDictionary *userCache;
-@property (nonatomic, assign) NSDateFormatter *dateFormatter;
 @property (nonatomic, copy) NSString *serviceURL;
 @property (nonatomic, copy) NSString *userName;
 

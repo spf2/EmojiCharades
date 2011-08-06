@@ -1,13 +1,7 @@
 class GameController < ApplicationController
-  # TODO(spf): eager loading of dependent objects
-
   def index
     games = Game.all
-    render :json => games.to_json
-      #(:include => {
-      #                            :owner => {},
-      #                            :turns => { :include => :user }
-      #                          })
+    render :json => games
   end
 
   def create
@@ -18,6 +12,6 @@ class GameController < ApplicationController
 
   def show
     game = Game.find(params[:id])
-    render :json => game.to_json
+    render :json => game
   end
 end
