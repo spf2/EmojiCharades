@@ -1,15 +1,15 @@
 class UserController < ApplicationController
   def index
-    render :xml => User.all
+    render :json => User.all
   end
 
   def show
-    render :xml => User.find(params[:id])
+    render :json => User.find(params[:id])
   end
 
   def create
     user = User.new(params[:user])
     user.save!
-    render :xml => user
+    render :json => user
   end
 end

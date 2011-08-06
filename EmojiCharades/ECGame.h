@@ -21,7 +21,7 @@
 @property (nonatomic, retain) ECUser *owner;
 @property (nonatomic, retain) NSArray *turns;
 
-+ (void)setupMappingWithObjectManager:(RKObjectManager *)objectManager;
-+ (void) setupObjectRouter:(RKObjectRouter *)objectRouter;
++ (RKManagedObjectMapping *)setupMappingWithObjectManager:(RKObjectManager *)objectManager withUserMapping:(RKObjectMapping *)userMapping;
++ (void)setupObjectRouter:(RKObjectRouter *)objectRouter;
 
 @end

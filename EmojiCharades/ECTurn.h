@@ -20,7 +20,9 @@
 @property (nonatomic, retain) ECUser *user;
 @property (nonatomic, retain) NSNumber *result;
 
-+ (void)setupMappingWithObjectManager:(RKObjectManager *)objectManager;
-+ (void) setupObjectRouter:(RKObjectRouter *)objectRouter;
++ (void)setupMappingWithObjectManager:(RKObjectManager *)objectManager 
+                      withUserMapping:(RKObjectMapping *)userMapping 
+                      withGameMapping:(RKObjectMapping *)gameMapping;
++ (void)setupObjectRouter:(RKObjectRouter *)objectRouter;
 
 @end

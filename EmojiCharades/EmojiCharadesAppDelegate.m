@@ -27,7 +27,6 @@
 @synthesize navigationController = _navigationController;
 
 @synthesize serviceURL;
-@synthesize userName;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
@@ -44,16 +43,21 @@
     [RKRequestQueue sharedQueue].showsNetworkActivityIndicatorWhenBusy = YES;
     NSString *databaseName = @"EmojiCharades.sqlite";
     objectManager.objectStore = [RKManagedObjectStore objectStoreWithStoreFilename:databaseName];
-    [ECUser setupMappingWithObjectManager:objectManager];
-    [ECGame setupMappingWithObjectManager:objectManager];
-    [ECTurn setupMappingWithObjectManager:objectManager];
-
-    RKObjectRouter *router = [[RKObjectRouter alloc] init];
-    [ECUser setupObjectRouter:router];
-    [ECGame setupObjectRouter:router];
-    [ECTurn setupObjectRouter:router];
-    [router release];
+    if (true) {
+        [objectManager.objectStore deletePersistantStore];
+    }
+    objectManager.serializationMIMEType = RKMIMETypeJSON;
     
+    RKObjectMapping *userMapping = [ECUser setupMappingWithObjectManager:objectManager];
+    RKObjectMapping *gameMapping = [ECGame setupMappingWithObjectManager:objectManager 
+                                                         withUserMapping:userMapping];
+    [ECTurn setupMappingWithObjectManager:objectManager 
+                          withUserMapping:userMapping 
+                          withGameMapping:gameMapping];
+
+    [ECUser setupObjectRouter:objectManager.router];
+    [ECTurn setupObjectRouter:objectManager.router];
+    [ECGame setupObjectRouter:objectManager.router];
     
     // Start visuals
     self.window.rootViewController = self.navigationController;
@@ -69,12 +73,6 @@
                             ofType:@"plist"];
     NSDictionary *properties = [NSDictionary dictionaryWithContentsOfFile:bundlePath];
     self.serviceURL = [properties valueForKey:@"Service URL"];
-    self.userName = [properties valueForKey:@"User Name"];
-}
-
-- (BOOL)needsSetup
-{
-    return (self.userName == nil);
 }
 
 - (void)showError:(NSString *)message
@@ -87,22 +85,6 @@
     [alert show];
     [alert release];    
 }
-
-/*
-- (void)tryToSetUserName:(NSString *)name notify:(id<SetupUserDelegate>) delegate {
-    chainedSetupUserDelegate = delegate;
-    userName = name; 
-    [service setupUser:name delegate:self];
-}
-
-- (void)setupUserDone:(NSString *)error {
-    if (error == nil) {
-        // write to properties
-    }
-    [chainedSetupUserDelegate setupUserDone:error];
-}
-*/
-
 
 
 - (void)applicationWillResignActive:(UIApplication *)application

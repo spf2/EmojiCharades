@@ -7,14 +7,16 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "RestKit/RestKit.h"
+#import "ECUser.h"
 
 
 @protocol SetupViewDelegate
-- (void) addedUserName:(NSString *)name;
+- (void) userSetupOk:(ECUser *)user;
 @end
 
 
-@interface SetupViewController : UIViewController <UITextFieldDelegate> {
+@interface SetupViewController : UIViewController <UITextFieldDelegate, RKObjectLoaderDelegate> {
     id<SetupViewDelegate> delegate;
     UIBarButtonItem *doneButton;
     UILabel *warningLabel;

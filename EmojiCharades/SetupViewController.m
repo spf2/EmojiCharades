@@ -7,6 +7,7 @@
 //
 
 #import "SetupViewController.h"
+#import "ECUser.h"
 
 @implementation SetupViewController
 
@@ -16,7 +17,10 @@
 @synthesize userNameTextField;
 
 - (IBAction)userNameDone:(id)sender {
-    [delegate addedUserName:userNameTextField.text];
+    ECUser* newUser = [ECUser object];
+    newUser.name = userNameTextField.text;
+    newUser.updatedAt = newUser.createdAt = [NSDate date];
+    [[RKObjectManager sharedManager] postObject:newUser delegate:self];
 }
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -51,6 +55,18 @@
 - (IBAction)userNameEditingDidBegin:(id)sender {
     warningLabel.text = @"";
 }
+
+#pragma mark RKObjectLoaderDelegate methods
+
+- (void)objectLoader:(RKObjectLoader*)objectLoader didLoadObjects:(NSArray*)objects {
+    [delegate userSetupOk:[objects objectAtIndex:0]];
+}
+
+- (void)objectLoader:(RKObjectLoader*)objectLoader didFailWithError:(NSError*)error {
+    [self showWarning:@"Already taken; try another."];
+	NSLog(@"Hit error: %@", error);
+}
+
 
 #pragma mark - View lifecycle
 

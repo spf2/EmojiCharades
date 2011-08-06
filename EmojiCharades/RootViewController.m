@@ -26,9 +26,10 @@
 {
     [super viewDidLoad];
     
-    self.emojiCharadesDelegate = (EmojiCharadesAppDelegate *)[UIApplication sharedApplication].delegate;
-    if (self.emojiCharadesDelegate.needsSetup) {
-//        [self userSetup];
+    
+    NSNumber* userID = [[NSUserDefaults standardUserDefaults] objectForKey:@"userID"];
+    if (!userID) {
+        [self userSetup];
     }
     
     [self loadGamesFromService];
@@ -74,6 +75,7 @@
 	[[NSUserDefaults standardUserDefaults] setObject:[NSDate date] forKey:@"LastUpdatedAt"];
 	[[NSUserDefaults standardUserDefaults] synchronize];
 	NSLog(@"Loaded games: %@", objects);
+    [self.tableView reloadData];
 }
 
 - (void)objectLoader:(RKObjectLoader*)objectLoader didFailWithError:(NSError*)error {
@@ -91,20 +93,14 @@
     self.setupController = [[SetupViewController alloc]
                             initWithNibName:@"SetupViewController" bundle:nil];
     [self.setupController setModalTransitionStyle:UIModalTransitionStyleCoverVertical];
-    //self.setupController.delegate = self;
+    self.setupController.delegate = self;
     [self presentModalViewController:self.setupController animated:YES];
 }
 
-- (void)addedUserName:(NSString *)name {
-  //  [self.emojiCharadesDelegate tryToSetUserName:name notify:self];
-}
-
-- (void)userSetupDone:(NSString *)error {
-    if (error == nil) {
-        [self dismissModalViewControllerAnimated:YES];
-    } else {
-        [self.setupController showWarning:error];
-    }
+- (void)userSetupOk:(ECUser *)user {
+	[[NSUserDefaults standardUserDefaults] setObject:user.userID forKey:@"userID"];
+	[[NSUserDefaults standardUserDefaults] synchronize];    
+    [self dismissModalViewControllerAnimated:YES];
 }
 
 /*

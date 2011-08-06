@@ -6,7 +6,7 @@
         <attribute name="gameID" attributeType="Integer 32" defaultValueString="0" indexed="YES"/>
         <attribute name="hint" attributeType="String"/>
         <attribute name="updatedAt" attributeType="Date"/>
-        <relationship name="owner" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="ECUser" inverseName="games" inverseEntity="ECUser"/>
+        <relationship name="owner" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="ECUser" inverseName="games" inverseEntity="ECUser"/>
         <relationship name="turns" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="ECTurn" inverseName="game" inverseEntity="ECTurn"/>
     </entity>
     <entity name="ECTurn" representedClassName="ECTurn">

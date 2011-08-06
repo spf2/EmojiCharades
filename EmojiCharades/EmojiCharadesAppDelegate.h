@@ -17,14 +17,10 @@
 @property (nonatomic, retain) IBOutlet UINavigationController *navigationController;
 
 @property (nonatomic, copy) NSString *serviceURL;
-@property (nonatomic, copy) NSString *userName;
 
 - (void)showError: (NSString *)message;
 - (void)saveContext;
 - (NSURL *)applicationDocumentsDirectory;
 - (void)configure;
-- (BOOL)needsSetup;
-//- (void)tryToSetUserName:(NSString *)userName notify:(id<SetupUserDelegate>) delegate;
-
 
 @end

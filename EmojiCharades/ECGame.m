@@ -21,7 +21,7 @@
 @dynamic owner;
 @dynamic turns;
 
-+ (void)setupMappingWithObjectManager:(RKObjectManager *)objectManager {
++ (RKObjectMapping *)setupMappingWithObjectManager:(RKObjectManager *)objectManager withUserMapping:(RKManagedObjectMapping *)userMapping {
     RKManagedObjectMapping* mapping = [RKManagedObjectMapping mappingForClass:ECGame.class];
     mapping.primaryKeyAttribute = @"gameID";
     [mapping mapKeyPathsToAttributes:@"id", @"gameID",
@@ -30,17 +30,14 @@
      @"updated_at", @"updatedAt",
      @"done_at", @"doneAt",
      nil];
-    [mapping mapRelationship:@"owner" withMapping:[RKManagedObjectMapping mappingForClass:ECUser.class]];
-    [mapping hasMany:@"turns" withMapping:[RKManagedObjectMapping mappingForClass:ECTurn.class]];
+    [mapping mapRelationship:@"owner" withMapping:userMapping];
     [mapping.dateFormatStrings addObject:ECDateFormat];
     [objectManager.mappingProvider registerMapping:mapping withRootKeyPath:@"game"];
+    return mapping;
 }
 
-+ (void) setupObjectRouter:(RKObjectRouter *)objectRouter {
-    [objectRouter routeClass:ECGame.class toResourcePath:@"/game" forMethod:RKRequestMethodGET];
-    [objectRouter routeClass:ECGame.class toResourcePath:@"/game" forMethod:RKRequestMethodPOST];
-    [objectRouter routeClass:ECGame.class toResourcePath:@"/game/(gameID)" forMethod:RKRequestMethodPUT];
-    [objectRouter routeClass:ECGame.class toResourcePath:@"/game/(gameID)" forMethod:RKRequestMethodDELETE];
++ (void) setupObjectRouter:(RKObjectRouter *)objectRouter {    
+    [objectRouter routeClass:ECGame.class toResourcePath:@"/game/(gameID)"];
 }
 
 @end
