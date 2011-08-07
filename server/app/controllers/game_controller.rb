@@ -11,7 +11,7 @@ class GameController < ApplicationController
   end
 
   def show
-    game = Game.find(params[:id])
-    render :json => game
+    game = Game.find(params[:id], :include => [:owner, :turns])
+    render :json => game.to_json(:include => [:owner, :turns])
   end
 end

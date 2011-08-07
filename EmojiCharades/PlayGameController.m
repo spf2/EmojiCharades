@@ -39,6 +39,12 @@
     return YES;
 }
 
+#pragma mark RKObjectLoaderDelegate methods
+
+- (void)objectLoader:(RKObjectLoader*)objectLoader didFailWithError:(NSError*)error {
+    
+}
+
 #pragma mark - View lifecycle
 
 - (void)viewDidLoad
@@ -46,6 +52,9 @@
     [super viewDidLoad];
     hintLabel.text = game.hint;
     metadataLabel.text = [NSString stringWithFormat:@"%@ at %@", game.owner.name, game.createdAt];
+    
+    // Load the object model via RestKit	
+    [[RKObjectManager sharedManager] getObject:game delegate:self];
 }
 
 - (void)viewDidUnload

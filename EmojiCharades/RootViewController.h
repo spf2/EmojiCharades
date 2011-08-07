@@ -24,6 +24,5 @@
 @property (nonatomic, retain) CreateGameController *createGameController;
 
 - (void)userSetup;
-- (void)loadGamesFromService;
 
 @end

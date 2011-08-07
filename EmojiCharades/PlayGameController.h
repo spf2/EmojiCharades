@@ -13,7 +13,7 @@
 - (void) gamePlayedOk:(ECGame *)game;
 @end
 
-@interface PlayGameController : UIViewController {
+@interface PlayGameController : UIViewController<RKObjectLoaderDelegate> {
     UILabel *hintLabel;
     UILabel *metadataLabel;
     UITableView *turnTableView;

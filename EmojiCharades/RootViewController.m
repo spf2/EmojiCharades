@@ -32,14 +32,13 @@
         [self userSetup];
     }
     
-    [self loadGamesFromService];
+    self.managedObjectContext = RKObjectManager.sharedManager.objectStore.managedObjectContext;
+    [[RKObjectManager sharedManager] loadObjectsAtResourcePath:@"/game" delegate:self]; 
     
     UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(showCreateGame)];
     self.navigationItem.rightBarButtonItem = addButton;
     self.navigationItem.title = @"Emoji Charades";
     [addButton release];
-    
-    self.managedObjectContext = RKObjectManager.sharedManager.objectStore.managedObjectContext;
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -60,16 +59,6 @@
 - (void)viewDidDisappear:(BOOL)animated
 {
 	[super viewDidDisappear:animated];
-}
-
-- (void)loadGamesFromService {
-    // Load the object model via RestKit	
-    RKObjectManager* objectManager = [RKObjectManager sharedManager];
-    [objectManager loadObjectsAtResourcePath:@"/game" 
-                                    delegate:self 
-                                       block:^(RKObjectLoader* loader) {
-        loader.objectMapping = [objectManager.mappingProvider objectMappingForClass:ECGame.class];
-    }];
 }
 
 #pragma mark RKObjectLoaderDelegate methods
