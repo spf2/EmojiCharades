@@ -27,12 +27,28 @@
      nil];
     [mapping.dateFormatStrings addObject:ECDateFormat];
     [objectManager.mappingProvider registerMapping:mapping withRootKeyPath:@"user"];
+    
     return mapping;
 }
 
 + (void) setupObjectRouter:(RKObjectRouter *)objectRouter {
     [objectRouter routeClass:ECUser.class toResourcePath:@"/user" forMethod:RKRequestMethodPOST];
     [objectRouter routeClass:ECUser.class toResourcePath:@"/user/(userID)"];
+}
+
++ (void) setSelfUser:(ECUser *)selfUser {
+    NSString *selfUserURI = selfUser.objectID.URIRepresentation.absoluteString;
+    [[NSUserDefaults standardUserDefaults] setValue:selfUserURI forKey:@"selfObjectURI"];
+	[[NSUserDefaults standardUserDefaults] synchronize];    
+}
+
++ (ECUser *)selfUser {
+    NSString *selfUserURI = [[NSUserDefaults standardUserDefaults] objectForKey:@"selfObjectURI"];
+    if (!selfUserURI) return nil;
+    NSManagedObjectContext *moc = RKObjectManager.sharedManager.objectStore.managedObjectContext;
+    NSManagedObjectID *selfObjectID = [moc.persistentStoreCoordinator managedObjectIDForURIRepresentation: [NSURL URLWithString:selfUserURI]];
+    if (!selfObjectID) return nil;
+    return (ECUser *)[moc objectWithID:selfObjectID];
 }
 
 @end

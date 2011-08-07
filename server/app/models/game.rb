@@ -3,6 +3,7 @@ class Game < ActiveRecord::Base
   has_many :turns
   validates_presence_of :owner
   validates_length_of(:hint,
-                      :maximum => 255,
-                      :message => "1-255 characters")
+                      :within => 1..255,
+                      :too_short => "at least 1 character",
+                      :too_long => "at most 255 characters")
 end

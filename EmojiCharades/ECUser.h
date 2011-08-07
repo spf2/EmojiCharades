@@ -20,4 +20,10 @@
 + (RKManagedObjectMapping *)setupMappingWithObjectManager:(RKObjectManager *)objectManager;
 + (void)setupObjectRouter:(RKObjectRouter *)objectRouter;
 
+// Sets a handle the self user.  Assumes that backing object is in Core Data.
++ (void)setSelfUser:(ECUser *)selfUser;
+
+// Fetches the self user, presuming its been set.
++ (ECUser *)selfUser;
+
 @end

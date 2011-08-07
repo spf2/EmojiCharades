@@ -7,18 +7,20 @@
 //
 
 #import <UIKit/UIKit.h>
-
 #import <CoreData/CoreData.h>
-#import "SetupViewController.h"
-#import "EmojiCharadesAppDelegate.h"
 #import <RestKit/RestKit.h>
 
-@interface RootViewController : UITableViewController <NSFetchedResultsControllerDelegate,RKObjectLoaderDelegate, SetupViewDelegate>
+#import "CreateGameController.h"
+#import "EmojiCharadesAppDelegate.h"
+#import "SetupViewController.h"
+
+@interface RootViewController : UITableViewController <NSFetchedResultsControllerDelegate,RKObjectLoaderDelegate, SetupViewDelegate, CreateGameDelegate>
 
 @property (nonatomic, retain) NSFetchedResultsController *fetchedResultsController;
 @property (nonatomic, retain) NSManagedObjectContext *managedObjectContext;
 @property (nonatomic, retain) EmojiCharadesAppDelegate *emojiCharadesDelegate;
 @property (nonatomic, retain) SetupViewController *setupController;
+@property (nonatomic, retain) CreateGameController *createGameController;
 
 - (void)userSetup;
 - (void)loadGamesFromService;

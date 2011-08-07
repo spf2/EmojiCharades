@@ -43,7 +43,7 @@
     [RKRequestQueue sharedQueue].showsNetworkActivityIndicatorWhenBusy = YES;
     NSString *databaseName = @"EmojiCharades.sqlite";
     objectManager.objectStore = [RKManagedObjectStore objectStoreWithStoreFilename:databaseName];
-    if (true) {
+    if (false) {
         [objectManager.objectStore deletePersistantStore];
     }
     objectManager.serializationMIMEType = RKMIMETypeJSON;

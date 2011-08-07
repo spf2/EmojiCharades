@@ -29,14 +29,23 @@
      @"created_at", @"createdAt",
      @"updated_at", @"updatedAt",
      @"done_at", @"doneAt",
+     @"owner_id", @"ownerID",
      nil];
     [mapping mapRelationship:@"owner" withMapping:userMapping];
+    [mapping connectRelationship:@"owner" withObjectForPrimaryKeyAttribute:@"ownerID"];
     [mapping.dateFormatStrings addObject:ECDateFormat];
     [objectManager.mappingProvider registerMapping:mapping withRootKeyPath:@"game"];
+    
+    // and serialization
+    RKObjectMapping *serializationMapping = [mapping inverseMapping];
+    [serializationMapping removeMappingForKeyPath:@"owner"];
+    [objectManager.mappingProvider setSerializationMapping:serializationMapping forClass:ECGame.class];
+    
     return mapping;
 }
 
 + (void) setupObjectRouter:(RKObjectRouter *)objectRouter {    
+    [objectRouter routeClass:ECGame.class toResourcePath:@"/game" forMethod:RKRequestMethodPOST];
     [objectRouter routeClass:ECGame.class toResourcePath:@"/game/(gameID)"];
 }
 

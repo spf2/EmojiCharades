@@ -21,20 +21,21 @@
 @synthesize managedObjectContext = __managedObjectContext;
 @synthesize emojiCharadesDelegate;
 @synthesize setupController;
+@synthesize createGameController;
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"userID"];  // xxx
     
-    NSNumber* userID = [[NSUserDefaults standardUserDefaults] objectForKey:@"userID"];
-    if (!userID) {
+    if (![ECUser selfUser]) {
         [self userSetup];
     }
     
     [self loadGamesFromService];
     
-    UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(insertNewObject)];
+    UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(showCreateGame)];
     self.navigationItem.rightBarButtonItem = addButton;
     [addButton release];
 }
@@ -87,20 +88,31 @@
 	NSLog(@"Hit error: %@", error);
 }
 
-
-
 - (void)userSetup {
     self.setupController = [[SetupViewController alloc]
                             initWithNibName:@"SetupViewController" bundle:nil];
-    [self.setupController setModalTransitionStyle:UIModalTransitionStyleCoverVertical];
+    [self.setupController setModalTransitionStyle:UIModalTransitionStyleFlipHorizontal];
     self.setupController.delegate = self;
     [self presentModalViewController:self.setupController animated:YES];
 }
 
-- (void)userSetupOk:(ECUser *)user {
-	[[NSUserDefaults standardUserDefaults] setObject:user.userID forKey:@"userID"];
-	[[NSUserDefaults standardUserDefaults] synchronize];    
+- (void)showCreateGame {
+    self.createGameController = [[CreateGameController alloc]
+                                 initWithNibName:@"CreateGameController" bundle:nil];
+    [self.createGameController setModalTransitionStyle:UIModalTransitionStyleCoverVertical];
+    self.createGameController.delegate = self;
+    [self presentModalViewController:self.createGameController animated:YES];
+}
+
+- (void) gameCreatedOk:(ECGame *)game {
     [self dismissModalViewControllerAnimated:YES];
+    [self.createGameController release];    
+}
+
+- (void)userSetupOk:(ECUser *)user {
+    [ECUser setSelfUser:user];
+    [self dismissModalViewControllerAnimated:YES];
+    [self.setupController release];
 }
 
 /*
