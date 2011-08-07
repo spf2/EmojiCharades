@@ -11,14 +11,15 @@
 #import <RestKit/RestKit.h>
 
 #import "CreateGameController.h"
-#import "EmojiCharadesAppDelegate.h"
+#import "PlayGameController.h"
 #import "SetupViewController.h"
 
-@interface RootViewController : UITableViewController <NSFetchedResultsControllerDelegate,RKObjectLoaderDelegate, SetupViewDelegate, CreateGameDelegate>
+@interface RootViewController : UITableViewController <NSFetchedResultsControllerDelegate,RKObjectLoaderDelegate, SetupViewDelegate, CreateGameDelegate, PlayGameDelegate> {
+}
+
 
 @property (nonatomic, retain) NSFetchedResultsController *fetchedResultsController;
 @property (nonatomic, retain) NSManagedObjectContext *managedObjectContext;
-@property (nonatomic, retain) EmojiCharadesAppDelegate *emojiCharadesDelegate;
 @property (nonatomic, retain) SetupViewController *setupController;
 @property (nonatomic, retain) CreateGameController *createGameController;
 

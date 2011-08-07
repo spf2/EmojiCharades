@@ -6,7 +6,7 @@
 //  Copyright 2011 __MyCompanyName__. All rights reserved.
 //
 
-#import "EmojiCharadesAppDelegate.h"
+#import "PlayGameController.h"
 #import "RootViewController.h"
 #import "SetupViewController.h"
 #import "ECGame.h"
@@ -19,7 +19,6 @@
 
 @synthesize fetchedResultsController = __fetchedResultsController;
 @synthesize managedObjectContext = __managedObjectContext;
-@synthesize emojiCharadesDelegate;
 @synthesize setupController;
 @synthesize createGameController;
 
@@ -37,6 +36,7 @@
     
     UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(showCreateGame)];
     self.navigationItem.rightBarButtonItem = addButton;
+    self.navigationItem.title = @"Emoji Charades";
     [addButton release];
     
     self.managedObjectContext = RKObjectManager.sharedManager.objectStore.managedObjectContext;
@@ -77,8 +77,6 @@
 - (void)objectLoader:(RKObjectLoader*)objectLoader didLoadObjects:(NSArray*)objects {
 	[[NSUserDefaults standardUserDefaults] setObject:[NSDate date] forKey:@"LastUpdatedAt"];
 	[[NSUserDefaults standardUserDefaults] synchronize];
-	NSLog(@"Loaded games: %@", objects);
-    [self.tableView reloadData];
 }
 
 - (void)objectLoader:(RKObjectLoader*)objectLoader didFailWithError:(NSError*)error {
@@ -117,6 +115,10 @@
     [self.setupController release];
 }
 
+- (void) gamePlayedOk:(ECGame *)game {
+    
+}
+
 /*
  // Override to allow orientations other than the default portrait orientation.
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
@@ -144,7 +146,7 @@
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
-        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier] autorelease];
     }
 
     // Configure the cell.
@@ -183,17 +185,14 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    /*
-    <#DetailViewController#> *detailViewController = [[<#DetailViewController#> alloc] initWithNibName:@"<#Nib name#>" bundle:nil];
-    // ...
-    // Pass the selected object to the new view controller.
-    [self.navigationController pushViewController:detailViewController animated:YES];
-    [detailViewController release];
-	*/
+    PlayGameController *playGameController = [[PlayGameController alloc] initWithNibName:@"PlayGameController" bundle:nil];
+    ECGame *game = [self.fetchedResultsController objectAtIndexPath:indexPath];
+    playGameController.game = game;
+    [self.navigationController pushViewController:playGameController animated:YES];
+    [playGameController release];
 }
 
-- (void)didReceiveMemoryWarning
-{
+- (void)didReceiveMemoryWarning {
     // Releases the view if it doesn't have a superview.
     [super didReceiveMemoryWarning];
     
@@ -218,7 +217,11 @@
 - (void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath
 {
     ECGame *game = [self.fetchedResultsController objectAtIndexPath:indexPath];
-    cell.textLabel.text = [NSString stringWithFormat: @"%@: %@", game.owner.name, game.hint];
+    cell.detailTextLabel.text = 
+        [NSString stringWithFormat:@"%@ at %@", game.owner.name, game.createdAt];
+    cell.textLabel.text = game.hint;
+    cell.selectionStyle = UITableViewCellSelectionStyleBlue;
+    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
 }
 
 - (void)insertNewObject

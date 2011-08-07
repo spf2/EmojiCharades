@@ -1,6 +1,6 @@
 class GameController < ApplicationController
   def index
-    games = Game.all
+    games = Game.all(:include => :owner)
     render :json => games.to_json(:include => :owner)
   end
 
