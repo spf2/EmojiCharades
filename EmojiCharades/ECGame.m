@@ -36,10 +36,11 @@
     [mapping.dateFormatStrings addObject:ECDateFormat];
     [objectManager.mappingProvider registerMapping:mapping withRootKeyPath:@"game"];
     
-    // and serialization
-    RKObjectMapping *serializationMapping = [mapping inverseMapping];
+    // tweak serialization
+    RKObjectMapping *serializationMapping = [objectManager.mappingProvider serializationMappingForClass:ECGame.class];
+    [serializationMapping removeMappingForKeyPath:@"ownerID"];
     [serializationMapping removeMappingForKeyPath:@"owner"];
-    [objectManager.mappingProvider setSerializationMapping:serializationMapping forClass:ECGame.class];
+    [serializationMapping mapKeyPath:@"owner.userID" toAttribute:@"owner_id"];
     
     return mapping;
 }

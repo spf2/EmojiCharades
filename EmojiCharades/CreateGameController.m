@@ -47,11 +47,15 @@
     [[RKObjectManager sharedManager] postObject:newGame delegate:self];
 }
 
+- (IBAction)createGameCancel:(id)sender {
+    [delegate gameCreatedOk: nil];
+}
+
 
 #pragma mark RKObjectLoaderDelegate methods
 
-- (void)objectLoader:(RKObjectLoader*)objectLoader didLoadObjects:(NSArray*)objects {
-    [delegate gameCreatedOk:[objects objectAtIndex:0]];
+- (void)objectLoader:(RKObjectLoader*)objectLoader didLoadObject:(id)game {
+    [delegate gameCreatedOk:game];
 }
 
 - (void)objectLoader:(RKObjectLoader*)objectLoader didFailWithError:(NSError*)error {
@@ -66,7 +70,6 @@
     [alert release];    
 
 }
-
 
 #pragma mark - View lifecycle
 

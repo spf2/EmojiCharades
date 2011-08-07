@@ -58,8 +58,8 @@
 
 #pragma mark RKObjectLoaderDelegate methods
 
-- (void)objectLoader:(RKObjectLoader*)objectLoader didLoadObjects:(NSArray*)objects {
-    [delegate userSetupOk:[objects objectAtIndex:0]];
+- (void)objectLoader:(RKObjectLoader*)objectLoader didLoadObject:(id)user {
+    [delegate userSetupOk:user];
 }
 
 - (void)objectLoader:(RKObjectLoader*)objectLoader didFailWithError:(NSError*)error {

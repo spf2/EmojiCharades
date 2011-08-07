@@ -10,6 +10,7 @@
 #import "ECGame.h"
 
 @protocol CreateGameDelegate
+// Game will be null if canceled
 - (void) gameCreatedOk:(ECGame *)game;
 @end
 
@@ -19,6 +20,8 @@
 }
 
 - (IBAction)createGameDone:(id)sender;
+- (IBAction)createGameCancel:(id)sender;
+
 
 @property (nonatomic, retain) id<CreateGameDelegate> delegate;
 @property (nonatomic, retain) IBOutlet UITextField *hintTextField;

@@ -46,13 +46,13 @@
 				<int key="NSvFlags">274</int>
 				<object class="NSMutableArray" key="NSSubviews">
 					<bool key="EncodedWithXMLCoder">YES</bool>
-					<object class="IBUITextField" id="450283124">
+					<object class="IBUITextField" id="743630951">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">292</int>
 						<string key="NSFrame">{{60, 100}, {200, 31}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView" ref="175275088"/>
+						<reference key="NSNextKeyView" ref="809278282"/>
 						<string key="NSReuseIdentifierKey">_NS:294</string>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClipsSubviews">YES</bool>
@@ -64,7 +64,7 @@
 						<object class="NSColor" key="IBUITextColor">
 							<int key="NSColorSpace">3</int>
 							<bytes key="NSWhite">MAA</bytes>
-							<object class="NSColorSpace" key="NSCustomColorSpace" id="414044827">
+							<object class="NSColorSpace" key="NSCustomColorSpace" id="976902241">
 								<int key="NSID">2</int>
 							</object>
 						</object>
@@ -79,30 +79,25 @@
 							<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 						</object>
 					</object>
-					<object class="IBUINavigationBar" id="233272290">
+					<object class="IBUINavigationBar" id="896412821">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">290</int>
 						<string key="NSFrameSize">{320, 44}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView" ref="450283124"/>
+						<reference key="NSNextKeyView" ref="743630951"/>
 						<string key="NSReuseIdentifierKey">_NS:240</string>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
-						<object class="NSArray" key="IBUIItems">
+						<object class="NSMutableArray" key="IBUIItems">
 							<bool key="EncodedWithXMLCoder">YES</bool>
-							<object class="IBUINavigationItem" id="1005829514">
-								<reference key="IBUINavigationBar" ref="233272290"/>
-								<string key="IBUITitle">Create Game</string>
-								<object class="IBUIBarButtonItem" key="IBUIBackBarButtonItem" id="175097703">
-									<string key="IBUITitle">Back</string>
-									<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
-									<int key="IBUIStyle">1</int>
-								</object>
+							<object class="IBUINavigationItem" id="311819242">
+								<reference key="IBUINavigationBar" ref="896412821"/>
+								<string key="IBUITitle">Title</string>
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 							</object>
 						</object>
 					</object>
-					<object class="IBUIToolbar" id="175275088">
+					<object class="IBUIToolbar" id="809278282">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">266</int>
 						<string key="NSFrame">{{0, 416}, {320, 44}}</string>
@@ -115,16 +110,22 @@
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 						<object class="NSMutableArray" key="IBUIItems">
 							<bool key="EncodedWithXMLCoder">YES</bool>
-							<object class="IBUIBarButtonItem" id="407054325">
+							<object class="IBUIBarButtonItem" id="599861411">
+								<string key="IBUITitle">Cancel</string>
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
-								<reference key="IBUIToolbar" ref="175275088"/>
+								<int key="IBUIStyle">1</int>
+								<reference key="IBUIToolbar" ref="809278282"/>
+							</object>
+							<object class="IBUIBarButtonItem" id="66906497">
+								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
+								<reference key="IBUIToolbar" ref="809278282"/>
 								<int key="IBUISystemItemIdentifier">5</int>
 							</object>
-							<object class="IBUIBarButtonItem" id="408658826">
+							<object class="IBUIBarButtonItem" id="134820806">
 								<string key="IBUITitle">Done</string>
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 								<int key="IBUIStyle">1</int>
-								<reference key="IBUIToolbar" ref="175275088"/>
+								<reference key="IBUIToolbar" ref="809278282"/>
 							</object>
 						</object>
 					</object>
@@ -132,11 +133,11 @@
 				<string key="NSFrame">{{0, 20}, {320, 460}}</string>
 				<reference key="NSSuperview"/>
 				<reference key="NSWindow"/>
-				<reference key="NSNextKeyView" ref="233272290"/>
+				<reference key="NSNextKeyView" ref="896412821"/>
 				<object class="NSColor" key="IBUIBackgroundColor">
 					<int key="NSColorSpace">3</int>
 					<bytes key="NSWhite">MQA</bytes>
-					<reference key="NSCustomColorSpace" ref="414044827"/>
+					<reference key="NSCustomColorSpace" ref="976902241"/>
 				</object>
 				<object class="IBUISimulatedStatusBarMetrics" key="IBUISimulatedStatusBarMetrics"/>
 				<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
@@ -156,7 +157,7 @@
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchOutletConnection" key="connection">
 						<string key="label">delegate</string>
-						<reference key="source" ref="450283124"/>
+						<reference key="source" ref="743630951"/>
 						<reference key="destination" ref="372490531"/>
 					</object>
 					<int key="connectionID">21</int>
@@ -165,7 +166,7 @@
 					<object class="IBCocoaTouchOutletConnection" key="connection">
 						<string key="label">hintTextField</string>
 						<reference key="source" ref="372490531"/>
-						<reference key="destination" ref="450283124"/>
+						<reference key="destination" ref="743630951"/>
 					</object>
 					<int key="connectionID">22</int>
 				</object>
@@ -173,14 +174,14 @@
 					<object class="IBCocoaTouchOutletConnection" key="connection">
 						<string key="label">doneButton</string>
 						<reference key="source" ref="372490531"/>
-						<reference key="destination" ref="408658826"/>
+						<reference key="destination" ref="134820806"/>
 					</object>
 					<int key="connectionID">23</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchEventConnection" key="connection">
 						<string key="label">createGameDone:</string>
-						<reference key="source" ref="450283124"/>
+						<reference key="source" ref="743630951"/>
 						<reference key="destination" ref="372490531"/>
 						<int key="IBEventType">19</int>
 					</object>
@@ -189,10 +190,18 @@
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchEventConnection" key="connection">
 						<string key="label">createGameDone:</string>
-						<reference key="source" ref="408658826"/>
+						<reference key="source" ref="134820806"/>
 						<reference key="destination" ref="372490531"/>
 					</object>
 					<int key="connectionID">25</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchEventConnection" key="connection">
+						<string key="label">createGameCancel:</string>
+						<reference key="source" ref="599861411"/>
+						<reference key="destination" ref="372490531"/>
+					</object>
+					<int key="connectionID">28</int>
 				</object>
 			</object>
 			<object class="IBMutableOrderedSet" key="objectRecords">
@@ -209,9 +218,9 @@
 						<reference key="object" ref="191373211"/>
 						<object class="NSMutableArray" key="children">
 							<bool key="EncodedWithXMLCoder">YES</bool>
-							<reference ref="450283124"/>
-							<reference ref="175275088"/>
-							<reference ref="233272290"/>
+							<reference ref="743630951"/>
+							<reference ref="809278282"/>
+							<reference ref="896412821"/>
 						</object>
 						<reference key="parent" ref="0"/>
 					</object>
@@ -228,51 +237,48 @@
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">5</int>
-						<reference key="object" ref="450283124"/>
+						<reference key="object" ref="743630951"/>
 						<reference key="parent" ref="191373211"/>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">15</int>
-						<reference key="object" ref="233272290"/>
+						<reference key="object" ref="896412821"/>
 						<object class="NSMutableArray" key="children">
 							<bool key="EncodedWithXMLCoder">YES</bool>
-							<reference ref="1005829514"/>
+							<reference ref="311819242"/>
 						</object>
 						<reference key="parent" ref="191373211"/>
 					</object>
 					<object class="IBObjectRecord">
-						<int key="objectID">16</int>
-						<reference key="object" ref="1005829514"/>
-						<object class="NSMutableArray" key="children">
-							<bool key="EncodedWithXMLCoder">YES</bool>
-							<reference ref="175097703"/>
-						</object>
-						<reference key="parent" ref="233272290"/>
-					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">17</int>
-						<reference key="object" ref="175097703"/>
-						<reference key="parent" ref="1005829514"/>
-					</object>
-					<object class="IBObjectRecord">
 						<int key="objectID">18</int>
-						<reference key="object" ref="175275088"/>
+						<reference key="object" ref="809278282"/>
 						<object class="NSMutableArray" key="children">
 							<bool key="EncodedWithXMLCoder">YES</bool>
-							<reference ref="408658826"/>
-							<reference ref="407054325"/>
+							<reference ref="134820806"/>
+							<reference ref="66906497"/>
+							<reference ref="599861411"/>
 						</object>
 						<reference key="parent" ref="191373211"/>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">19</int>
-						<reference key="object" ref="408658826"/>
-						<reference key="parent" ref="175275088"/>
+						<reference key="object" ref="134820806"/>
+						<reference key="parent" ref="809278282"/>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">20</int>
-						<reference key="object" ref="407054325"/>
-						<reference key="parent" ref="175275088"/>
+						<reference key="object" ref="66906497"/>
+						<reference key="parent" ref="809278282"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">26</int>
+						<reference key="object" ref="599861411"/>
+						<reference key="parent" ref="809278282"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">27</int>
+						<reference key="object" ref="311819242"/>
+						<reference key="parent" ref="896412821"/>
 					</object>
 				</object>
 			</object>
@@ -286,11 +292,11 @@
 					<string>-2.IBPluginDependency</string>
 					<string>1.IBPluginDependency</string>
 					<string>15.IBPluginDependency</string>
-					<string>16.IBPluginDependency</string>
-					<string>17.IBPluginDependency</string>
 					<string>18.IBPluginDependency</string>
 					<string>19.IBPluginDependency</string>
 					<string>20.IBPluginDependency</string>
+					<string>26.IBPluginDependency</string>
+					<string>27.IBPluginDependency</string>
 					<string>5.IBPluginDependency</string>
 				</object>
 				<object class="NSMutableArray" key="dict.values">
@@ -321,7 +327,7 @@
 				<reference key="dict.values" ref="0"/>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">25</int>
+			<int key="maxID">28</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -330,14 +336,35 @@
 					<string key="className">CreateGameController</string>
 					<string key="superclassName">UIViewController</string>
 					<object class="NSMutableDictionary" key="actions">
-						<string key="NS.key.0">createGameDone:</string>
-						<string key="NS.object.0">id</string>
+						<bool key="EncodedWithXMLCoder">YES</bool>
+						<object class="NSArray" key="dict.sortedKeys">
+							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>createGameCancel:</string>
+							<string>createGameDone:</string>
+						</object>
+						<object class="NSMutableArray" key="dict.values">
+							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>id</string>
+							<string>id</string>
+						</object>
 					</object>
 					<object class="NSMutableDictionary" key="actionInfosByName">
-						<string key="NS.key.0">createGameDone:</string>
-						<object class="IBActionInfo" key="NS.object.0">
-							<string key="name">createGameDone:</string>
-							<string key="candidateClassName">id</string>
+						<bool key="EncodedWithXMLCoder">YES</bool>
+						<object class="NSArray" key="dict.sortedKeys">
+							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>createGameCancel:</string>
+							<string>createGameDone:</string>
+						</object>
+						<object class="NSMutableArray" key="dict.values">
+							<bool key="EncodedWithXMLCoder">YES</bool>
+							<object class="IBActionInfo">
+								<string key="name">createGameCancel:</string>
+								<string key="candidateClassName">id</string>
+							</object>
+							<object class="IBActionInfo">
+								<string key="name">createGameDone:</string>
+								<string key="candidateClassName">id</string>
+							</object>
 						</object>
 					</object>
 					<object class="NSMutableDictionary" key="outlets">

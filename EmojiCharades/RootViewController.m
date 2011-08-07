@@ -38,6 +38,8 @@
     UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(showCreateGame)];
     self.navigationItem.rightBarButtonItem = addButton;
     [addButton release];
+    
+    self.managedObjectContext = RKObjectManager.sharedManager.objectStore.managedObjectContext;
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -106,7 +108,7 @@
 
 - (void) gameCreatedOk:(ECGame *)game {
     [self dismissModalViewControllerAnimated:YES];
-    [self.createGameController release];    
+    [self.createGameController release];   
 }
 
 - (void)userSetupOk:(ECUser *)user {
@@ -216,7 +218,7 @@
 - (void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath
 {
     ECGame *game = [self.fetchedResultsController objectAtIndexPath:indexPath];
-    cell.textLabel.text = [NSString stringWithFormat: @"owner: %@", game.owner.name];
+    cell.textLabel.text = [NSString stringWithFormat: @"%@: %@", game.owner.name, game.hint];
 }
 
 - (void)insertNewObject
