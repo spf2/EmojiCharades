@@ -14,7 +14,7 @@
 #import "PlayGameController.h"
 #import "SetupViewController.h"
 
-@interface RootViewController : UITableViewController <NSFetchedResultsControllerDelegate,RKObjectLoaderDelegate, SetupViewDelegate, CreateGameDelegate, PlayGameDelegate> {
+@interface RootViewController : UITableViewController <NSFetchedResultsControllerDelegate,RKObjectLoaderDelegate, SetupViewDelegate, CreateGameDelegate> {
 }
 
 

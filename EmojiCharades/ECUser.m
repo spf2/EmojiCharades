@@ -49,6 +49,7 @@
     NSManagedObjectID *selfObjectID = [moc.persistentStoreCoordinator managedObjectIDForURIRepresentation: [NSURL URLWithString:selfUserURI]];
     if (!selfObjectID) return nil;
     return (ECUser *)[moc objectWithID:selfObjectID];
+    // consider caching...?
 }
 
 @end

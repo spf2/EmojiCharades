@@ -7,17 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
+
 #import "ECGame.h"
+#import "ECTurn.h"
+#import "ResultController.h"
 
-@protocol PlayGameDelegate
-- (void) gamePlayedOk:(ECGame *)game;
-@end
-
-@interface PlayGameController : UIViewController<NSFetchedResultsControllerDelegate, RKObjectLoaderDelegate, UITextFieldDelegate, UITableViewDataSource, UITableViewDelegate> {
+@interface PlayGameController : UIViewController<NSFetchedResultsControllerDelegate, RKObjectLoaderDelegate, UITextFieldDelegate, UITableViewDataSource, UITableViewDelegate, ResultControllerDelegate> {
 }
 
-@property (nonatomic, retain) NSManagedObjectContext *managedObjectContext;
-@property (nonatomic, retain) NSFetchedResultsController *fetchedResultsController;
 @property (nonatomic, retain) IBOutlet UILabel *hintLabel;
 @property (nonatomic, retain) IBOutlet UILabel *metadataLabel;
 @property (nonatomic, retain) IBOutlet UITableView *turnTableView;
@@ -29,5 +26,6 @@
 - (void) moveTextViewForKeyboard:(NSNotification*)note up: (BOOL) up;
 - (IBAction)guessEditingDidEnd:(id)sender;
 - (void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath;
+- (ECTurn *)turnAtIndexPath: (NSIndexPath *)indexPath;
 
 @end

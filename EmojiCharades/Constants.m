@@ -9,3 +9,9 @@
 #import "Constants.h"
 
 NSString * const ECDateFormat = @"yyyy-MM-dd'T'HH:mm:ss'Z'";
+NSString * const ECRight = @"👍";
+NSString * const ECWrong = @"👎";
+
+int const ECResultRight = 1;
+int const ECResultWrong = -1;
+int const ECResultNone = 0;

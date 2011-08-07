@@ -9,3 +9,8 @@
 #import <Foundation/Foundation.h>
 
 extern NSString * const ECDateFormat;
+extern NSString * const ECRight;
+extern NSString * const ECWrong;
+extern int const ECResultRight;
+extern int const ECResultWrong;
+extern int const ECResultNone;

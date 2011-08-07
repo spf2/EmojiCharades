@@ -10,6 +10,7 @@
 #import "RootViewController.h"
 #import "SetupViewController.h"
 #import "ECGame.h"
+#import "Constants.h"
 
 @interface RootViewController ()
 - (void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath;
@@ -21,6 +22,14 @@
 @synthesize managedObjectContext = __managedObjectContext;
 @synthesize setupController;
 @synthesize createGameController;
+
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+{
+    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+    if (self) {
+    }
+    return self;
+}
 
 - (void)viewDidLoad
 {
@@ -34,6 +43,7 @@
     self.navigationItem.rightBarButtonItem = addButton;
     self.navigationItem.title = @"Games";
     [addButton release];
+    
     self.managedObjectContext = RKObjectManager.sharedManager.objectStore.managedObjectContext;
 }
 
@@ -101,10 +111,6 @@
     [ECUser setSelfUser:user];
     [self dismissModalViewControllerAnimated:YES];
     [self.setupController release];
-}
-
-- (void) gamePlayedOk:(ECGame *)game {
-    
 }
 
 /*
@@ -205,8 +211,13 @@
 - (void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath
 {
     ECGame *game = [self.fetchedResultsController objectAtIndexPath:indexPath];
-    cell.detailTextLabel.text = 
-        [NSString stringWithFormat:@"%@ at %@", game.owner.name, game.updatedAt];
+    
+    if (game.doneAt) {        
+        cell.detailTextLabel.text = 
+        [NSString stringWithFormat:@"%@ %@", game.owner.name, ECRight];
+    } else {
+        cell.detailTextLabel.text = game.owner.name;
+    }
     cell.textLabel.text = game.hint;
     cell.selectionStyle = UITableViewCellSelectionStyleBlue;
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;

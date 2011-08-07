@@ -36,6 +36,8 @@
 		E7AF37D913E4B98300DB58CA /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = E7AF37D713E4B98300DB58CA /* InfoPlist.strings */; };
 		E7AF37DB13E4B98300DB58CA /* EmojiCharadesTests.h in Resources */ = {isa = PBXBuildFile; fileRef = E7AF37DA13E4B98300DB58CA /* EmojiCharadesTests.h */; };
 		E7AF37DD13E4B98300DB58CA /* EmojiCharadesTests.m in Sources */ = {isa = PBXBuildFile; fileRef = E7AF37DC13E4B98300DB58CA /* EmojiCharadesTests.m */; };
+		E7D3B9C513EF2A1F007C5B19 /* ResultController.m in Sources */ = {isa = PBXBuildFile; fileRef = E7D3B9C313EF2A1E007C5B19 /* ResultController.m */; };
+		E7D3B9C613EF2A1F007C5B19 /* ResultController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E7D3B9C413EF2A1F007C5B19 /* ResultController.xib */; };
 		E7F809BD13E5F13B0077F0CE /* libRestKitSupport.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E7F809AC13E5F0C90077F0CE /* libRestKitSupport.a */; };
 		E7F809C013E5F23D0077F0CE /* libRestKitJSONParserJSONKit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E7F809B413E5F0C90077F0CE /* libRestKitJSONParserJSONKit.a */; };
 		E7F809C113E5F23D0077F0CE /* libRestKitNetwork.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E7F809A813E5F0C90077F0CE /* libRestKitNetwork.a */; };
@@ -177,6 +179,9 @@
 		E7AF37D813E4B98300DB58CA /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		E7AF37DA13E4B98300DB58CA /* EmojiCharadesTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EmojiCharadesTests.h; sourceTree = "<group>"; };
 		E7AF37DC13E4B98300DB58CA /* EmojiCharadesTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EmojiCharadesTests.m; sourceTree = "<group>"; };
+		E7D3B9C213EF2A1E007C5B19 /* ResultController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ResultController.h; sourceTree = "<group>"; };
+		E7D3B9C313EF2A1E007C5B19 /* ResultController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ResultController.m; sourceTree = "<group>"; };
+		E7D3B9C413EF2A1F007C5B19 /* ResultController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ResultController.xib; sourceTree = "<group>"; };
 		E7F8099313E5F0C90077F0CE /* RestKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RestKit.xcodeproj; path = RestKit/RestKit.xcodeproj; sourceTree = "<group>"; };
 		E7F809C613E5FD150077F0CE /* ECUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ECUser.h; sourceTree = "<group>"; };
 		E7F809C713E5FD150077F0CE /* ECUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ECUser.m; sourceTree = "<group>"; };
@@ -288,6 +293,9 @@
 				E7309C9013EDFF5500F270F3 /* CreateGameController.xib */,
 				E7AF37BA13E4B98300DB58CA /* EmojiCharades.xcdatamodeld */,
 				E7AF37AF13E4B98300DB58CA /* Supporting Files */,
+				E7D3B9C213EF2A1E007C5B19 /* ResultController.h */,
+				E7D3B9C313EF2A1E007C5B19 /* ResultController.m */,
+				E7D3B9C413EF2A1F007C5B19 /* ResultController.xib */,
 			);
 			path = EmojiCharades;
 			sourceTree = "<group>";
@@ -501,6 +509,7 @@
 				E720AF1D13E5BFE3007D1564 /* SetupViewController.xib in Resources */,
 				E7309C9213EDFF5500F270F3 /* CreateGameController.xib in Resources */,
 				E7309C9713EE4A0500F270F3 /* PlayGameController.xib in Resources */,
+				E7D3B9C613EF2A1F007C5B19 /* ResultController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -547,6 +556,7 @@
 				E7F809D113E680720077F0CE /* ECTurn.m in Sources */,
 				E7309C9113EDFF5500F270F3 /* CreateGameController.m in Sources */,
 				E7309C9613EE4A0500F270F3 /* PlayGameController.m in Sources */,
+				E7D3B9C513EF2A1F007C5B19 /* ResultController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

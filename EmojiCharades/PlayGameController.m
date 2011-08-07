@@ -7,12 +7,13 @@
 //
 
 #import "PlayGameController.h"
+
+#import "ResultController.h"
 #import "ECTurn.h"
+#import "Constants.h"
 
 @implementation PlayGameController
 
-@synthesize fetchedResultsController = __fetchedResultsController;
-@synthesize managedObjectContext = __managedObjectContext;
 @synthesize hintLabel;
 @synthesize metadataLabel;
 @synthesize turnTableView;
@@ -20,7 +21,6 @@
 @synthesize guessButton;
 @synthesize game;
 @synthesize guessToolbar;
-
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -94,15 +94,28 @@
 - (IBAction)guessEditingDidEnd:(id)sender {
 }
 
-#pragma mark RKObjectLoaderDelegate methods
+#pragma mark ResultControllerDelegate methods
 
-- (void)objectLoader:(RKObjectLoader*)objectLoader didLoadObject:(id)game {
-    [guessTextField resignFirstResponder];
-    guessTextField.text = @"";
+- (void)resultOk:(ECTurn *)turn
+{
+    [self.navigationController popViewControllerAnimated:YES];
     [turnTableView reloadData];
 }
 
-- (void)objectLoader:(RKObjectLoader*)objectLoader didFailWithError:(NSError*)error {
+#pragma mark RKObjectLoaderDelegate methods
+
+- (void)objectLoader:(RKObjectLoader*)objectLoader didLoadObject:(id)_ 
+{
+    [guessTextField resignFirstResponder];
+    guessTextField.text = @"";
+    if (game.doneAt) {
+        guessTextField.hidden = YES;
+    }
+    [turnTableView reloadData];
+}
+
+- (void)objectLoader:(RKObjectLoader*)objectLoader didFailWithError:(NSError*)error 
+{
 	NSLog(@"Hit error: %@", error);
     UIAlertView *alert = [[UIAlertView alloc] 
                           initWithTitle:@"Error" 
@@ -125,8 +138,11 @@
     [super viewDidLoad];
     hintLabel.text = game.hint;
     metadataLabel.text = [NSString stringWithFormat:@"%@ at %@", game.owner.name, game.createdAt];
+    guessTextField.hidden = game.doneAt != nil;
+   
     guessTextField.delegate = self;
     turnTableView.dataSource = self;
+    turnTableView.delegate = self;
     
     [[NSNotificationCenter defaultCenter]
      addObserver:self
@@ -138,8 +154,6 @@
      selector:@selector(keyboardWillHide:)
      name:UIKeyboardWillHideNotification
      object:nil];
-    
-    self.managedObjectContext = RKObjectManager.sharedManager.objectStore.managedObjectContext;    
 }
 
 - (void)viewDidUnload
@@ -164,7 +178,25 @@
 
 #pragma mark UITableViewDelegate methods
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+- (BOOL)userCanGiveResultFor:(ECTurn *)turn 
+{
+    return game.doneAt == nil && game.owner == [ECUser selfUser] && turn.result.intValue == ECResultNone;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    ECTurn* turn = [self turnAtIndexPath:indexPath];
+    if ([self userCanGiveResultFor:turn]) {
+        ResultController *resultController = [[ResultController alloc] initWithNibName:@"ResultController" bundle:nil];
+        resultController.delegate = self;
+        resultController.turn = turn;
+        [self.navigationController pushViewController:resultController animated:YES];
+        [resultController release];
+    }
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section 
+{
     return game.turns.count;
 }
 
@@ -184,17 +216,37 @@
 }
 
 - (void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath {
-    // TODO this resorts for /each/ row... instead only sort when game changes.
+    ECTurn* turn = [self turnAtIndexPath:indexPath];
+    cell.textLabel.text = turn.guess;
+    
+    if (turn.result.intValue == ECResultWrong) {
+        cell.detailTextLabel.text = [NSString stringWithFormat:@"%@ %@", turn.user.name, ECWrong];
+        cell.detailTextLabel.textColor = [UIColor redColor];
+    } else if (turn.result.intValue == ECResultRight) {
+        cell.detailTextLabel.text = [NSString stringWithFormat:@"%@ %@", turn.user.name, ECRight];
+        cell.detailTextLabel.textColor = [UIColor colorWithRed:0 green:0.5 blue:0 alpha:1];        
+    } else {
+        if (game.doneAt) {
+            cell.detailTextLabel.text = turn.user.name;    
+        } else {
+            cell.detailTextLabel.text = [NSString stringWithFormat:@"%@ at %@", turn.user.name, turn.createdAt];
+        }
+        cell.detailTextLabel.textColor = [UIColor grayColor];
+    }
+    
+    if ([self userCanGiveResultFor:turn]) {
+        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+    }
+}
+
+- (ECTurn *)turnAtIndexPath: (NSIndexPath *)indexPath {
+    // TODO this resorts all turns for /each/ row... instead only sort when game changes.
     NSComparator byID = ^(id a, id b) {
         return [[b turnID] compare:[a turnID]];
     };
-    
     NSArray *sorted = [[game.turns allObjects] sortedArrayUsingComparator:byID];                       
-                       
     ECTurn *turn = [sorted objectAtIndex:indexPath.row];
-    cell.detailTextLabel.text = 
-    [NSString stringWithFormat:@"%@ at %@", turn.user.name, turn.createdAt];
-    cell.textLabel.text = turn.guess;
+    return turn;
 }
 
 
