@@ -26,24 +26,23 @@
 {
     [super viewDidLoad];
     
-    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"userID"];  // xxx
-    
     if (![ECUser selfUser]) {
         [self userSetup];
     }
-    
-    self.managedObjectContext = RKObjectManager.sharedManager.objectStore.managedObjectContext;
-    [[RKObjectManager sharedManager] loadObjectsAtResourcePath:@"/game" delegate:self]; 
-    
+        
     UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(showCreateGame)];
     self.navigationItem.rightBarButtonItem = addButton;
-    self.navigationItem.title = @"Emoji Charades";
+    self.navigationItem.title = @"Games";
     [addButton release];
+    self.managedObjectContext = RKObjectManager.sharedManager.objectStore.managedObjectContext;
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    
+    // Trigger data refresh every time the user goes to, or returns to, this view.
+    [[RKObjectManager sharedManager] loadObjectsAtResourcePath:@"/game" delegate:self];     
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -207,7 +206,7 @@
 {
     ECGame *game = [self.fetchedResultsController objectAtIndexPath:indexPath];
     cell.detailTextLabel.text = 
-        [NSString stringWithFormat:@"%@ at %@", game.owner.name, game.createdAt];
+        [NSString stringWithFormat:@"%@ at %@", game.owner.name, game.updatedAt];
     cell.textLabel.text = game.hint;
     cell.selectionStyle = UITableViewCellSelectionStyleBlue;
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;

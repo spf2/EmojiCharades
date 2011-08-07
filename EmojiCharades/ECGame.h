@@ -19,7 +19,7 @@
 @property (nonatomic, retain) NSDate *doneAt;
 @property (nonatomic, retain) NSString *hint;
 @property (nonatomic, retain) ECUser *owner;
-@property (nonatomic, retain) NSArray *turns;
+@property (nonatomic, retain) NSSet *turns;
 
 + (RKManagedObjectMapping *)setupMappingWithObjectManager:(RKObjectManager *)objectManager withUserMapping:(RKObjectMapping *)userMapping;
 + (void)setupObjectRouter:(RKObjectRouter *)objectRouter;

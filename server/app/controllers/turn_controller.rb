@@ -1,9 +1,19 @@
 class TurnController < ApplicationController
 
+  def index
+    turns = Turn.find_by_game_id(params[:game_id])
+    render :json => turns
+  end
+
+  def show
+    turn = Turn.find(params[:id])
+    render :json => turn
+  end
+  
   def create
-    turn = Turn.new(params[:turn].merge(:game_id=>params[:game_id]))
+    turn = Turn.new(params[:turn])
     turn.save!
-    render :xml => turn
+    render :json => turn
   end
 
   def update
@@ -11,6 +21,6 @@ class TurnController < ApplicationController
     # TODO(spf): ensure that updater is game owner
     turn.result = params[:turn][:result]
     turn.save!
-    render :xml => turn
+    render :json => turn
   end
 end

@@ -13,20 +13,21 @@
 - (void) gamePlayedOk:(ECGame *)game;
 @end
 
-@interface PlayGameController : UIViewController<RKObjectLoaderDelegate> {
-    UILabel *hintLabel;
-    UILabel *metadataLabel;
-    UITableView *turnTableView;
-    UITextField *guessTextField;
-    UIBarButtonItem *guessButton;
-    ECGame *game;
+@interface PlayGameController : UIViewController<NSFetchedResultsControllerDelegate, RKObjectLoaderDelegate, UITextFieldDelegate, UITableViewDataSource, UITableViewDelegate> {
 }
 
+@property (nonatomic, retain) NSManagedObjectContext *managedObjectContext;
+@property (nonatomic, retain) NSFetchedResultsController *fetchedResultsController;
 @property (nonatomic, retain) IBOutlet UILabel *hintLabel;
 @property (nonatomic, retain) IBOutlet UILabel *metadataLabel;
 @property (nonatomic, retain) IBOutlet UITableView *turnTableView;
 @property (nonatomic, retain) IBOutlet UITextField *guessTextField;
 @property (nonatomic, retain) IBOutlet UIBarButtonItem *guessButton;
 @property (nonatomic, retain) ECGame *game;
+@property (nonatomic, retain) IBOutlet UIToolbar *guessToolbar;
+
+- (void) moveTextViewForKeyboard:(NSNotification*)note up: (BOOL) up;
+- (IBAction)guessEditingDidEnd:(id)sender;
+- (void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath;
 
 @end

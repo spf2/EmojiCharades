@@ -12,10 +12,12 @@
     </entity>
     <entity name="ECTurn" representedClassName="ECTurn">
         <attribute name="createdAt" attributeType="Date" indexed="YES"/>
+        <attribute name="gameID" optional="YES" attributeType="Integer 32" defaultValueString="0"/>
         <attribute name="guess" attributeType="String"/>
-        <attribute name="score" optional="YES" attributeType="Integer 32" defaultValueString="0"/>
+        <attribute name="result" optional="YES" attributeType="Integer 32" defaultValueString="0"/>
         <attribute name="turnID" attributeType="Integer 32" defaultValueString="0" indexed="YES"/>
         <attribute name="updatedAt" attributeType="Date"/>
+        <attribute name="userID" optional="YES" attributeType="Integer 32" defaultValueString="0"/>
         <relationship name="game" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="ECGame" inverseName="turns" inverseEntity="ECGame"/>
         <relationship name="user" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="ECUser" inverseName="turns" inverseEntity="ECUser"/>
     </entity>
@@ -29,7 +31,7 @@
     </entity>
     <elements>
         <element name="ECGame" positionX="286" positionY="612" width="128" height="165"/>
-        <element name="ECTurn" positionX="531" positionY="288" width="128" height="150"/>
+        <element name="ECTurn" positionX="531" positionY="288" width="128" height="180"/>
         <element name="ECUser" positionX="160" positionY="192" width="128" height="135"/>
     </elements>
 </model>

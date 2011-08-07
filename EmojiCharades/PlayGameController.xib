@@ -14,10 +14,10 @@
 			<bool key="EncodedWithXMLCoder">YES</bool>
 			<string>IBUIBarButtonItem</string>
 			<string>IBUILabel</string>
-			<string>IBUITextField</string>
-			<string>IBProxyObject</string>
 			<string>IBUINavigationBar</string>
+			<string>IBProxyObject</string>
 			<string>IBUINavigationItem</string>
+			<string>IBUITextField</string>
 			<string>IBUIToolbar</string>
 			<string>IBUIScrollView</string>
 			<string>IBUIView</string>
@@ -80,7 +80,7 @@
 										<object class="IBUITextField" id="964155278">
 											<reference key="NSNextResponder" ref="11731045"/>
 											<int key="NSvFlags">292</int>
-											<string key="NSFrame">{{12, 7}, {230, 31}}</string>
+											<string key="NSFrame">{{12, 7}, {298, 31}}</string>
 											<reference key="NSSuperview" ref="11731045"/>
 											<reference key="NSWindow"/>
 											<reference key="NSNextKeyView"/>
@@ -91,6 +91,7 @@
 											<int key="IBUIContentVerticalAlignment">0</int>
 											<string key="IBUIText"/>
 											<int key="IBUIBorderStyle">3</int>
+											<string key="IBUIPlaceholder">Your guess</string>
 											<object class="NSColor" key="IBUITextColor">
 												<int key="NSColorSpace">3</int>
 												<bytes key="NSWhite">MAA</bytes>
@@ -101,6 +102,8 @@
 											<bool key="IBUIAdjustsFontSizeToFit">YES</bool>
 											<float key="IBUIMinimumFontSize">17</float>
 											<object class="IBUITextInputTraits" key="IBUITextInputTraits">
+												<int key="IBUIReturnKeyType">9</int>
+												<bool key="IBUIEnablesReturnKeyAutomatically">YES</bool>
 												<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 											</object>
 										</object>
@@ -118,12 +121,6 @@
 										<object class="IBUIBarButtonItem" id="532050059">
 											<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 											<reference key="IBUICustomView" ref="964155278"/>
-											<reference key="IBUIToolbar" ref="11731045"/>
-										</object>
-										<object class="IBUIBarButtonItem" id="269264756">
-											<string key="IBUITitle">Guess</string>
-											<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
-											<int key="IBUIStyle">1</int>
 											<reference key="IBUIToolbar" ref="11731045"/>
 										</object>
 									</object>
@@ -148,7 +145,7 @@
 									<string key="IBUIText">Hint goes here</string>
 									<object class="NSFont" key="IBUIFont">
 										<string key="NSName">Helvetica</string>
-										<double key="NSSize">17</double>
+										<double key="NSSize">18</double>
 										<int key="NSfFlags">16</int>
 									</object>
 									<object class="NSColor" key="IBUITextColor">
@@ -162,7 +159,7 @@
 								<object class="IBUILabel" id="548557911">
 									<reference key="NSNextResponder" ref="566647209"/>
 									<int key="NSvFlags">292</int>
-									<string key="NSFrame">{{20, 48}, {280, 34}}</string>
+									<string key="NSFrame">{{20, 38}, {280, 16}}</string>
 									<reference key="NSSuperview" ref="566647209"/>
 									<reference key="NSWindow"/>
 									<reference key="NSNextKeyView" ref="718136542"/>
@@ -195,7 +192,7 @@
 										<object class="IBUITableView" id="1005185173">
 											<reference key="NSNextResponder" ref="718136542"/>
 											<int key="NSvFlags">274</int>
-											<string key="NSFrameSize">{320, 282}</string>
+											<string key="NSFrameSize">{320, 310}</string>
 											<reference key="NSSuperview" ref="718136542"/>
 											<reference key="NSWindow"/>
 											<reference key="NSNextKeyView" ref="11731045"/>
@@ -215,7 +212,7 @@
 											<float key="IBUISectionFooterHeight">22</float>
 										</object>
 									</object>
-									<string key="NSFrame">{{0, 90}, {320, 282}}</string>
+									<string key="NSFrame">{{0, 62}, {320, 310}}</string>
 									<reference key="NSSuperview" ref="566647209"/>
 									<reference key="NSWindow"/>
 									<reference key="NSNextKeyView" ref="1005185173"/>
@@ -285,14 +282,6 @@
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchOutletConnection" key="connection">
-						<string key="label">guessButton</string>
-						<reference key="source" ref="372490531"/>
-						<reference key="destination" ref="269264756"/>
-					</object>
-					<int key="connectionID">41</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBCocoaTouchOutletConnection" key="connection">
 						<string key="label">metadataLabel</string>
 						<reference key="source" ref="372490531"/>
 						<reference key="destination" ref="548557911"/>
@@ -314,6 +303,23 @@
 						<reference key="destination" ref="566647209"/>
 					</object>
 					<int key="connectionID">47</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">guessToolbar</string>
+						<reference key="source" ref="372490531"/>
+						<reference key="destination" ref="11731045"/>
+					</object>
+					<int key="connectionID">48</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchEventConnection" key="connection">
+						<string key="label">guessEditingDidEnd:</string>
+						<reference key="source" ref="964155278"/>
+						<reference key="destination" ref="372490531"/>
+						<int key="IBEventType">19</int>
+					</object>
+					<int key="connectionID">49</int>
 				</object>
 			</object>
 			<object class="IBMutableOrderedSet" key="objectRecords">
@@ -361,10 +367,10 @@
 						<reference key="object" ref="566647209"/>
 						<object class="NSMutableArray" key="children">
 							<bool key="EncodedWithXMLCoder">YES</bool>
-							<reference ref="11731045"/>
 							<reference ref="718136542"/>
 							<reference ref="1041585980"/>
 							<reference ref="548557911"/>
+							<reference ref="11731045"/>
 						</object>
 						<reference key="parent" ref="782093789"/>
 					</object>
@@ -393,28 +399,8 @@
 						<object class="NSMutableArray" key="children">
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<reference ref="532050059"/>
-							<reference ref="269264756"/>
 						</object>
 						<reference key="parent" ref="566647209"/>
-					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">34</int>
-						<reference key="object" ref="269264756"/>
-						<reference key="parent" ref="11731045"/>
-					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">33</int>
-						<reference key="object" ref="532050059"/>
-						<object class="NSMutableArray" key="children">
-							<bool key="EncodedWithXMLCoder">YES</bool>
-							<reference ref="964155278"/>
-						</object>
-						<reference key="parent" ref="11731045"/>
-					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">32</int>
-						<reference key="object" ref="964155278"/>
-						<reference key="parent" ref="532050059"/>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">21</int>
@@ -430,6 +416,20 @@
 						<int key="objectID">37</int>
 						<reference key="object" ref="1005185173"/>
 						<reference key="parent" ref="718136542"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">33</int>
+						<reference key="object" ref="532050059"/>
+						<object class="NSMutableArray" key="children">
+							<bool key="EncodedWithXMLCoder">YES</bool>
+							<reference ref="964155278"/>
+						</object>
+						<reference key="parent" ref="11731045"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">32</int>
+						<reference key="object" ref="964155278"/>
+						<reference key="parent" ref="532050059"/>
 					</object>
 				</object>
 			</object>
@@ -449,7 +449,6 @@
 					<string>30.IBPluginDependency</string>
 					<string>32.IBPluginDependency</string>
 					<string>33.IBPluginDependency</string>
-					<string>34.IBPluginDependency</string>
 					<string>35.IBPluginDependency</string>
 					<string>36.IBPluginDependency</string>
 					<string>37.IBPluginDependency</string>
@@ -460,7 +459,6 @@
 					<string>PlayGameController</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>UIResponder</string>
-					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
@@ -488,7 +486,7 @@
 				<reference key="dict.values" ref="0"/>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">47</int>
+			<int key="maxID">50</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -496,12 +494,24 @@
 				<object class="IBPartialClassDescription">
 					<string key="className">PlayGameController</string>
 					<string key="superclassName">UIViewController</string>
+					<object class="NSMutableDictionary" key="actions">
+						<string key="NS.key.0">guessEditingDidEnd:</string>
+						<string key="NS.object.0">id</string>
+					</object>
+					<object class="NSMutableDictionary" key="actionInfosByName">
+						<string key="NS.key.0">guessEditingDidEnd:</string>
+						<object class="IBActionInfo" key="NS.object.0">
+							<string key="name">guessEditingDidEnd:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+					</object>
 					<object class="NSMutableDictionary" key="outlets">
 						<bool key="EncodedWithXMLCoder">YES</bool>
 						<object class="NSArray" key="dict.sortedKeys">
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<string>guessButton</string>
 							<string>guessTextField</string>
+							<string>guessToolbar</string>
 							<string>hintLabel</string>
 							<string>metadataLabel</string>
 							<string>turnTableView</string>
@@ -510,6 +520,7 @@
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<string>UIBarButtonItem</string>
 							<string>UITextField</string>
+							<string>UIToolbar</string>
 							<string>UILabel</string>
 							<string>UILabel</string>
 							<string>UITableView</string>
@@ -521,6 +532,7 @@
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<string>guessButton</string>
 							<string>guessTextField</string>
+							<string>guessToolbar</string>
 							<string>hintLabel</string>
 							<string>metadataLabel</string>
 							<string>turnTableView</string>
@@ -534,6 +546,10 @@
 							<object class="IBToOneOutletInfo">
 								<string key="name">guessTextField</string>
 								<string key="candidateClassName">UITextField</string>
+							</object>
+							<object class="IBToOneOutletInfo">
+								<string key="name">guessToolbar</string>
+								<string key="candidateClassName">UIToolbar</string>
 							</object>
 							<object class="IBToOneOutletInfo">
 								<string key="name">hintLabel</string>

@@ -9,6 +9,8 @@
 #import <CoreData/CoreData.h>
 #import <RestKit/RestKit.h>
 #import <RestKit/CoreData/CoreData.h>
+
+#import "ECGame.h"
 #import "ECUser.h"
 
 @interface ECTurn : NSManagedObject
@@ -18,6 +20,7 @@
 @property (nonatomic, retain) NSDate *updatedAt;
 @property (nonatomic, retain) NSString *guess;
 @property (nonatomic, retain) ECUser *user;
+@property (nonatomic, retain) ECGame *game;
 @property (nonatomic, retain) NSNumber *result;
 
 + (void)setupMappingWithObjectManager:(RKObjectManager *)objectManager 
