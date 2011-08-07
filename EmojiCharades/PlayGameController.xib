@@ -95,7 +95,7 @@
 											<object class="NSColor" key="IBUITextColor">
 												<int key="NSColorSpace">3</int>
 												<bytes key="NSWhite">MAA</bytes>
-												<object class="NSColorSpace" key="NSCustomColorSpace" id="354233253">
+												<object class="NSColorSpace" key="NSCustomColorSpace">
 													<int key="NSID">2</int>
 												</object>
 											</object>
@@ -128,14 +128,14 @@
 								<object class="IBUILabel" id="1041585980">
 									<reference key="NSNextResponder" ref="566647209"/>
 									<int key="NSvFlags">292</int>
-									<string key="NSFrame">{{20, 0}, {248, 54}}</string>
+									<string key="NSFrame">{{11, 0}, {298, 54}}</string>
 									<reference key="NSSuperview" ref="566647209"/>
 									<reference key="NSWindow"/>
 									<reference key="NSNextKeyView" ref="548557911"/>
 									<string key="NSReuseIdentifierKey">_NS:311</string>
-									<object class="NSColor" key="IBUIBackgroundColor" id="529059704">
-										<int key="NSColorSpace">1</int>
-										<bytes key="NSRGB">MSAxIDEAA</bytes>
+									<object class="NSColor" key="IBUIBackgroundColor" id="189618876">
+										<int key="NSColorSpace">3</int>
+										<bytes key="NSWhite">MCAwAA</bytes>
 									</object>
 									<bool key="IBUIOpaque">NO</bool>
 									<bool key="IBUIClipsSubviews">YES</bool>
@@ -159,12 +159,12 @@
 								<object class="IBUILabel" id="548557911">
 									<reference key="NSNextResponder" ref="566647209"/>
 									<int key="NSvFlags">292</int>
-									<string key="NSFrame">{{20, 38}, {280, 16}}</string>
+									<string key="NSFrame">{{11, 38}, {298, 16}}</string>
 									<reference key="NSSuperview" ref="566647209"/>
 									<reference key="NSWindow"/>
 									<reference key="NSNextKeyView" ref="718136542"/>
 									<string key="NSReuseIdentifierKey">_NS:311</string>
-									<reference key="IBUIBackgroundColor" ref="529059704"/>
+									<reference key="IBUIBackgroundColor" ref="189618876"/>
 									<bool key="IBUIOpaque">NO</bool>
 									<bool key="IBUIClipsSubviews">YES</bool>
 									<int key="IBUIContentMode">7</int>
@@ -228,9 +228,33 @@
 							<reference key="NSNextKeyView" ref="1041585980"/>
 							<string key="NSReuseIdentifierKey">_NS:180</string>
 							<object class="NSColor" key="IBUIBackgroundColor">
-								<int key="NSColorSpace">3</int>
-								<bytes key="NSWhite">MQA</bytes>
-								<reference key="NSCustomColorSpace" ref="354233253"/>
+								<int key="NSColorSpace">10</int>
+								<object class="NSImage" key="NSImage">
+									<int key="NSImageFlags">549453824</int>
+									<string key="NSSize">{84, 1}</string>
+									<object class="NSMutableArray" key="NSReps">
+										<bool key="EncodedWithXMLCoder">YES</bool>
+										<object class="NSArray">
+											<bool key="EncodedWithXMLCoder">YES</bool>
+											<integer value="0"/>
+											<object class="NSBitmapImageRep">
+												<object class="NSData" key="NSTIFFRepresentation">
+													<bytes key="NS.bytes">TU0AKgAAAVjFzNT/xczU/8XM1P/FzNT/xczS/8vS2P/L0tj/xczU/8XM1P/FzNT/xczU/8XM0v/L0tj/
+y9LY/8XM1P/FzNT/xczU/8XM1P/FzNL/y9LY/8vS2P/FzNT/xczU/8XM1P/FzNT/xczS/8vS2P/L0tj/
+xczU/8XM1P/FzNT/xczU/8XM0v/L0tj/y9LY/8XM1P/FzNT/xczU/8XM1P/FzNL/y9LY/8vS2P/FzNT/
+xczU/8XM1P/FzNT/xczS/8vS2P/L0tj/xczU/8XM1P/FzNT/xczU/8XM0v/L0tj/y9LY/8XM1P/FzNT/
+xczU/8XM1P/FzNL/y9LY/8vS2P/FzNT/xczU/8XM1P/FzNT/xczS/8vS2P/L0tj/xczU/8XM1P/FzNT/
+xczU/8XM0v/L0tj/y9LY/8XM1P/FzNT/xczU/8XM1P/FzNL/y9LY/8vS2P8ADQEAAAMAAAABAFQAAAEB
+AAMAAAABAAEAAAECAAMAAAAEAAAB+gEDAAMAAAABAAEAAAEGAAMAAAABAAIAAAERAAQAAAABAAAACAES
+AAMAAAABAAEAAAEVAAMAAAABAAQAAAEWAAMAAAABAAEAAAEXAAQAAAABAAABUAEcAAMAAAABAAEAAAFS
+AAMAAAABAAEAAAFTAAMAAAAEAAACAgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
+												</object>
+											</object>
+										</object>
+									</object>
+									<reference key="NSColor" ref="189618876"/>
+								</object>
+								<string key="IBUIColorCocoaTouchKeyPath">groupTableViewBackgroundColor</string>
 							</object>
 							<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 						</object>
@@ -368,9 +392,9 @@
 						<object class="NSMutableArray" key="children">
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<reference ref="718136542"/>
+							<reference ref="11731045"/>
 							<reference ref="1041585980"/>
 							<reference ref="548557911"/>
-							<reference ref="11731045"/>
 						</object>
 						<reference key="parent" ref="782093789"/>
 					</object>
