@@ -9,7 +9,7 @@
 #import "EmojiCharadesAppDelegate.h"
 
 #import "RootViewController.h"
-#import "SetupViewController.h"
+#import "SetupUserController.h"
 #import "RestKit/RestKit.h"
 #import "Restkit/CoreData/CoreData.h"
 

@@ -12,15 +12,15 @@
 
 #import "CreateGameController.h"
 #import "PlayGameController.h"
-#import "SetupViewController.h"
+#import "SetupUserController.h"
 
-@interface RootViewController : UITableViewController <NSFetchedResultsControllerDelegate,RKObjectLoaderDelegate, SetupViewDelegate, CreateGameDelegate> {
+@interface RootViewController : UITableViewController <NSFetchedResultsControllerDelegate,RKObjectLoaderDelegate, SetupUserDelegate, CreateGameDelegate> {
 }
 
 
 @property (nonatomic, retain) NSFetchedResultsController *fetchedResultsController;
 @property (nonatomic, retain) NSManagedObjectContext *managedObjectContext;
-@property (nonatomic, retain) SetupViewController *setupController;
+@property (nonatomic, retain) SetupUserController *setupController;
 @property (nonatomic, retain) CreateGameController *createGameController;
 
 - (void)userSetup;

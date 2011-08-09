@@ -59,6 +59,8 @@
     [self moveTextViewForKeyboard:note up:NO];    
 }
 
+
+// This madness is needed so that the keyboard doesn't obscure the text-entry box.
 - (void) moveTextViewForKeyboard:(NSNotification*)note up: (BOOL) up {
     NSDictionary* userInfo = [note userInfo];
     
@@ -119,7 +121,7 @@
 	NSLog(@"Hit error: %@", error);
     UIAlertView *alert = [[UIAlertView alloc] 
                           initWithTitle:@"Error" 
-                          message:@"Error saving turn" 
+                          message:@"Error loading game" 
                           delegate:nil 
                           cancelButtonTitle:@"Ok" 
                           otherButtonTitles:nil];

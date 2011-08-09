@@ -8,7 +8,7 @@
 
 #import "PlayGameController.h"
 #import "RootViewController.h"
-#import "SetupViewController.h"
+#import "SetupUserController.h"
 #import "ECGame.h"
 #import "Constants.h"
 
@@ -87,8 +87,8 @@
 }
 
 - (void)userSetup {
-    self.setupController = [[SetupViewController alloc]
-                            initWithNibName:@"SetupViewController" bundle:nil];
+    self.setupController = [[SetupUserController alloc]
+                            initWithNibName:@"SetupUserController" bundle:nil];
     [self.setupController setModalTransitionStyle:UIModalTransitionStyleFlipHorizontal];
     self.setupController.delegate = self;
     [self presentModalViewController:self.setupController animated:YES];

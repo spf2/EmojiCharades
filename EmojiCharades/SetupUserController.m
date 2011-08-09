@@ -1,15 +1,15 @@
 //
-//  SetupViewController.m
+//  SetupUserController.m
 //  EmojiCharades
 //
 //  Created by Steve Farrell on 7/31/11.
 //  Copyright 2011 __MyCompanyName__. All rights reserved.
 //
 
-#import "SetupViewController.h"
+#import "SetupUserController.h"
 #import "ECUser.h"
 
-@implementation SetupViewController
+@implementation SetupUserController
 
 @synthesize doneButton;
 @synthesize warningLabel;
