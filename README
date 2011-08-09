@@ -14,8 +14,8 @@ git clone git@github.com:spf2/EmojiCharades.git
 git submodule init
 git submodule update
 
-Rails initalize:
-(cd server; bundle update; rake db:migrate
+Rails initialize:
+(cd server; bundle update; rake db:migrate)
 
 Rails run server:
 (cd server; rails server)
