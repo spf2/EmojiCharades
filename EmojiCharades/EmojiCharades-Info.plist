@@ -33,7 +33,7 @@
 	<key>NSMainNibFile</key>
 	<string>MainWindow</string>
 	<key>Service URL</key>
-	<string>http://localhost:3000</string>
+	<string>http://emoji-charades.heroku.com</string>
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
