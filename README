@@ -7,15 +7,10 @@ Implementation: Steve Farrell
 Getting started
 ===============
 
-This is an Xcode 4.1 and Rails 3 project
+This is an Xcode 4.1 project
 
 Code:
 git clone git@github.com:spf2/EmojiCharades.git
-git submodule init
-git submodule update
+(cd EmojiChardes; git submodule init; git submodule update)
 
-Rails initialize:
-(cd server; bundle update; rake db:migrate)
-
-Rails run server:
-(cd server; rails server)
+There is also a server component.  See https://github.com/spf2/emoji-charades
