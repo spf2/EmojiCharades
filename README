@@ -9,8 +9,13 @@ Getting started
 
 This is an Xcode 4.1 and Rails 3 project
 
+Code:
 git clone git@github.com:spf2/EmojiCharades.git
 git submodule init
 git submodule update
 
-To run the server: "(cd server; rails server)"
+Rails initalize:
+(cd server; bundle update; rake db:migrate
+
+Rails run server:
+(cd server; rails server)
