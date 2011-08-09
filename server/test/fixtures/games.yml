@@ -1,9 +1,0 @@
-# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
-
-game1:
-  owner: user1
-  hint: hint1
-
-game2:
-  owner: user2
-  hint: hint2
