@@ -35,12 +35,13 @@
      nil];
     [gameMapping mapRelationship:@"turns" withMapping:mapping];
     [mapping connectRelationship:@"game" withObjectForPrimaryKeyAttribute:@"gameID"];
-    [mapping connectRelationship:@"user" withObjectForPrimaryKeyAttribute:@"userID"];
+    [mapping mapRelationship:@"user" withMapping:userMapping];
     [mapping.dateFormatStrings addObject:ECDateFormat];
     [objectManager.mappingProvider registerMapping:mapping withRootKeyPath:@"turn"];
     
     // tweak serialization
     RKObjectMapping *serializationMapping = [objectManager.mappingProvider serializationMappingForClass:ECTurn.class];
+    [serializationMapping removeMappingForKeyPath:@"user"];
     [serializationMapping removeMappingForKeyPath:@"userID"];
     [serializationMapping removeMappingForKeyPath:@"gameID"];
     [serializationMapping mapKeyPath:@"user.userID" toAttribute:@"user_id"];

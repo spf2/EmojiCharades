@@ -180,15 +180,14 @@
 
 #pragma mark UITableViewDelegate methods
 
-- (BOOL)userCanGiveResultFor:(ECTurn *)turn 
-{
-    return game.doneAt == nil && game.owner == [ECUser selfUser] && turn.result.intValue == ECResultNone;
+static BOOL userCanGiveResultFor(ECGame *game, ECTurn *turn) {
+    return game.doneAt == nil && game.owner.userID == [ECUser selfUser].userID && turn.result.intValue == ECResultNone;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     ECTurn* turn = [self turnAtIndexPath:indexPath];
-    if ([self userCanGiveResultFor:turn]) {
+    if (userCanGiveResultFor(game, turn)) {
         ResultController *resultController = [[ResultController alloc] initWithNibName:@"ResultController" bundle:nil];
         resultController.delegate = self;
         resultController.turn = turn;
@@ -236,7 +235,7 @@
         cell.detailTextLabel.textColor = [UIColor grayColor];
     }
     
-    if ([self userCanGiveResultFor:turn]) {
+    if (userCanGiveResultFor(game, turn)) {
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     }
 }

@@ -19,7 +19,6 @@
 @implementation RootViewController
 
 @synthesize fetchedResultsController = __fetchedResultsController;
-@synthesize managedObjectContext = __managedObjectContext;
 @synthesize setupController;
 @synthesize createGameController;
 
@@ -43,8 +42,6 @@
     self.navigationItem.rightBarButtonItem = addButton;
     self.navigationItem.title = @"Games";
     [addButton release];
-    
-    self.managedObjectContext = RKObjectManager.sharedManager.objectStore.managedObjectContext;
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -159,7 +156,7 @@
     if (editingStyle == UITableViewCellEditingStyleDelete)
     {
         // Delete the managed object for the given index path
-        NSManagedObjectContext *context = [self.fetchedResultsController managedObjectContext];
+        NSManagedObjectContext *context = RKObjectManager.sharedManager.objectStore.managedObjectContext;
         [context deleteObject:[self.fetchedResultsController objectAtIndexPath:indexPath]];
         
         // Save the context.
@@ -204,7 +201,6 @@
 - (void)dealloc
 {
     [__fetchedResultsController release];
-    [__managedObjectContext release];
     [super dealloc];
 }
 
@@ -226,7 +222,7 @@
 - (void)insertNewObject
 {
     // Create a new instance of the entity managed by the fetched results controller.
-    NSManagedObjectContext *context = [self.fetchedResultsController managedObjectContext];
+    NSManagedObjectContext *context = RKObjectManager.sharedManager.objectStore.managedObjectContext;
     NSEntityDescription *entity = [[self.fetchedResultsController fetchRequest] entity];
     NSManagedObject *newManagedObject = [NSEntityDescription insertNewObjectForEntityForName:[entity name] inManagedObjectContext:context];
     
@@ -259,7 +255,7 @@
     // Edit the entity name as appropriate.
     NSEntityDescription *entity = [NSEntityDescription
                                    entityForName:@"ECGame"
-                                   inManagedObjectContext:self.managedObjectContext];
+                                   inManagedObjectContext:RKObjectManager.sharedManager.objectStore.managedObjectContext];
     [fetchRequest setEntity:entity];
     [fetchRequest setFetchBatchSize:20];
     NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc]
@@ -271,7 +267,7 @@
     
     // Edit the section name key path and cache name if appropriate.
     // nil for section name key path means "no sections".
-    NSFetchedResultsController *aFetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest managedObjectContext:self.managedObjectContext sectionNameKeyPath:nil cacheName:@"Root"];
+    NSFetchedResultsController *aFetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest managedObjectContext:RKObjectManager.sharedManager.objectStore.managedObjectContext sectionNameKeyPath:nil cacheName:@"Root"];
     aFetchedResultsController.delegate = self;
     self.fetchedResultsController = aFetchedResultsController;
     

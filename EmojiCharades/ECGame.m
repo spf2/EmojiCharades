@@ -31,13 +31,14 @@
      @"done_at", @"doneAt",
      @"owner_id", @"ownerID",
      nil];
-    [mapping connectRelationship:@"owner" withObjectForPrimaryKeyAttribute:@"ownerID"];
+    [mapping mapRelationship:@"owner" withMapping:userMapping];
     [mapping.dateFormatStrings addObject:ECDateFormat];
     [objectManager.mappingProvider registerMapping:mapping withRootKeyPath:@"game"];
     
     // tweak serialization
     RKObjectMapping *serializationMapping = [objectManager.mappingProvider serializationMappingForClass:ECGame.class];
     [serializationMapping removeMappingForKeyPath:@"ownerID"];
+    [serializationMapping removeMappingForKeyPath:@"owner"];
     [serializationMapping mapKeyPath:@"owner.userID" toAttribute:@"owner_id"];
     
     return mapping;

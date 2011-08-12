@@ -40,11 +40,10 @@
     NSString *databaseName = @"EmojiCharades.sqlite";
     
     self.objectManager.objectStore = [RKManagedObjectStore objectStoreWithStoreFilename:databaseName];
-
-
     if (false) {
         [self.objectManager.objectStore deletePersistantStore];
     }
+
     self.objectManager.serializationMIMEType = RKMIMETypeJSON;
     
     RKObjectMapping *userMapping = [ECUser setupMappingWithObjectManager:self.objectManager];
@@ -131,8 +130,7 @@
 
 - (void)awakeFromNib
 {
-    RootViewController *rootViewController = (RootViewController *)[self.navigationController topViewController];
-    rootViewController.managedObjectContext = self.objectManager.objectStore.managedObjectContext;
+//    RootViewController *rootViewController = (RootViewController *)[self.navigationController topViewController];
 }
 
 /**

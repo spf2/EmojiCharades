@@ -38,6 +38,7 @@
 		E7AF37DD13E4B98300DB58CA /* EmojiCharadesTests.m in Sources */ = {isa = PBXBuildFile; fileRef = E7AF37DC13E4B98300DB58CA /* EmojiCharadesTests.m */; };
 		E7D3B9C513EF2A1F007C5B19 /* ResultController.m in Sources */ = {isa = PBXBuildFile; fileRef = E7D3B9C313EF2A1E007C5B19 /* ResultController.m */; };
 		E7D3B9C613EF2A1F007C5B19 /* ResultController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E7D3B9C413EF2A1F007C5B19 /* ResultController.xib */; };
+		E7E9BEBE13F4E9BC00C113F1 /* EmojiCharades.xcdatamodeld in Resources */ = {isa = PBXBuildFile; fileRef = E7AF37BA13E4B98300DB58CA /* EmojiCharades.xcdatamodeld */; };
 		E7F809BD13E5F13B0077F0CE /* libRestKitSupport.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E7F809AC13E5F0C90077F0CE /* libRestKitSupport.a */; };
 		E7F809C013E5F23D0077F0CE /* libRestKitJSONParserJSONKit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E7F809B413E5F0C90077F0CE /* libRestKitJSONParserJSONKit.a */; };
 		E7F809C113E5F23D0077F0CE /* libRestKitNetwork.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E7F809A813E5F0C90077F0CE /* libRestKitNetwork.a */; };
@@ -503,6 +504,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E7E9BEBE13F4E9BC00C113F1 /* EmojiCharades.xcdatamodeld in Resources */,
 				E7AF37B313E4B98300DB58CA /* InfoPlist.strings in Resources */,
 				E7AF37BF13E4B98300DB58CA /* MainWindow.xib in Resources */,
 				E7AF37C513E4B98300DB58CA /* RootViewController.xib in Resources */,
@@ -732,6 +734,60 @@
 			};
 			name = Release;
 		};
+		E7E9BEBA13F4DE9F00C113F1 /* Ad hoc */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_VERSION = com.apple.compilers.llvmgcc42;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = "$(SOURCE_ROOT)/RestKit/Build";
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				LIBRARY_SEARCH_PATHS = "$(SOURCE_ROOT)/RestKit/$(BUILD_STYLE)-$(PLATFORM_NAME)";
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				OTHER_LDFLAGS = (
+					"-Objc",
+					"-all_load",
+				);
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = "Ad hoc";
+		};
+		E7E9BEBB13F4DE9F00C113F1 /* Ad hoc */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "EmojiCharades/EmojiCharades-Prefix.pch";
+				INFOPLIST_FILE = "EmojiCharades/EmojiCharades-Info.plist";
+				LIBRARY_SEARCH_PATHS = "";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = "Ad hoc";
+		};
+		E7E9BEBC13F4DE9F00C113F1 /* Ad hoc */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/EmojiCharades.app/EmojiCharades";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(DEVELOPER_LIBRARY_DIR)/Frameworks",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "EmojiCharades/EmojiCharades-Prefix.pch";
+				INFOPLIST_FILE = "EmojiCharadesTests/EmojiCharadesTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = "Ad hoc";
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -740,6 +796,7 @@
 			buildConfigurations = (
 				E7AF37DE13E4B98300DB58CA /* Debug */,
 				E7AF37DF13E4B98300DB58CA /* Release */,
+				E7E9BEBA13F4DE9F00C113F1 /* Ad hoc */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -749,6 +806,7 @@
 			buildConfigurations = (
 				E7AF37E113E4B98300DB58CA /* Debug */,
 				E7AF37E213E4B98300DB58CA /* Release */,
+				E7E9BEBB13F4DE9F00C113F1 /* Ad hoc */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -758,6 +816,7 @@
 			buildConfigurations = (
 				E7AF37E413E4B98300DB58CA /* Debug */,
 				E7AF37E513E4B98300DB58CA /* Release */,
+				E7E9BEBC13F4DE9F00C113F1 /* Ad hoc */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

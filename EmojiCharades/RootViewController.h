@@ -19,7 +19,6 @@
 
 
 @property (nonatomic, retain) NSFetchedResultsController *fetchedResultsController;
-@property (nonatomic, retain) NSManagedObjectContext *managedObjectContext;
 @property (nonatomic, retain) SetupUserController *setupController;
 @property (nonatomic, retain) CreateGameController *createGameController;
 
