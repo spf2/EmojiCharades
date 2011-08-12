@@ -145,7 +145,7 @@
 
 /* Begin PBXFileReference section */
 		E720AF1C13E5BFE3007D1564 /* SetupUserController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SetupUserController.xib; sourceTree = "<group>"; };
-		E720AF1F13E5C2BF007D1564 /* SetupUserController.h */ = {isa = PBXFileReference; fileEncoding = 4; path = SetupUserController.h; sourceTree = "<group>"; };
+		E720AF1F13E5C2BF007D1564 /* SetupUserController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SetupUserController.h; sourceTree = "<group>"; };
 		E720AF2013E5C2BF007D1564 /* SetupUserController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SetupUserController.m; sourceTree = "<group>"; };
 		E720AF8113E5EBEF007D1564 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		E720AF8313E5EC10007D1564 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
