@@ -71,6 +71,10 @@
                             ofType:@"plist"];
     NSDictionary *properties = [NSDictionary dictionaryWithContentsOfFile:bundlePath];
     self.serviceURL = [properties valueForKey:@"Service URL"];
+    
+#ifdef DEBUG
+    self.serviceURL = @"http://localhost:3000";
+#endif
 }
 
 - (void)showError:(NSString *)message

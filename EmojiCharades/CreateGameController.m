@@ -40,14 +40,17 @@
 }
 
 - (IBAction)createGameDone:(id)sender {
-    ECGame* newGame = [ECGame object];
-    newGame.hint = hintTextField.text;
-    newGame.updatedAt = newGame.createdAt = [NSDate date];
-    newGame.owner = [ECUser selfUser];
-    [[RKObjectManager sharedManager] postObject:newGame delegate:self];
+    if ([hintTextField.text length] > 0) {
+        ECGame* newGame = [ECGame object];
+        newGame.hint = hintTextField.text;
+        newGame.updatedAt = newGame.createdAt = [NSDate date];
+        newGame.owner = [ECUser selfUser];
+        [[RKObjectManager sharedManager] postObject:newGame delegate:self];
+    }
 }
 
 - (IBAction)createGameCancel:(id)sender {
+    hintTextField.text = @"";
     [delegate gameCreatedOk: nil];
 }
 

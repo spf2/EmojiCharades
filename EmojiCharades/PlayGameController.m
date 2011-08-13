@@ -40,7 +40,7 @@
 
 - (BOOL)textFieldShouldReturn:(UITextField *)theTextField {
     if (theTextField == self.guessTextField) {
-        
+        [guessTextField resignFirstResponder];
         ECTurn* newTurn = [ECTurn object];
         newTurn.guess = guessTextField.text;
         newTurn.updatedAt = newTurn.createdAt = [NSDate date];
@@ -108,7 +108,6 @@
 
 - (void)objectLoader:(RKObjectLoader*)objectLoader didLoadObject:(id)_ 
 {
-    [guessTextField resignFirstResponder];
     guessTextField.text = @"";
     if (game.doneAt) {
         guessTextField.hidden = YES;
@@ -121,7 +120,7 @@
 	NSLog(@"Hit error: %@", error);
     UIAlertView *alert = [[UIAlertView alloc] 
                           initWithTitle:@"Error" 
-                          message:@"Error loading game" 
+                          message:@"Error saving turn" 
                           delegate:nil 
                           cancelButtonTitle:@"Ok" 
                           otherButtonTitles:nil];
