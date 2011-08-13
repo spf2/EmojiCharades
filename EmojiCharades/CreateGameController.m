@@ -34,7 +34,7 @@
 
 - (BOOL)textFieldShouldReturn:(UITextField *)theTextField {
     if (theTextField == self.hintTextField) {
-        [theTextField resignFirstResponder];
+        [self createGameDone:theTextField];
     }
     return YES;
 }
@@ -47,6 +47,7 @@
         newGame.owner = [ECUser selfUser];
         [[RKObjectManager sharedManager] postObject:newGame delegate:self];
     }
+    [hintTextField resignFirstResponder];
 }
 
 - (IBAction)createGameCancel:(id)sender {

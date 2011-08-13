@@ -214,6 +214,8 @@
     } else {
         cell.detailTextLabel.text = game.owner.name;
     }
+    cell.textLabel.backgroundColor = [UIColor clearColor];
+    cell.detailTextLabel.backgroundColor = [UIColor clearColor];
     cell.textLabel.text = game.hint;
     cell.selectionStyle = UITableViewCellSelectionStyleBlue;
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
