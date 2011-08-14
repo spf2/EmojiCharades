@@ -35,6 +35,7 @@
      nil];
     [gameMapping mapRelationship:@"turns" withMapping:mapping];
     [gameMapping mapKeyPath:@"winning_turn" toRelationship:@"winningTurn" withMapping:mapping];
+    [mapping connectRelationship:@"game" withObjectForPrimaryKeyAttribute:@"gameID"];
     [mapping mapRelationship:@"user" withMapping:userMapping];
     [mapping.dateFormatStrings addObject:ECDateFormat];
     [objectManager.mappingProvider registerMapping:mapping withRootKeyPath:@"turn"];

@@ -45,16 +45,14 @@
 
 + (ECUser *)selfUser 
 {
-    static ECUser* selfUser = nil;
-    @synchronized(ECUser.class) {
-        if (selfUser == nil) {
-            NSString *selfName = [[NSUserDefaults standardUserDefaults] objectForKey:@"selfName"];
-            if (selfName) {
-                selfUser = [self userByName: selfName];
-            }
+    ECUser* selfUser = nil;
+    if (selfUser == nil) {
+        NSString *selfName = [[NSUserDefaults standardUserDefaults] objectForKey:@"selfName"];
+        if (selfName) {
+            selfUser = [self userByName: selfName];
         }
-        return selfUser;
     }
+    return selfUser;
 }
 
 + (ECUser *)userByName:(NSString *)name

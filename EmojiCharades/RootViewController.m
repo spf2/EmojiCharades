@@ -85,30 +85,30 @@
 }
 
 - (void)userSetup {
-    self.setupController = [[SetupUserController alloc]
-                            initWithNibName:@"SetupUserController" bundle:nil];
-    [self.setupController setModalTransitionStyle:UIModalTransitionStyleFlipHorizontal];
-    self.setupController.delegate = self;
-    [self presentModalViewController:self.setupController animated:YES];
+    setupController = [[[SetupUserController alloc]
+                        initWithNibName:@"SetupUserController" bundle:nil] autorelease];
+    [setupController setModalTransitionStyle:UIModalTransitionStyleFlipHorizontal];
+    setupController.delegate = self;
+    [self presentModalViewController:setupController animated:YES];
 }
 
 - (void)showCreateGame {
-    self.createGameController = [[CreateGameController alloc]
-                                 initWithNibName:@"CreateGameController" bundle:nil];
-    [self.createGameController setModalTransitionStyle:UIModalTransitionStyleCoverVertical];
-    self.createGameController.delegate = self;
-    [self presentModalViewController:self.createGameController animated:YES];
+    createGameController = [[[CreateGameController alloc]
+                             initWithNibName:@"CreateGameController" bundle:nil] autorelease];
+    [createGameController setModalTransitionStyle:UIModalTransitionStyleCoverVertical];
+    createGameController.delegate = self;
+    [self presentModalViewController:createGameController animated:YES];
 }
 
 - (void) gameCreatedOk:(ECGame *)game {
     [self dismissModalViewControllerAnimated:YES];
-    [self.createGameController release];   
+    [createGameController release];   
 }
 
 - (void)userSetupOk:(ECUser *)user {
     [ECUser setSelfUser:user];
     [self dismissModalViewControllerAnimated:YES];
-    [self.setupController release];
+    [setupController release];
 }
 
 /*

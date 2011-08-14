@@ -63,12 +63,10 @@
 {
 
     self.objectManager = [RKObjectManager objectManagerWithBaseURL:self.serviceURL];
-    [RKRequestQueue sharedQueue].showsNetworkActivityIndicatorWhenBusy = YES;
-    NSString *databaseName = @"EmojiCharades.sqlite";
-    
-    self.objectManager.objectStore = [RKManagedObjectStore objectStoreWithStoreFilename:databaseName usingSeedDatabaseName:nil managedObjectModel:nil delegate:self];
-    
+    [RKRequestQueue sharedQueue].showsNetworkActivityIndicatorWhenBusy = YES;    
     self.objectManager.serializationMIMEType = RKMIMETypeJSON;
+    NSString *databaseName = @"EmojiCharades.sqlite";
+    self.objectManager.objectStore = [RKManagedObjectStore objectStoreWithStoreFilename:databaseName usingSeedDatabaseName:nil managedObjectModel:nil delegate:self];
     
     RKManagedObjectMapping *userMapping = [ECUser setupMappingWithObjectManager:self.objectManager];
     RKManagedObjectMapping *gameMapping = [ECGame setupMappingWithObjectManager:self.objectManager 
