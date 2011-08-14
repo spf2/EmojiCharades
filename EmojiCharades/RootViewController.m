@@ -34,22 +34,23 @@
 {
     [super viewDidLoad];
     
-    if (![ECUser selfUser]) {
-        [self userSetup];
-    }
         
-    UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(showCreateGame)];
-    self.navigationItem.rightBarButtonItem = addButton;
+    UIBarButtonItem *createButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(showCreateGame)];
+    self.navigationItem.rightBarButtonItem = createButton;
     self.navigationItem.title = @"Games";
-    [addButton release];
+    [createButton release];
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    
-    // Trigger data refresh every time the user goes to, or returns to, this view.
-    [[RKObjectManager sharedManager] loadObjectsAtResourcePath:@"/game" delegate:self];     
+
+    if (![ECUser selfUser]) {
+        [self userSetup];
+    } else {
+        // Trigger data refresh every time the user goes to, or returns to, this view.
+        [[RKObjectManager sharedManager] loadObjectsAtResourcePath:@"/game" delegate:self];
+    }
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -148,23 +149,15 @@
 // Override to support conditional editing of the table view.
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return YES;
+    ECGame *game = [self.fetchedResultsController objectAtIndexPath:indexPath];
+    return game.owner == [ECUser selfUser] && game.turns.count == 0;
 }
 
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (editingStyle == UITableViewCellEditingStyleDelete)
     {
-        // Delete the managed object for the given index path
-        NSManagedObjectContext *context = RKObjectManager.sharedManager.objectStore.managedObjectContext;
-        [context deleteObject:[self.fetchedResultsController objectAtIndexPath:indexPath]];
-        
-        // Save the context.
-        NSError *error = nil;
-        if (![context save:&error]) {
-            NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
-            abort();
-        }
+        [[RKObjectManager sharedManager] deleteObject:[self.fetchedResultsController objectAtIndexPath:indexPath] delegate:self];
     }   
 }
 
@@ -208,15 +201,16 @@
 {
     ECGame *game = [self.fetchedResultsController objectAtIndexPath:indexPath];
     
+
     if (game.doneAt) {        
+        cell.textLabel.text = game.winningTurn.guess;
         cell.detailTextLabel.text = 
-        [NSString stringWithFormat:@"%@ %@", game.owner.name, ECRight];
+        [NSString stringWithFormat:@"by %@ (%@ guess%@, solved by %@)", game.owner.name, game.numTurns, game.numTurns.intValue == 1 ? @"" : @"es", game.winningTurn.user.name];
     } else {
-        cell.detailTextLabel.text = game.owner.name;
+        cell.textLabel.text = game.hint;
+        cell.detailTextLabel.text = 
+        [NSString stringWithFormat:@"by %@ (%@ guess%@)", game.owner.name, game.numTurns, game.numTurns.intValue == 1 ? @"" : @"es"];
     }
-    cell.textLabel.backgroundColor = [UIColor clearColor];
-    cell.detailTextLabel.backgroundColor = [UIColor clearColor];
-    cell.textLabel.text = game.hint;
     cell.selectionStyle = UITableViewCellSelectionStyleBlue;
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
 }

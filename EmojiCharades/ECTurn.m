@@ -21,8 +21,8 @@
 @dynamic game;
 
 + (void)setupMappingWithObjectManager:(RKObjectManager *)objectManager 
-                      withUserMapping:(RKObjectMapping *)userMapping 
-                      withGameMapping:(RKObjectMapping *)gameMapping {
+                      withUserMapping:(RKManagedObjectMapping *)userMapping 
+                      withGameMapping:(RKManagedObjectMapping *)gameMapping {
     RKManagedObjectMapping* mapping = [RKManagedObjectMapping mappingForClass:ECTurn.class];
     mapping.primaryKeyAttribute = @"turnID";
     [mapping mapKeyPathsToAttributes:@"id", @"turnID",
@@ -34,6 +34,7 @@
      @"user_id", @"userID",
      nil];
     [gameMapping mapRelationship:@"turns" withMapping:mapping];
+    [gameMapping mapKeyPath:@"winning_turn" toRelationship:@"winningTurn" withMapping:mapping];
     [mapping connectRelationship:@"game" withObjectForPrimaryKeyAttribute:@"gameID"];
     [mapping mapRelationship:@"user" withMapping:userMapping];
     [mapping.dateFormatStrings addObject:ECDateFormat];

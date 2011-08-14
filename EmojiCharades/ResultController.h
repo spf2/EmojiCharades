@@ -7,8 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <RestKit/RestKit.h>
+#import <RestKit/CoreData/CoreData.h>
 
-#import "ECTurn.h"
+@class ECTurn;
 
 @protocol ResultControllerDelegate <NSObject>
 - (void)resultOk:(ECTurn *)turn;

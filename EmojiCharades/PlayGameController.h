@@ -10,6 +10,7 @@
 
 #import "ECGame.h"
 #import "ECTurn.h"
+#import "ECUser.h"
 #import "ResultController.h"
 
 @interface PlayGameController : UIViewController<NSFetchedResultsControllerDelegate, RKObjectLoaderDelegate, UITextFieldDelegate, UITableViewDataSource, UITableViewDelegate, ResultControllerDelegate> {

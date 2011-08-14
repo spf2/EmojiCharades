@@ -83,7 +83,6 @@
 											<string key="NSFrame">{{12, 7}, {298, 31}}</string>
 											<reference key="NSSuperview" ref="11731045"/>
 											<reference key="NSWindow"/>
-											<reference key="NSNextKeyView"/>
 											<string key="NSReuseIdentifierKey">_NS:294</string>
 											<bool key="IBUIOpaque">NO</bool>
 											<bool key="IBUIClipsSubviews">YES</bool>
@@ -98,6 +97,11 @@
 												<object class="NSColorSpace" key="NSCustomColorSpace">
 													<int key="NSID">2</int>
 												</object>
+											</object>
+											<object class="NSFont" key="IBUIFont">
+												<string key="NSName">Helvetica</string>
+												<double key="NSSize">16</double>
+												<int key="NSfFlags">16</int>
 											</object>
 											<bool key="IBUIAdjustsFontSizeToFit">YES</bool>
 											<float key="IBUIMinimumFontSize">17</float>
@@ -145,7 +149,7 @@
 									<string key="IBUIText">Hint goes here</string>
 									<object class="NSFont" key="IBUIFont">
 										<string key="NSName">Helvetica</string>
-										<double key="NSSize">18</double>
+										<double key="NSSize">24</double>
 										<int key="NSfFlags">16</int>
 									</object>
 									<object class="NSColor" key="IBUITextColor">
@@ -159,7 +163,7 @@
 								<object class="IBUILabel" id="548557911">
 									<reference key="NSNextResponder" ref="566647209"/>
 									<int key="NSvFlags">292</int>
-									<string key="NSFrame">{{11, 38}, {298, 16}}</string>
+									<string key="NSFrame">{{11, 44}, {298, 16}}</string>
 									<reference key="NSSuperview" ref="566647209"/>
 									<reference key="NSWindow"/>
 									<reference key="NSNextKeyView" ref="718136542"/>
@@ -173,7 +177,7 @@
 									<string key="IBUIText">Author name and timestamp</string>
 									<object class="NSFont" key="IBUIFont">
 										<string key="NSName">Helvetica</string>
-										<double key="NSSize">12</double>
+										<double key="NSSize">14</double>
 										<int key="NSfFlags">16</int>
 									</object>
 									<object class="NSColor" key="IBUITextColor">

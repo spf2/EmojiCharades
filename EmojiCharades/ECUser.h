@@ -25,5 +25,6 @@
 
 // Fetches the self user, presuming its been set.
 + (ECUser *)selfUser;
++ (ECUser *)userByName:(NSString *)name;
 
 @end

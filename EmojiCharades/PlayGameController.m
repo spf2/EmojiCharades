@@ -180,7 +180,9 @@
 #pragma mark UITableViewDelegate methods
 
 static BOOL userCanGiveResultFor(ECGame *game, ECTurn *turn) {
-    return game.doneAt == nil && game.owner.userID == [ECUser selfUser].userID && turn.result.intValue == ECResultNone;
+    return !game.doneAt && 
+    (game.owner && game.owner.userID == [ECUser selfUser].userID) && 
+    (!turn.result || turn.result.intValue == ECResultNone);
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
@@ -220,10 +222,10 @@ static BOOL userCanGiveResultFor(ECGame *game, ECTurn *turn) {
     cell.textLabel.text = turn.guess;
     
     if (turn.result.intValue == ECResultWrong) {
-        cell.detailTextLabel.text = [NSString stringWithFormat:@"%@ %@", turn.user.name, ECWrong];
+        cell.detailTextLabel.text = [NSString stringWithFormat:@"%@ is wrong", turn.user.name];
         cell.detailTextLabel.textColor = [UIColor redColor];
     } else if (turn.result.intValue == ECResultRight) {
-        cell.detailTextLabel.text = [NSString stringWithFormat:@"%@ %@", turn.user.name, ECRight];
+        cell.detailTextLabel.text = [NSString stringWithFormat:@"%@ is right", turn.user.name];
         cell.detailTextLabel.textColor = [UIColor colorWithRed:0 green:0.5 blue:0 alpha:1];        
     } else {
         if (game.doneAt) {
@@ -238,6 +240,22 @@ static BOOL userCanGiveResultFor(ECGame *game, ECTurn *turn) {
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     }
 }
+
+// Override to support conditional editing of the table view.
+- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    ECTurn *turn = [self turnAtIndexPath:indexPath];
+    return turn.user == [ECUser selfUser] && [turn.result isEqualToNumber:[NSNumber numberWithInt:ECResultNone]] && !turn.game.doneAt;
+}
+
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (editingStyle == UITableViewCellEditingStyleDelete)
+    {
+        [[RKObjectManager sharedManager] deleteObject:[self turnAtIndexPath:indexPath] delegate:self];
+    }   
+}
+
 
 - (ECTurn *)turnAtIndexPath: (NSIndexPath *)indexPath {
     // TODO this resorts all turns for /each/ row... instead only sort when game changes.

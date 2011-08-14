@@ -7,7 +7,6 @@
 //
 
 #import "EmojiCharadesAppDelegate.h"
-
 #import "RootViewController.h"
 #import "SetupUserController.h"
 
@@ -16,12 +15,15 @@
 #import "ECTurn.h"
 #import "Constants.h"
 
+@interface EmojiCharadesAppDelegate (PrivateMethods)
+- (void)initializeDataLayer;
+@end
+
 @implementation EmojiCharadesAppDelegate
 
 @synthesize objectManager = _objectManager;
 @synthesize window = _window;
 @synthesize navigationController = _navigationController;
-
 @synthesize serviceURL;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
@@ -34,28 +36,8 @@
     RKLogConfigureByName("RestKit/UI", RKLogLevelTrace);
     RKLogConfigureByName("RestKit/ObjectMapping", RKLogLevelTrace);
     RKLogConfigureByName("RestKit/Network*", RKLogLevelDebug);
-
-    self.objectManager = [RKObjectManager objectManagerWithBaseURL:self.serviceURL];
-    [RKRequestQueue sharedQueue].showsNetworkActivityIndicatorWhenBusy = YES;
-    NSString *databaseName = @"EmojiCharades.sqlite";
     
-    self.objectManager.objectStore = [RKManagedObjectStore objectStoreWithStoreFilename:databaseName];
-    if (false) {
-        [self.objectManager.objectStore deletePersistantStore];
-    }
-
-    self.objectManager.serializationMIMEType = RKMIMETypeJSON;
-    
-    RKObjectMapping *userMapping = [ECUser setupMappingWithObjectManager:self.objectManager];
-    RKObjectMapping *gameMapping = [ECGame setupMappingWithObjectManager:self.objectManager 
-                                                         withUserMapping:userMapping];
-    [ECTurn setupMappingWithObjectManager:self.objectManager 
-                          withUserMapping:userMapping 
-                          withGameMapping:gameMapping];
-
-    [ECUser setupObjectRouter:self.objectManager.router];
-    [ECTurn setupObjectRouter:self.objectManager.router];
-    [ECGame setupObjectRouter:self.objectManager.router];
+    [self initializeDataLayer];
     
     // Start visuals
     self.window.rootViewController = self.navigationController;
@@ -72,10 +54,33 @@
     NSDictionary *properties = [NSDictionary dictionaryWithContentsOfFile:bundlePath];
     self.serviceURL = [properties valueForKey:@"Service URL"];
     
-#ifdef DEBUG
+#if TARGET_IPHONE_SIMULATOR
     self.serviceURL = @"http://localhost:3000";
 #endif
 }
+
+- (void)initializeDataLayer 
+{
+    self.objectManager = [RKObjectManager objectManagerWithBaseURL:self.serviceURL];
+    [RKRequestQueue sharedQueue].showsNetworkActivityIndicatorWhenBusy = YES;
+    NSString *databaseName = @"EmojiCharades.sqlite";
+    
+    self.objectManager.objectStore = [RKManagedObjectStore objectStoreWithStoreFilename:databaseName usingSeedDatabaseName:nil managedObjectModel:nil delegate:self];
+    
+    self.objectManager.serializationMIMEType = RKMIMETypeJSON;
+    
+    RKManagedObjectMapping *userMapping = [ECUser setupMappingWithObjectManager:self.objectManager];
+    RKManagedObjectMapping *gameMapping = [ECGame setupMappingWithObjectManager:self.objectManager 
+                                                                withUserMapping:userMapping];
+    [ECTurn setupMappingWithObjectManager:self.objectManager 
+                          withUserMapping:userMapping 
+                          withGameMapping:gameMapping];
+    
+    [ECUser setupObjectRouter:self.objectManager.router];
+    [ECTurn setupObjectRouter:self.objectManager.router];
+    [ECGame setupObjectRouter:self.objectManager.router];
+}
+
 
 - (void)showError:(NSString *)message
 {
@@ -88,6 +93,12 @@
     [alert release];    
 }
 
+- (void)managedObjectStore:(RKManagedObjectStore *)objectStore didFailToCreatePersistentStoreCoordinatorWithError:(NSError *)error 
+{
+    NSLog(@"Error with persistent store: %@", [error localizedDescription]);
+    [self showError:[error localizedDescription]];
+    [self.objectManager.objectStore deletePersistantStore];
+}
 
 - (void)applicationWillResignActive:(UIApplication *)application
 {
@@ -117,6 +128,10 @@
     /*
      Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
      */
+    
+    // Invoke viewDidAppear to trigger a refresh of content on resume.
+    RootViewController *rootViewController = (RootViewController *)[self.navigationController topViewController];
+    [rootViewController viewWillAppear:NO];
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application

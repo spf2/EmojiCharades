@@ -20,8 +20,11 @@
 @dynamic hint;
 @dynamic owner;
 @dynamic turns;
+@dynamic numTurns;
+@dynamic winningTurn;
 
-+ (RKObjectMapping *)setupMappingWithObjectManager:(RKObjectManager *)objectManager withUserMapping:(RKManagedObjectMapping *)userMapping {
++ (RKObjectMapping *)setupMappingWithObjectManager:(RKObjectManager *)objectManager 
+                                   withUserMapping:(RKManagedObjectMapping *)userMapping {
     RKManagedObjectMapping* mapping = [RKManagedObjectMapping mappingForClass:ECGame.class];
     mapping.primaryKeyAttribute = @"gameID";
     [mapping mapKeyPathsToAttributes:@"id", @"gameID",
@@ -30,6 +33,8 @@
      @"updated_at", @"updatedAt",
      @"done_at", @"doneAt",
      @"owner_id", @"ownerID",
+     @"num_turns", @"numTurns",
+     @"winning_turn_id", @"winningTurnID",
      nil];
     [mapping mapRelationship:@"owner" withMapping:userMapping];
     [mapping.dateFormatStrings addObject:ECDateFormat];

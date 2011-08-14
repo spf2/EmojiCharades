@@ -37,19 +37,42 @@
 }
 
 + (void) setSelfUser:(ECUser *)selfUser {
-    NSString *selfUserURI = selfUser.objectID.URIRepresentation.absoluteString;
-    [[NSUserDefaults standardUserDefaults] setValue:selfUserURI forKey:@"selfObjectURI"];
-	[[NSUserDefaults standardUserDefaults] synchronize];    
+    NSString *selfName = selfUser.name;
+    [[NSUserDefaults standardUserDefaults] setValue:selfName forKey:@"selfName"];
+	[[NSUserDefaults standardUserDefaults] synchronize];
+    selfUser = nil;
 }
 
-+ (ECUser *)selfUser {
-    NSString *selfUserURI = [[NSUserDefaults standardUserDefaults] objectForKey:@"selfObjectURI"];
-    if (!selfUserURI) return nil;
++ (ECUser *)selfUser 
+{
+    /*static*/ ECUser* selfUser = nil;
+    if (selfUser == nil) {
+        NSString *selfName = [[NSUserDefaults standardUserDefaults] objectForKey:@"selfName"];
+        if (selfName) {
+            selfUser = [self userByName: selfName];
+        }
+    }
+    return selfUser;
+}
+
++ (ECUser *)userByName:(NSString *)name
+{
     NSManagedObjectContext *moc = RKObjectManager.sharedManager.objectStore.managedObjectContext;
-    NSManagedObjectID *selfObjectID = [moc.persistentStoreCoordinator managedObjectIDForURIRepresentation: [NSURL URLWithString:selfUserURI]];
-    if (!selfObjectID) return nil;
-    return (ECUser *)[moc objectWithID:selfObjectID];
-    // consider caching...?
+    NSEntityDescription *entityDescription = [NSEntityDescription
+                                              entityForName:@"ECUser" inManagedObjectContext:moc];
+    NSFetchRequest *request = [[[NSFetchRequest alloc] init] autorelease];
+    [request setEntity:entityDescription];
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"(name = %@)", name];
+    [request setPredicate:predicate];
+    NSError *error = nil;
+    NSArray *array = [moc executeFetchRequest:request error:&error];
+    if (error) {
+        NSLog(@"Error fetching user %@: %@", name, [error localizedDescription]);
+    }
+    if ([array count] == 1) {
+        return [array objectAtIndex:0];    
+    }
+    return nil;
 }
 
 @end

@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "ECGame.h"
+#import "ECUser.h"
 
 @protocol CreateGameDelegate
 // Game will be null if canceled

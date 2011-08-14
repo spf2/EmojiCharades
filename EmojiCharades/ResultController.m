@@ -8,6 +8,8 @@
 
 #import "ResultController.h"
 #import "Constants.h"
+#import "ECGame.h"
+#import "ECTurn.h"
 
 @implementation ResultController
 

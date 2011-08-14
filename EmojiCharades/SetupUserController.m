@@ -17,27 +17,15 @@
 @synthesize userNameTextField;
 
 - (IBAction)userNameDone:(id)sender {
-    ECUser* newUser = [ECUser object];
-    newUser.name = userNameTextField.text;
-    newUser.updatedAt = newUser.createdAt = [NSDate date];
-    [[RKObjectManager sharedManager] postObject:newUser delegate:self];
-}
-
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        // Custom initialization
+    ECUser *user = [ECUser userByName:userNameTextField.text];
+    if (user) {
+        [delegate userSetupOk:user];
+    } else {
+        user = [ECUser object];
+        user.name = userNameTextField.text;
+        user.updatedAt = user.createdAt = [NSDate date];
+        [[RKObjectManager sharedManager] postObject:user delegate:self];
     }
-    return self;
-}
-
-- (void)didReceiveMemoryWarning
-{
-    // Releases the view if it doesn't have a superview.
-    [super didReceiveMemoryWarning];
-    
-    // Release any cached data, images, etc that aren't in use.
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)theTextField {

@@ -5,13 +5,10 @@
         <attribute name="doneAt" optional="YES" attributeType="Date"/>
         <attribute name="gameID" attributeType="Integer 32" defaultValueString="0" indexed="YES"/>
         <attribute name="hint" attributeType="String"/>
-        <attribute name="numTurns" optional="YES" attributeType="Integer 32" defaultValueString="0"/>
         <attribute name="ownerID" optional="YES" attributeType="Integer 32" defaultValueString="0"/>
         <attribute name="updatedAt" attributeType="Date"/>
-        <attribute name="winningTurnID" optional="YES" attributeType="Integer 32" defaultValueString="0"/>
         <relationship name="owner" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="ECUser" inverseName="games" inverseEntity="ECUser"/>
         <relationship name="turns" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="ECTurn" inverseName="game" inverseEntity="ECTurn"/>
-        <relationship name="winningTurn" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="ECTurn" inverseName="game" inverseEntity="ECTurn"/>
     </entity>
     <entity name="ECTurn" representedClassName="ECTurn">
         <attribute name="createdAt" attributeType="Date" indexed="YES"/>
@@ -33,7 +30,7 @@
         <relationship name="turns" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="ECTurn" inverseName="user" inverseEntity="ECTurn"/>
     </entity>
     <elements>
-        <element name="ECGame" positionX="286" positionY="612" width="128" height="210"/>
+        <element name="ECGame" positionX="286" positionY="612" width="128" height="165"/>
         <element name="ECTurn" positionX="531" positionY="288" width="128" height="180"/>
         <element name="ECUser" positionX="160" positionY="192" width="128" height="135"/>
     </elements>

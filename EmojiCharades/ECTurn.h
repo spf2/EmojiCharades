@@ -10,8 +10,8 @@
 #import <RestKit/RestKit.h>
 #import <RestKit/CoreData/CoreData.h>
 
-#import "ECGame.h"
-#import "ECUser.h"
+@class ECGame;
+@class ECUser;
 
 @interface ECTurn : NSManagedObject
 
@@ -24,8 +24,8 @@
 @property (nonatomic, retain) NSNumber *result;
 
 + (void)setupMappingWithObjectManager:(RKObjectManager *)objectManager 
-                      withUserMapping:(RKObjectMapping *)userMapping 
-                      withGameMapping:(RKObjectMapping *)gameMapping;
+                      withUserMapping:(RKManagedObjectMapping *)userMapping 
+                      withGameMapping:(RKManagedObjectMapping *)gameMapping;
 + (void)setupObjectRouter:(RKObjectRouter *)objectRouter;
 
 @end

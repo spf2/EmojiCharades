@@ -10,7 +10,9 @@
 #import "RestKit/RestKit.h"
 #import "Restkit/CoreData/CoreData.h"
 
-@interface EmojiCharadesAppDelegate : NSObject <UIApplicationDelegate>
+@interface EmojiCharadesAppDelegate : NSObject <UIApplicationDelegate, RKManagedObjectStoreDelegate> {
+    int numDataLayerErrors;
+}
 
 @property (nonatomic, retain) IBOutlet UIWindow *window;
 @property (nonatomic, retain) IBOutlet UINavigationController *navigationController;
