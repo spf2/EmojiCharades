@@ -32,10 +32,6 @@
     // Add the navigation controller's view to the window and display.
     [self configure];
     
-    // Enable some verbose logging
-    RKLogConfigureByName("RestKit/UI", RKLogLevelTrace);
-    RKLogConfigureByName("RestKit/ObjectMapping", RKLogLevelTrace);
-    RKLogConfigureByName("RestKit/Network*", RKLogLevelDebug);
     
     [self initializeDataLayer];
     
@@ -56,11 +52,16 @@
     
 #if TARGET_IPHONE_SIMULATOR
     self.serviceURL = @"http://localhost:3000";
+    // Enable some verbose logging
+    //RKLogConfigureByName("RestKit/UI", RKLogLevelTrace);
+    //RKLogConfigureByName("RestKit/ObjectMapping", RKLogLevelTrace);
+    //RKLogConfigureByName("RestKit/Network*", RKLogLevelDebug);
 #endif
 }
 
 - (void)initializeDataLayer 
 {
+
     self.objectManager = [RKObjectManager objectManagerWithBaseURL:self.serviceURL];
     [RKRequestQueue sharedQueue].showsNetworkActivityIndicatorWhenBusy = YES;
     NSString *databaseName = @"EmojiCharades.sqlite";
