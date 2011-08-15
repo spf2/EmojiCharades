@@ -17,6 +17,8 @@
 		E7309C9213EDFF5500F270F3 /* CreateGameController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E7309C9013EDFF5500F270F3 /* CreateGameController.xib */; };
 		E7309C9613EE4A0500F270F3 /* PlayGameController.m in Sources */ = {isa = PBXBuildFile; fileRef = E7309C9413EE4A0400F270F3 /* PlayGameController.m */; };
 		E7309C9713EE4A0500F270F3 /* PlayGameController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E7309C9513EE4A0400F270F3 /* PlayGameController.xib */; };
+		E77B278E13F8F2B0009BA273 /* emoji_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = E77B278C13F8F1C5009BA273 /* emoji_icon.png */; };
+		E77B279013F8F2B6009BA273 /* emoji_icon.png@2.png in Resources */ = {isa = PBXBuildFile; fileRef = E77B278F13F8F2B6009BA273 /* emoji_icon.png@2.png */; };
 		E7AF37A713E4B98300DB58CA /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E7AF37A613E4B98300DB58CA /* UIKit.framework */; };
 		E7AF37A913E4B98300DB58CA /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E7AF37A813E4B98300DB58CA /* Foundation.framework */; };
 		E7AF37AB13E4B98300DB58CA /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E7AF37AA13E4B98300DB58CA /* CoreGraphics.framework */; };
@@ -161,6 +163,8 @@
 		E7309C9513EE4A0400F270F3 /* PlayGameController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PlayGameController.xib; sourceTree = "<group>"; };
 		E77B278A13F71915009BA273 /* EmojiCharades 2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "EmojiCharades 2.xcdatamodel"; sourceTree = "<group>"; };
 		E77B278B13F8A921009BA273 /* EmojiCharades 3.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "EmojiCharades 3.xcdatamodel"; sourceTree = "<group>"; };
+		E77B278C13F8F1C5009BA273 /* emoji_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = emoji_icon.png; sourceTree = "<group>"; };
+		E77B278F13F8F2B6009BA273 /* emoji_icon.png@2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "emoji_icon.png@2.png"; sourceTree = "<group>"; };
 		E7AF37A213E4B98300DB58CA /* EmojiCharades.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EmojiCharades.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E7AF37A613E4B98300DB58CA /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		E7AF37A813E4B98300DB58CA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -237,6 +241,8 @@
 		E7AF379713E4B98200DB58CA = {
 			isa = PBXGroup;
 			children = (
+				E77B278F13F8F2B6009BA273 /* emoji_icon.png@2.png */,
+				E77B278C13F8F1C5009BA273 /* emoji_icon.png */,
 				E7E9BEC313F50BFD00C113F1 /* Entitlements.entitlements */,
 				E7F8099313E5F0C90077F0CE /* RestKit.xcodeproj */,
 				E720AF8713E5EC27007D1564 /* libxml2.dylib */,
@@ -518,6 +524,8 @@
 				E7309C9713EE4A0500F270F3 /* PlayGameController.xib in Resources */,
 				E7D3B9C613EF2A1F007C5B19 /* ResultController.xib in Resources */,
 				E7E9BEC413F50BFD00C113F1 /* Entitlements.entitlements in Resources */,
+				E77B278E13F8F2B0009BA273 /* emoji_icon.png in Resources */,
+				E77B279013F8F2B6009BA273 /* emoji_icon.png@2.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
