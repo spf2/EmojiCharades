@@ -35,7 +35,7 @@
     
 #if !TARGET_IPHONE_SIMULATOR
     // Register for alert notifications
-    [application registerForRemoteNotificationTypes:UIRemoteNotificationTypeAlert];
+    [application registerForRemoteNotificationTypes:UIRemoteNotificationTypeAlert | UIRemoteNotificationTypeBadge];
 #endif
     
      //NSDictionary *pushInfo = [launchOptions valueForKey:UIApplicationLaunchOptionsRemoteNotificationKey];  
