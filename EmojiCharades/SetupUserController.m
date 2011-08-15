@@ -21,12 +21,12 @@
     EmojiCharadesAppDelegate *app = (EmojiCharadesAppDelegate *)[[UIApplication sharedApplication] delegate];
     ECUser *user = [ECUser userByName:userNameTextField.text];
     if (user) {
-        if (user.apsToken) {
-            [delegate userSetupOk:user];
-        } else if (app.apsToken) {
+        if (app.apsToken && !user.apsToken) {
             user.apsToken = app.apsToken;
             user.updatedAt = [NSDate date];
-            [[RKObjectManager sharedManager] putObject:user delegate:self];            
+            [[RKObjectManager sharedManager] putObject:user delegate:self];
+        } else {
+            [delegate userSetupOk:user];
         }
     } else {
         user = [ECUser object];

@@ -142,13 +142,6 @@ didReceiveAuthenticationChallenge:(NSURLAuthenticationChallenge *)challenge
     NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse*)response;
     if ((httpResponse.statusCode / 100) == 2) {
         NSLog(@"We successfully registered for push notifications");
-        // Verify selfUser has push token set correctly
-        ECUser *selfUser = [ECUser selfUser];
-        if (selfUser && !selfUser.apsToken) {
-            NSLog(@"Saving the token with the self user");
-            selfUser.apsToken = apsToken;
-            [[RKObjectManager sharedManager] putObject:selfUser delegate:self];
-        }
     } else {
         NSLog(@"We failed to register for push notifications");
         [self showError:[NSHTTPURLResponse localizedStringForStatusCode:httpResponse.statusCode]];
@@ -169,17 +162,6 @@ didFailToRegisterForRemoteNotificationsWithError:(NSError*)error
     [failureAlert show];
     [failureAlert release];
 }
-
-
-- (void)objectLoader:(RKObjectLoader*)objectLoader didLoadObject:(id)user {
-    NSLog(@"Updated user ok");
-}
-
-- (void)objectLoader:(RKObjectLoader*)objectLoader didFailWithError:(NSError*)error {
-    [self showError:@"Already taken; try another."];
-	NSLog(@"Hit error: %@", error);
-}
-
 
 - (void)showError:(NSString *)message
 {

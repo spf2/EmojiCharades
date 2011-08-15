@@ -10,7 +10,7 @@
 #import "RestKit/RestKit.h"
 #import "Restkit/CoreData/CoreData.h"
 
-@interface EmojiCharadesAppDelegate : NSObject <UIApplicationDelegate, RKManagedObjectStoreDelegate, RKObjectLoaderDelegate> {
+@interface EmojiCharadesAppDelegate : NSObject <UIApplicationDelegate, RKManagedObjectStoreDelegate> {
     int numDataLayerErrors;
 }
 

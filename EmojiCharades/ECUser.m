@@ -25,6 +25,7 @@
      @"name", @"name",
      @"created_at", @"createdAt",
      @"updated_at", @"updatedAt",
+     @"aps_token", @"apsToken",
      nil];
     [mapping.dateFormatStrings addObject:ECDateFormat];
     [objectManager.mappingProvider registerMapping:mapping withRootKeyPath:@"user"];
@@ -38,42 +39,52 @@
 }
 
 + (void) setSelfUser:(ECUser *)selfUser {
-    NSString *selfName = selfUser.name;
-    [[NSUserDefaults standardUserDefaults] setValue:selfName forKey:@"selfName"];
+    NSNumber *selfID = selfUser.userID;
+    [[NSUserDefaults standardUserDefaults] setValue:selfID forKey:@"selfID"];
 	[[NSUserDefaults standardUserDefaults] synchronize];
     selfUser = nil;
 }
 
-+ (ECUser *)selfUser 
-{
-    static ECUser* selfUser = nil;
-    if (selfUser == nil) {
-        NSString *selfName = [[NSUserDefaults standardUserDefaults] objectForKey:@"selfName"];
-        if (selfName) {
-            selfUser = [[self userByName: selfName] retain];
-        }
-    }
-    return selfUser;
-}
-
-+ (ECUser *)userByName:(NSString *)name
++ (ECUser *)userByPredicate:(NSPredicate *) predicate
 {
     NSManagedObjectContext *moc = RKObjectManager.sharedManager.objectStore.managedObjectContext;
     NSEntityDescription *entityDescription = [NSEntityDescription
                                               entityForName:@"ECUser" inManagedObjectContext:moc];
     NSFetchRequest *request = [[[NSFetchRequest alloc] init] autorelease];
     [request setEntity:entityDescription];
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"(name = %@)", name];
     [request setPredicate:predicate];
     NSError *error = nil;
     NSArray *array = [moc executeFetchRequest:request error:&error];
     if (error) {
-        NSLog(@"Error fetching user %@: %@", name, [error localizedDescription]);
+        NSLog(@"Error fetching user %@", [error localizedDescription]);
     }
     if ([array count] == 1) {
         return [array objectAtIndex:0];    
     }
-    return nil;
+    return nil;    
 }
+
++ (ECUser *)userByID:(NSNumber *)userID
+{
+    return [self userByPredicate:[NSPredicate predicateWithFormat:@"(userID = %@)", userID]];
+}
+
++ (ECUser *)userByName:(NSString *)name
+{
+   return [self userByPredicate:[NSPredicate predicateWithFormat:@"(name = %@)", name]];
+}
+
++ (ECUser *)selfUser 
+{
+    static ECUser* selfUser = nil;
+    if (selfUser == nil) {
+        NSNumber *selfID = [[NSUserDefaults standardUserDefaults] objectForKey:@"selfID"];
+        if (selfID) {
+            selfUser = [[self userByID: selfID] retain];
+        }
+    }
+    return selfUser;
+}
+
 
 @end
