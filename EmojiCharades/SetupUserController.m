@@ -6,6 +6,7 @@
 //  Copyright 2011 __MyCompanyName__. All rights reserved.
 //
 
+#import "EmojiCharadesAppDelegate.h"
 #import "SetupUserController.h"
 #import "ECUser.h"
 
@@ -17,13 +18,21 @@
 @synthesize userNameTextField;
 
 - (IBAction)userNameDone:(id)sender {
+    EmojiCharadesAppDelegate *app = (EmojiCharadesAppDelegate *)[[UIApplication sharedApplication] delegate];
     ECUser *user = [ECUser userByName:userNameTextField.text];
     if (user) {
-        [delegate userSetupOk:user];
+        if (user.apsToken) {
+            [delegate userSetupOk:user];
+        } else if (app.apsToken) {
+            user.apsToken = app.apsToken;
+            user.updatedAt = [NSDate date];
+            [[RKObjectManager sharedManager] putObject:user delegate:self];            
+        }
     } else {
         user = [ECUser object];
         user.name = userNameTextField.text;
         user.updatedAt = user.createdAt = [NSDate date];
+        user.apsToken = app.apsToken;
         [[RKObjectManager sharedManager] postObject:user delegate:self];
     }
 }

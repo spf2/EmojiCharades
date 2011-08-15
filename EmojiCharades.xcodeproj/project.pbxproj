@@ -160,6 +160,7 @@
 		E7309C9413EE4A0400F270F3 /* PlayGameController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlayGameController.m; sourceTree = "<group>"; };
 		E7309C9513EE4A0400F270F3 /* PlayGameController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PlayGameController.xib; sourceTree = "<group>"; };
 		E77B278A13F71915009BA273 /* EmojiCharades 2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "EmojiCharades 2.xcdatamodel"; sourceTree = "<group>"; };
+		E77B278B13F8A921009BA273 /* EmojiCharades 3.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "EmojiCharades 3.xcdatamodel"; sourceTree = "<group>"; };
 		E7AF37A213E4B98300DB58CA /* EmojiCharades.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EmojiCharades.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E7AF37A613E4B98300DB58CA /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		E7AF37A813E4B98300DB58CA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -849,6 +850,7 @@
 			children = (
 				E77B278A13F71915009BA273 /* EmojiCharades 2.xcdatamodel */,
 				E7AF37BB13E4B98300DB58CA /* EmojiCharades.xcdatamodel */,
+				E77B278B13F8A921009BA273 /* EmojiCharades 3.xcdatamodel */,
 			);
 			currentVersion = E7AF37BB13E4B98300DB58CA /* EmojiCharades.xcdatamodel */;
 			path = EmojiCharades.xcdatamodeld;

@@ -15,6 +15,7 @@
 @dynamic createdAt;
 @dynamic updatedAt;
 @dynamic name;
+@dynamic apsToken;
 
 + (RKManagedObjectMapping *)setupMappingWithObjectManager:(RKObjectManager *)objectManager {
     RKManagedObjectMapping* mapping = [RKManagedObjectMapping mappingForClass:ECUser.class];

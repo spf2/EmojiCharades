@@ -10,7 +10,7 @@
 #import "RestKit/RestKit.h"
 #import "Restkit/CoreData/CoreData.h"
 
-@interface EmojiCharadesAppDelegate : NSObject <UIApplicationDelegate, RKManagedObjectStoreDelegate> {
+@interface EmojiCharadesAppDelegate : NSObject <UIApplicationDelegate, RKManagedObjectStoreDelegate, RKObjectLoaderDelegate> {
     int numDataLayerErrors;
 }
 
@@ -18,6 +18,7 @@
 @property (nonatomic, retain) IBOutlet UINavigationController *navigationController;
 @property (nonatomic, retain) RKObjectManager *objectManager;
 @property (nonatomic, copy) NSString *serviceURL;
+@property (copy) NSString *apsToken;
 
 - (void)showError: (NSString *)message;
 - (void)configure;

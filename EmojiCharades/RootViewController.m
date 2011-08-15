@@ -33,7 +33,6 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
         
     UIBarButtonItem *createButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(showCreateGame)];
     self.navigationItem.rightBarButtonItem = createButton;
@@ -45,11 +44,12 @@
 {
     [super viewWillAppear:animated];
 
-    if (![ECUser selfUser]) {
-        [self userSetup];
-    } else {
+    ECUser *user = [ECUser selfUser];
+    if (user) {
         // Trigger data refresh every time the user goes to, or returns to, this view.
         [[RKObjectManager sharedManager] loadObjectsAtResourcePath:@"/game" delegate:self];
+    } else {
+        [self userSetup];
     }
 }
 
