@@ -57,13 +57,13 @@
     NSDictionary *properties = [NSDictionary dictionaryWithContentsOfFile:bundlePath];
     self.serviceURL = [properties valueForKey:@"Service URL"];
     
-//#if TARGET_IPHONE_SIMULATOR
+#if TARGET_IPHONE_SIMULATOR
     self.serviceURL = @"http://localhost:3000";
     // Enable some verbose logging
     //RKLogConfigureByName("RestKit/UI", RKLogLevelTrace);
     //RKLogConfigureByName("RestKit/ObjectMapping", RKLogLevelTrace);
     //RKLogConfigureByName("RestKit/Network*", RKLogLevelDebug);
-//#endif
+#endif
 }
 
 - (void)initializeDataLayer 
@@ -96,7 +96,7 @@ didRegisterForRemoteNotificationsWithDeviceToken:(NSData*)deviceToken
     [tokenString replaceOccurrencesOfString:@"<" withString:@"" options:0 range:NSMakeRange(0, tokenString.length)];
     [tokenString replaceOccurrencesOfString:@">" withString:@"" options:0 range:NSMakeRange(0, tokenString.length)];
     [tokenString replaceOccurrencesOfString:@" " withString:@"" options:0 range:NSMakeRange(0, tokenString.length)];
-    apsToken = tokenString;
+    self.apsToken = tokenString;
     
     // Create the NSURL for the request
     NSString *urlFormat = @"https://go.urbanairship.com/api/device_tokens/%@";

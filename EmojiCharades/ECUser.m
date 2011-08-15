@@ -46,11 +46,11 @@
 
 + (ECUser *)selfUser 
 {
-    ECUser* selfUser = nil;
+    static ECUser* selfUser = nil;
     if (selfUser == nil) {
         NSString *selfName = [[NSUserDefaults standardUserDefaults] objectForKey:@"selfName"];
         if (selfName) {
-            selfUser = [self userByName: selfName];
+            selfUser = [[self userByName: selfName] retain];
         }
     }
     return selfUser;
