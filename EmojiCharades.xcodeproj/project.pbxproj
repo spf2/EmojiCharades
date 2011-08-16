@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		00771AD113FA4FF400F2FBAA /* PlayGameView.m in Sources */ = {isa = PBXBuildFile; fileRef = 00771AD013FA4FF400F2FBAA /* PlayGameView.m */; };
 		E720AF8213E5EBEF007D1564 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E720AF8113E5EBEF007D1564 /* CFNetwork.framework */; };
 		E720AF8413E5EC10007D1564 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E720AF8313E5EC10007D1564 /* MobileCoreServices.framework */; };
 		E720AF8613E5EC1A007D1564 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E720AF8513E5EC1A007D1564 /* SystemConfiguration.framework */; };
@@ -161,6 +162,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		00771ACF13FA4FF400F2FBAA /* PlayGameView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlayGameView.h; sourceTree = "<group>"; };
+		00771AD013FA4FF400F2FBAA /* PlayGameView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlayGameView.m; sourceTree = "<group>"; };
 		E720AF8113E5EBEF007D1564 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		E720AF8313E5EC10007D1564 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 		E720AF8513E5EC1A007D1564 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
@@ -251,6 +254,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		00771ACE13FA4FF400F2FBAA /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				00771ACF13FA4FF400F2FBAA /* PlayGameView.h */,
+				00771AD013FA4FF400F2FBAA /* PlayGameView.m */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 		E77B279213FA0E2D009BA273 /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -302,6 +314,7 @@
 		E7AF37AE13E4B98300DB58CA /* EmojiCharades */ = {
 			isa = PBXGroup;
 			children = (
+				00771ACE13FA4FF400F2FBAA /* Views */,
 				E7AF37B713E4B98300DB58CA /* EmojiCharadesAppDelegate.h */,
 				E7AF37B813E4B98300DB58CA /* EmojiCharadesAppDelegate.m */,
 				E7F809C613E5FD150077F0CE /* ECUser.h */,
@@ -425,6 +438,9 @@
 /* Begin PBXProject section */
 		E7AF379913E4B98200DB58CA /* Project object */ = {
 			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0420;
+			};
 			buildConfigurationList = E7AF379C13E4B98200DB58CA /* Build configuration list for PBXProject "EmojiCharades" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
@@ -602,6 +618,7 @@
 				E7309C9113EDFF5500F270F3 /* CreateGameController.m in Sources */,
 				E7309C9613EE4A0500F270F3 /* PlayGameController.m in Sources */,
 				E7D3B9C513EF2A1F007C5B19 /* ResultController.m in Sources */,
+				00771AD113FA4FF400F2FBAA /* PlayGameView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
