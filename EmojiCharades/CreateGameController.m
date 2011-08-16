@@ -43,7 +43,7 @@
 - (IBAction)createGameDone:(id)sender {
     if ([_hintTextView.text length] > 0) {
         ECGame* newGame = [ECGame object];
-        newGame.hint = _hintTextView.text;
+        newGame.hint = [_hintTextView.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
         newGame.updatedAt = newGame.createdAt = [NSDate date];
         newGame.owner = [ECUser selfUser];
         [[RKObjectManager sharedManager] postObject:newGame delegate:self];
