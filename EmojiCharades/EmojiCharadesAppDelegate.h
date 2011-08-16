@@ -9,18 +9,15 @@
 #import <UIKit/UIKit.h>
 #import "RestKit/RestKit.h"
 #import "Restkit/CoreData/CoreData.h"
+#import "FBConnect.h"
 
-@interface EmojiCharadesAppDelegate : NSObject <UIApplicationDelegate, RKManagedObjectStoreDelegate> {
-    int numDataLayerErrors;
-}
+@interface EmojiCharadesAppDelegate : NSObject <UIApplicationDelegate, RKManagedObjectStoreDelegate, RKObjectLoaderDelegate, FBSessionDelegate, FBRequestDelegate>
 
 @property (nonatomic, retain) IBOutlet UIWindow *window;
 @property (nonatomic, retain) IBOutlet UINavigationController *navigationController;
 @property (nonatomic, retain) RKObjectManager *objectManager;
 @property (nonatomic, copy) NSString *serviceURL;
-@property (copy) NSString *apsToken;
-
-- (void)showError: (NSString *)message;
-- (void)configure;
+@property (nonatomic, copy) NSString *apsToken;
+@property (nonatomic, retain) Facebook *facebook;
 
 @end

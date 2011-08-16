@@ -8,7 +8,6 @@
 
 #import "EmojiCharadesAppDelegate.h"
 #import "RootViewController.h"
-#import "SetupUserController.h"
 
 #import "ECUser.h"
 #import "ECGame.h"
@@ -17,6 +16,10 @@
 
 @interface EmojiCharadesAppDelegate (PrivateMethods)
 - (void)initializeDataLayer;
+- (void)initializeIdentity;
+- (void)showMessage:(NSString *)message;
+- (void)showError:(NSError *)error;
+- (void)configure;
 @end
 
 @implementation EmojiCharadesAppDelegate
@@ -26,6 +29,7 @@
 @synthesize navigationController = _navigationController;
 @synthesize serviceURL;
 @synthesize apsToken;
+@synthesize facebook;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
@@ -36,11 +40,12 @@
 #if !TARGET_IPHONE_SIMULATOR
     // Register for alert notifications
     [application registerForRemoteNotificationTypes:UIRemoteNotificationTypeAlert | UIRemoteNotificationTypeBadge];
+    //NSDictionary *pushInfo = [launchOptions valueForKey:UIApplicationLaunchOptionsRemoteNotificationKey];  
 #endif
     
-     //NSDictionary *pushInfo = [launchOptions valueForKey:UIApplicationLaunchOptionsRemoteNotificationKey];  
-
     [self initializeDataLayer];
+
+    [self initializeIdentity];
     
     // Start visuals
     self.window.rootViewController = self.navigationController;
@@ -68,7 +73,6 @@
 
 - (void)initializeDataLayer 
 {
-    
     self.objectManager = [RKObjectManager objectManagerWithBaseURL:self.serviceURL];
     [RKRequestQueue sharedQueue].showsNetworkActivityIndicatorWhenBusy = YES;    
     self.objectManager.serializationMIMEType = RKMIMETypeJSON;
@@ -97,18 +101,12 @@ didRegisterForRemoteNotificationsWithDeviceToken:(NSData*)deviceToken
     [tokenString replaceOccurrencesOfString:@">" withString:@"" options:0 range:NSMakeRange(0, tokenString.length)];
     [tokenString replaceOccurrencesOfString:@" " withString:@"" options:0 range:NSMakeRange(0, tokenString.length)];
     self.apsToken = tokenString;
-    
-    // Create the NSURL for the request
+
     NSString *urlFormat = @"https://go.urbanairship.com/api/device_tokens/%@";
     NSURL *registrationURL = [NSURL URLWithString:[NSString stringWithFormat:urlFormat, tokenString]];
-    
-    // Create the registration request
     NSMutableURLRequest *registrationRequest = [[NSMutableURLRequest alloc] initWithURL:registrationURL];
     [registrationRequest setHTTPMethod:@"PUT"];
-    
-    // And fire it off
-    NSURLConnection *connection = [NSURLConnection connectionWithRequest:registrationRequest
-                                                                delegate:self];
+    NSURLConnection *connection = [NSURLConnection connectionWithRequest:registrationRequest delegate:self];
     [connection start];
     
     NSLog(@"Registering for push notifications...");
@@ -134,7 +132,7 @@ didReceiveAuthenticationChallenge:(NSURLAuthenticationChallenge *)challenge
 
 - (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error
 {
-    [self showError:[error localizedDescription]];
+    [self showError:error];
 }
 
 - (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response
@@ -144,7 +142,7 @@ didReceiveAuthenticationChallenge:(NSURLAuthenticationChallenge *)challenge
         NSLog(@"We successfully registered for push notifications");
     } else {
         NSLog(@"We failed to register for push notifications");
-        [self showError:[NSHTTPURLResponse localizedStringForStatusCode:httpResponse.statusCode]];
+        [self showMessage:[NSHTTPURLResponse localizedStringForStatusCode:httpResponse.statusCode]];
     }
 }
 
@@ -163,7 +161,7 @@ didFailToRegisterForRemoteNotificationsWithError:(NSError*)error
     [failureAlert release];
 }
 
-- (void)showError:(NSString *)message
+- (void)showMessage:(NSString *)message
 {
     UIAlertView *alert = [[UIAlertView alloc] 
                           initWithTitle:@"Error" 
@@ -174,11 +172,76 @@ didFailToRegisterForRemoteNotificationsWithError:(NSError*)error
     [alert release];    
 }
 
+- (void)showError:(NSError *)error
+{
+    [self showMessage:[error localizedDescription]];
+}
+
 - (void)managedObjectStore:(RKManagedObjectStore *)objectStore didFailToCreatePersistentStoreCoordinatorWithError:(NSError *)error 
 {
     NSLog(@"Error with persistent store: %@", [error localizedDescription]);
-    [self showError:[error localizedDescription]];
+    [self showError:error];
     [self.objectManager.objectStore deletePersistantStore];
+}
+
+#pragma mark Facebook
+
+- (void)initializeIdentity
+{
+    self.facebook = [[Facebook alloc] initWithAppId:@"245855945445328" andDelegate:self];
+    facebook.accessToken = [[NSUserDefaults standardUserDefaults] valueForKey:@"facebookAccessToken"];
+    facebook.expirationDate = [[NSUserDefaults standardUserDefaults] valueForKey:@"facebookExpirationDate"];
+    if (facebook.isSessionValid) {
+        // TODO(spf): this updates the user every time.  instead, we should validate user and only
+        // refresh if needed.
+        [facebook requestWithGraphPath:@"me" andDelegate:self];
+    } else {
+        NSArray *permissions = [NSArray arrayWithObjects:@"offline_access", nil];
+        [facebook authorize:permissions];
+    }
+}
+
+- (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url
+{
+    return [self.facebook handleOpenURL:url];
+}
+
+- (void)fbDidLogin
+{
+    [[NSUserDefaults standardUserDefaults] setValue:facebook.accessToken forKey:@"facebookAccessToken"];
+    [[NSUserDefaults standardUserDefaults] setValue:facebook.expirationDate forKey:@"facebookExpirationDate"];
+	[[NSUserDefaults standardUserDefaults] synchronize];
+    [facebook requestWithGraphPath:@"me" andDelegate:self];
+}
+
+- (void)request:(FBRequest *)request didFailWithError:(NSError *)error
+{
+    NSLog(@"Error with facebook: %@", [error localizedDescription]);
+    [self showError:error];
+}
+
+- (void)request:(FBRequest *)request didLoad:(id)result
+{
+    NSDictionary *resultDict = (NSDictionary *)result;
+    ECUser *user = [ECUser selfUser];
+    if (!user) {
+        user = [ECUser object];
+    }
+    user.name = [resultDict valueForKey:@"name"];
+    user.facebookID = [NSString stringWithFormat:@"%@", [resultDict valueForKey:@"id"]];
+    user.updatedAt = user.createdAt = [NSDate date];
+    user.apsToken = self.apsToken;
+    [[RKObjectManager sharedManager] putObject:user delegate:self];
+}
+
+- (void)objectLoader:(RKObjectLoader*)objectLoader didLoadObject:(id)user {
+    NSLog(@"user setup ok");
+    [ECUser setSelfUser:user];
+}
+
+- (void)objectLoader:(RKObjectLoader*)objectLoader didFailWithError:(NSError*)error {
+    NSLog(@"user setup failed %@", [error localizedDescription]);
+    [self showError:error];
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application

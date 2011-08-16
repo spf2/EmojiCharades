@@ -30,7 +30,16 @@
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleURLTypes</key>
-	<array/>
+	<array>
+		<dict>
+			<key>CFBundleURLName</key>
+			<string></string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>fb245855945445328</string>
+			</array>
+		</dict>
+	</array>
 	<key>CFBundleVersion</key>
 	<string>6</string>
 	<key>LSRequiresIPhoneOS</key>
@@ -47,5 +56,7 @@
 	<array/>
 	<key>UTImportedTypeDeclarations</key>
 	<array/>
+	<key>LSApplicationCategoryType</key>
+	<string></string>
 </dict>
 </plist>

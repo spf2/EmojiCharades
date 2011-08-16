@@ -27,7 +27,6 @@
     <entity name="ECUser" representedClassName="ECUser">
         <attribute name="apsToken" optional="YES" attributeType="String"/>
         <attribute name="createdAt" attributeType="Date"/>
-        <attribute name="facebookID" optional="YES" attributeType="String"/>
         <attribute name="name" attributeType="String"/>
         <attribute name="updatedAt" attributeType="Date"/>
         <attribute name="userID" attributeType="Integer 32" defaultValueString="0" indexed="YES"/>
@@ -37,6 +36,6 @@
     <elements>
         <element name="ECGame" positionX="286" positionY="612" width="128" height="195"/>
         <element name="ECTurn" positionX="531" positionY="288" width="128" height="180"/>
-        <element name="ECUser" positionX="160" positionY="192" width="128" height="165"/>
+        <element name="ECUser" positionX="160" positionY="192" width="128" height="150"/>
     </elements>
 </model>

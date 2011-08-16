@@ -16,6 +16,9 @@
 @dynamic updatedAt;
 @dynamic name;
 @dynamic apsToken;
+@dynamic facebookID;
+
+static ECUser* selfUser = nil;
 
 + (RKManagedObjectMapping *)setupMappingWithObjectManager:(RKObjectManager *)objectManager {
     RKManagedObjectMapping* mapping = [RKManagedObjectMapping mappingForClass:ECUser.class];
@@ -26,6 +29,7 @@
      @"created_at", @"createdAt",
      @"updated_at", @"updatedAt",
      @"aps_token", @"apsToken",
+     @"facebook_id", @"facebookID",
      nil];
     [mapping.dateFormatStrings addObject:ECDateFormat];
     [objectManager.mappingProvider registerMapping:mapping withRootKeyPath:@"user"];
@@ -58,7 +62,7 @@
     if (error) {
         NSLog(@"Error fetching user %@", [error localizedDescription]);
     }
-    if ([array count] == 1) {
+    if ([array count] > 0) {
         return [array objectAtIndex:0];    
     }
     return nil;    
@@ -76,7 +80,6 @@
 
 + (ECUser *)selfUser 
 {
-    static ECUser* selfUser = nil;
     if (selfUser == nil) {
         NSNumber *selfID = [[NSUserDefaults standardUserDefaults] objectForKey:@"selfID"];
         if (selfID) {

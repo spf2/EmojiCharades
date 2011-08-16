@@ -17,6 +17,7 @@
 @property (nonatomic, retain) NSDate *updatedAt;
 @property (nonatomic, retain) NSString *name;
 @property (nonatomic, retain) NSString *apsToken;
+@property (nonatomic, retain) NSString *facebookID;
 
 + (RKManagedObjectMapping *)setupMappingWithObjectManager:(RKObjectManager *)objectManager;
 + (void)setupObjectRouter:(RKObjectRouter *)objectRouter;

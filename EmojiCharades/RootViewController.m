@@ -8,7 +8,6 @@
 
 #import "PlayGameController.h"
 #import "RootViewController.h"
-#import "SetupUserController.h"
 #import "ECGame.h"
 #import "Constants.h"
 
@@ -19,7 +18,6 @@
 @implementation RootViewController
 
 @synthesize fetchedResultsController = __fetchedResultsController;
-@synthesize setupController;
 @synthesize createGameController;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -43,19 +41,12 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-
-    ECUser *user = [ECUser selfUser];
-    if (user) {
-        // Trigger data refresh every time the user goes to, or returns to, this view.
-        [[RKObjectManager sharedManager] loadObjectsAtResourcePath:@"/game" delegate:self];
-    } else {
-        [self userSetup];
-    }
 }
 
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
+    [[RKObjectManager sharedManager] loadObjectsAtResourcePath:@"/game" delegate:self];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -73,6 +64,7 @@
 - (void)objectLoader:(RKObjectLoader*)objectLoader didLoadObjects:(NSArray*)objects {
 	[[NSUserDefaults standardUserDefaults] setObject:[NSDate date] forKey:@"LastUpdatedAt"];
 	[[NSUserDefaults standardUserDefaults] synchronize];
+    NSLog(@"Games loaded ok: %d", [objects count]);
 }
 
 - (void)objectLoader:(RKObjectLoader*)objectLoader didFailWithError:(NSError*)error {
@@ -84,14 +76,6 @@
 	NSLog(@"Hit error: %@", error);
 }
 
-- (void)userSetup {
-    self.setupController = [[[SetupUserController alloc]
-                             initWithNibName:@"SetupUserController" bundle:nil] autorelease];
-    [setupController setModalTransitionStyle:UIModalTransitionStyleFlipHorizontal];
-    setupController.delegate = self;
-    [self presentModalViewController:setupController animated:YES];
-}
-
 - (void)showCreateGame {
     self.createGameController = [[[CreateGameController alloc]
                                   initWithNibName:@"CreateGameController" bundle:nil] autorelease];
@@ -101,11 +85,6 @@
 }
 
 - (void) gameCreatedOk:(ECGame *)game {
-    [self dismissModalViewControllerAnimated:YES];
-}
-
-- (void)userSetupOk:(ECUser *)user {
-    [ECUser setSelfUser:user];
     [self dismissModalViewControllerAnimated:YES];
 }
 
