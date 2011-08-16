@@ -27,9 +27,9 @@
 @synthesize objectManager = _objectManager;
 @synthesize window = _window;
 @synthesize navigationController = _navigationController;
-@synthesize serviceURL;
-@synthesize apsToken;
-@synthesize facebook;
+@synthesize serviceURL = _serviceURL;
+@synthesize apsToken = _apsToken;
+@synthesize facebook = _facebook;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
@@ -189,15 +189,15 @@ didFailToRegisterForRemoteNotificationsWithError:(NSError*)error
 - (void)initializeIdentity
 {
     self.facebook = [[Facebook alloc] initWithAppId:@"245855945445328" andDelegate:self];
-    facebook.accessToken = [[NSUserDefaults standardUserDefaults] valueForKey:@"facebookAccessToken"];
-    facebook.expirationDate = [[NSUserDefaults standardUserDefaults] valueForKey:@"facebookExpirationDate"];
-    if (facebook.isSessionValid) {
+    _facebook.accessToken = [[NSUserDefaults standardUserDefaults] valueForKey:@"facebookAccessToken"];
+    _facebook.expirationDate = [[NSUserDefaults standardUserDefaults] valueForKey:@"facebookExpirationDate"];
+    if (_facebook.isSessionValid) {
         // TODO(spf): this updates the user every time.  instead, we should validate user and only
         // refresh if needed.
-        [facebook requestWithGraphPath:@"me" andDelegate:self];
+        [_facebook requestWithGraphPath:@"me" andDelegate:self];
     } else {
         NSArray *permissions = [NSArray arrayWithObjects:@"offline_access", nil];
-        [facebook authorize:permissions];
+        [_facebook authorize:permissions];
     }
 }
 
@@ -208,10 +208,10 @@ didFailToRegisterForRemoteNotificationsWithError:(NSError*)error
 
 - (void)fbDidLogin
 {
-    [[NSUserDefaults standardUserDefaults] setValue:facebook.accessToken forKey:@"facebookAccessToken"];
-    [[NSUserDefaults standardUserDefaults] setValue:facebook.expirationDate forKey:@"facebookExpirationDate"];
+    [[NSUserDefaults standardUserDefaults] setValue:_facebook.accessToken forKey:@"facebookAccessToken"];
+    [[NSUserDefaults standardUserDefaults] setValue:_facebook.expirationDate forKey:@"facebookExpirationDate"];
 	[[NSUserDefaults standardUserDefaults] synchronize];
-    [facebook requestWithGraphPath:@"me" andDelegate:self];
+    [_facebook requestWithGraphPath:@"me" andDelegate:self];
 }
 
 - (void)request:(FBRequest *)request didFailWithError:(NSError *)error

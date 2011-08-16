@@ -14,8 +14,7 @@
 #import "ResultController.h"
 #import "PlayGameView.h"
 
-@interface PlayGameController : UIViewController<NSFetchedResultsControllerDelegate, RKObjectLoaderDelegate, UITextFieldDelegate, UITableViewDataSource, UITableViewDelegate, ResultControllerDelegate> {
-}
+@interface PlayGameController : UIViewController<NSFetchedResultsControllerDelegate, RKObjectLoaderDelegate, UITextFieldDelegate, UITableViewDataSource, UITableViewDelegate, ResultControllerDelegate>
 
 @property (nonatomic, retain) IBOutlet PlayGameView *playGameView;
 @property (nonatomic, retain) IBOutlet UITableView *turnTableView;

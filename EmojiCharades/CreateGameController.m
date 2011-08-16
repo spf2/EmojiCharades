@@ -11,9 +11,9 @@
 
 @implementation CreateGameController
 
-@synthesize doneButton;
-@synthesize hintTextView;
-@synthesize delegate;
+@synthesize doneButton = _doneButton;
+@synthesize hintTextView = _hintTextView;
+@synthesize delegate = _delegate;
 
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -34,33 +34,33 @@
 }
 
 - (BOOL)textFieldShouldReturn:(id)sender {
-    if (sender == self.hintTextView) {
+    if (sender == _hintTextView) {
         [self createGameDone:sender];
     }
     return YES;
 }
 
 - (IBAction)createGameDone:(id)sender {
-    if ([hintTextView.text length] > 0) {
+    if ([_hintTextView.text length] > 0) {
         ECGame* newGame = [ECGame object];
-        newGame.hint = hintTextView.text;
+        newGame.hint = _hintTextView.text;
         newGame.updatedAt = newGame.createdAt = [NSDate date];
         newGame.owner = [ECUser selfUser];
         [[RKObjectManager sharedManager] postObject:newGame delegate:self];
     }
-    [hintTextView resignFirstResponder];
+    [_hintTextView resignFirstResponder];
 }
 
 - (IBAction)createGameCancel:(id)sender {
-    hintTextView.text = @"";
-    [delegate gameCreatedOk: nil];
+    _hintTextView.text = @"";
+    [_delegate gameCreatedOk: nil];
 }
 
 
 #pragma mark RKObjectLoaderDelegate methods
 
 - (void)objectLoader:(RKObjectLoader*)objectLoader didLoadObject:(id)game {
-    [delegate gameCreatedOk:game];
+    [_delegate gameCreatedOk:game];
 }
 
 - (void)objectLoader:(RKObjectLoader*)objectLoader didFailWithError:(NSError*)error {
@@ -81,8 +81,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    hintTextView.layer.cornerRadius = 5;
-    hintTextView.clipsToBounds = YES;
+    _hintTextView.layer.cornerRadius = 5;
+    _hintTextView.clipsToBounds = YES;
 }
 
 - (void)viewDidUnload
@@ -100,7 +100,8 @@
 }
 
 - (void)dealloc {
-    [hintTextView release];
+    [_doneButton release];
+    [_hintTextView release];
     [super dealloc];
 }
 @end

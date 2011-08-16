@@ -13,14 +13,14 @@
 
 @implementation ResultController
 
-@synthesize hintTextLabel;
-@synthesize hintMetadataLabel;
-@synthesize guessTextLabel;
-@synthesize guessMetadataLabel;
-@synthesize rightButton;
-@synthesize wrongButton;
-@synthesize turn;
-@synthesize delegate;
+@synthesize hintTextLabel = _hintTextLabel;
+@synthesize hintMetadataLabel = _hintMetadataLabel;
+@synthesize guessTextLabel = _guessTextLabel;
+@synthesize guessMetadataLabel = _guessMetadataLabel;
+@synthesize rightButton = _rightButton;
+@synthesize wrongButton = _wrongButton;
+@synthesize turn = _turn;
+@synthesize delegate = _delegate;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -41,21 +41,21 @@
 
 - (void)rightButtonPressed:(id)sender 
 {
-    turn.result = [NSNumber numberWithInt:ECResultRight];
-    [[RKObjectManager sharedManager] putObject:turn delegate:self];
+    _turn.result = [NSNumber numberWithInt:ECResultRight];
+    [[RKObjectManager sharedManager] putObject:_turn delegate:self];
 }
 
 - (void)wrongButtonPressed:(id)sender
 {
-    turn.result = [NSNumber numberWithInt:ECResultWrong];
-    [[RKObjectManager sharedManager] putObject:turn delegate:self];
+    _turn.result = [NSNumber numberWithInt:ECResultWrong];
+    [[RKObjectManager sharedManager] putObject:_turn delegate:self];
 }
 
 
 #pragma mark RKObjectLoaderDelegate methods
 
 - (void)objectLoader:(RKObjectLoader*)objectLoader didLoadObject:(id)object {
-    [delegate resultOk:turn];
+    [_delegate resultOk:_turn];
 }
 
 
@@ -77,8 +77,8 @@
 {
     [super viewDidLoad];
     
-    hintTextLabel.text = turn.game.hint;
-    guessTextLabel.text = turn.guess;
+    _hintTextLabel.text = _turn.game.hint;
+    _guessTextLabel.text = _turn.guess;
 }
 
 - (void)viewDidUnload
@@ -101,12 +101,12 @@
 }
 
 - (void)dealloc {
-    [hintTextLabel release];
-    [hintMetadataLabel release];
-    [guessTextLabel release];
-    [guessMetadataLabel release];
-    [rightButton release];
-    [wrongButton release];
+    [_hintTextLabel release];
+    [_hintMetadataLabel release];
+    [_guessTextLabel release];
+    [_guessMetadataLabel release];
+    [_rightButton release];
+    [_wrongButton release];
     [super dealloc];
 }
  

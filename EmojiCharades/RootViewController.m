@@ -17,8 +17,8 @@
 
 @implementation RootViewController
 
-@synthesize fetchedResultsController = __fetchedResultsController;
-@synthesize createGameController;
+@synthesize fetchedResultsController = _fetchedResultsController;
+@synthesize createGameController = _createGameController;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -79,9 +79,9 @@
 - (void)showCreateGame {
     self.createGameController = [[[CreateGameController alloc]
                                   initWithNibName:@"CreateGameController" bundle:nil] autorelease];
-    [createGameController setModalTransitionStyle:UIModalTransitionStyleCoverVertical];
-    createGameController.delegate = self;
-    [self presentModalViewController:createGameController animated:YES];
+    [_createGameController setModalTransitionStyle:UIModalTransitionStyleCoverVertical];
+    _createGameController.delegate = self;
+    [self presentModalViewController:_createGameController animated:YES];
 }
 
 - (void) gameCreatedOk:(ECGame *)game {
@@ -170,7 +170,7 @@
 
 - (void)dealloc
 {
-    [__fetchedResultsController release];
+    [_fetchedResultsController release];
     [super dealloc];
 }
 
@@ -215,9 +215,9 @@
 
 - (NSFetchedResultsController *)fetchedResultsController
 {
-    if (__fetchedResultsController != nil)
+    if (_fetchedResultsController != nil)
     {
-        return __fetchedResultsController;
+        return _fetchedResultsController;
     }
     
     /*
@@ -255,7 +255,7 @@
 	    abort();
 	}
     
-    return __fetchedResultsController;
+    return _fetchedResultsController;
 }    
 
 #pragma mark - Fetched results controller delegate

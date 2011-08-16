@@ -3,3 +3,5 @@ Breakpoints.xcbkptlist
 *.ipa
 build
 EmojiCharades.xcodeproj/xcuserdata
+xcshareddata
+.DS_Store

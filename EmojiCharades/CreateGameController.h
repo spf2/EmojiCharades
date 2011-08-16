@@ -15,15 +15,10 @@
 - (void) gameCreatedOk:(ECGame *)game;
 @end
 
-@interface CreateGameController : UIViewController <UITextFieldDelegate, RKObjectLoaderDelegate> {
-    id<CreateGameDelegate> delegate;
-    UIBarButtonItem *doneButton;
-    UITextView *hintTextView;
-}
+@interface CreateGameController : UIViewController <UITextFieldDelegate, RKObjectLoaderDelegate> 
 
 - (IBAction)createGameDone:(id)sender;
 - (IBAction)createGameCancel:(id)sender;
-
 
 @property (nonatomic, retain) id<CreateGameDelegate> delegate;
 @property (nonatomic, retain) IBOutlet UIBarButtonItem *doneButton;

@@ -14,12 +14,12 @@
 
 @implementation PlayGameController
 
-@synthesize playGameView;
-@synthesize turnTableView;
-@synthesize guessTextField;
-@synthesize guessButton;
-@synthesize game;
-@synthesize guessToolbar;
+@synthesize playGameView = _playGameView;
+@synthesize turnTableView = _turnTableView;
+@synthesize guessTextField = _guessTextField;
+@synthesize guessButton = _guessButton;
+@synthesize game = _game;
+@synthesize guessToolbar = _guessToolbar;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -39,13 +39,14 @@
 
 - (BOOL)textFieldShouldReturn:(UITextField *)theTextField {
     if (theTextField == self.guessTextField) {
-        [guessTextField resignFirstResponder];
+        [_guessTextField resignFirstResponder];
         ECTurn* newTurn = [ECTurn object];
-        newTurn.guess = guessTextField.text;
+        newTurn.guess = _guessTextField.text;
         newTurn.updatedAt = newTurn.createdAt = [NSDate date];
         newTurn.user = [ECUser selfUser];
-        newTurn.game = game;
+        newTurn.game = _game;
         [[RKObjectManager sharedManager] postObject:newTurn delegate:self];
+        _guessTextField.enabled = NO;
     }
     return YES;
 }
@@ -78,16 +79,16 @@
     [UIView setAnimationDuration:animationDuration];
     [UIView setAnimationCurve:animationCurve];
     
-    CGRect newToolbarFrame = guessToolbar.frame;
-    CGRect newTableViewFrame = turnTableView.frame;
+    CGRect newToolbarFrame = _guessToolbar.frame;
+    CGRect newTableViewFrame = _turnTableView.frame;
     CGRect keyboardFrame = [self.view convertRect:keyboardEndFrame toView:nil];
     int delta = keyboardFrame.size.height * (up ? 1 : -1);
     
     newTableViewFrame.size.height -= delta;
     newToolbarFrame.origin.y -= delta;
     
-    guessToolbar.frame = newToolbarFrame;
-    turnTableView.frame = newTableViewFrame;
+    _guessToolbar.frame = newToolbarFrame;
+    _turnTableView.frame = newTableViewFrame;
     
     [UIView commitAnimations];
 }
@@ -100,22 +101,24 @@
 - (void)resultOk:(ECTurn *)turn
 {
     [self.navigationController popViewControllerAnimated:YES];
-    [turnTableView reloadData];
+    [_turnTableView reloadData];
 }
 
 #pragma mark RKObjectLoaderDelegate methods
 
 - (void)objectLoader:(RKObjectLoader*)objectLoader didLoadObject:(id)_ 
 {
-    guessTextField.text = @"";
-    if (game.doneAt) {
-        guessTextField.hidden = YES;
+    _guessTextField.enabled = YES;
+    _guessTextField.text = @"";
+    if (_game.doneAt) {
+        _guessTextField.hidden = YES;
     }
-    [turnTableView reloadData];
+    [_turnTableView reloadData];
 }
 
 - (void)objectLoader:(RKObjectLoader*)objectLoader didFailWithError:(NSError*)error 
 {
+    _guessTextField.enabled = YES;
 	NSLog(@"Hit error: %@", error);
     UIAlertView *alert = [[UIAlertView alloc] 
                           initWithTitle:@"Error" 
@@ -131,29 +134,21 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     // Trigger data refresh every time the user goes to, or returns to, this view.
-    [[RKObjectManager sharedManager] getObject:game delegate:self];
+    [[RKObjectManager sharedManager] getObject:_game delegate:self];
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    playGameView.hintLabel.text = game.hint;
-    playGameView.metadataLabel.text = [NSString stringWithFormat:@"%@ at %@", game.owner.name, game.createdAt];
-    guessTextField.hidden = game.doneAt != nil;
+    _playGameView.hintLabel.text = _game.hint;
+    _playGameView.metadataLabel.text = [NSString stringWithFormat:@"%@ at %@", _game.owner.name, _game.createdAt];
+    _guessTextField.hidden = _game.doneAt != nil;
    
-    guessTextField.delegate = self;
-    turnTableView.dataSource = self;
-    turnTableView.delegate = self;
+    _guessTextField.delegate = self;
+    _turnTableView.dataSource = self;
+    _turnTableView.delegate = self;
     
-    [[NSNotificationCenter defaultCenter]
-     addObserver:self
-     selector:@selector(keyboardWillShow:)
-     name:UIKeyboardWillShowNotification
-     object:nil];
-    [[NSNotificationCenter defaultCenter]
-     addObserver:self
-     selector:@selector(keyboardWillHide:)
-     name:UIKeyboardWillHideNotification
-     object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
 }
 
 - (void)viewDidUnload
@@ -187,7 +182,7 @@ static BOOL userCanGiveResultFor(ECGame *game, ECTurn *turn) {
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     ECTurn* turn = [self turnAtIndexPath:indexPath];
-    if (userCanGiveResultFor(game, turn)) {
+    if (userCanGiveResultFor(_game, turn)) {
         ResultController *resultController = [[ResultController alloc] initWithNibName:@"ResultController" bundle:nil];
         resultController.delegate = self;
         resultController.turn = turn;
@@ -198,7 +193,7 @@ static BOOL userCanGiveResultFor(ECGame *game, ECTurn *turn) {
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section 
 {
-    return game.turns.count;
+    return _game.turns.count;
 }
 
 // Customize the appearance of table view cells.
@@ -227,7 +222,7 @@ static BOOL userCanGiveResultFor(ECGame *game, ECTurn *turn) {
         cell.detailTextLabel.text = [NSString stringWithFormat:@"%@ is right", turn.user.name];
         cell.detailTextLabel.textColor = [UIColor colorWithRed:0 green:0.5 blue:0 alpha:1];        
     } else {
-        if (game.doneAt) {
+        if (_game.doneAt) {
             cell.detailTextLabel.text = turn.user.name;    
         } else {
             cell.detailTextLabel.text = [NSString stringWithFormat:@"%@ at %@", turn.user.name, turn.createdAt];
@@ -235,7 +230,7 @@ static BOOL userCanGiveResultFor(ECGame *game, ECTurn *turn) {
         cell.detailTextLabel.textColor = [UIColor grayColor];
     }
     
-    if (userCanGiveResultFor(game, turn)) {
+    if (userCanGiveResultFor(_game, turn)) {
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     }
 }
@@ -261,18 +256,18 @@ static BOOL userCanGiveResultFor(ECGame *game, ECTurn *turn) {
     NSComparator byID = ^(id a, id b) {
         return [[b turnID] compare:[a turnID]];
     };
-    NSArray *sorted = [[game.turns allObjects] sortedArrayUsingComparator:byID];                       
+    NSArray *sorted = [[_game.turns allObjects] sortedArrayUsingComparator:byID];                       
     ECTurn *turn = [sorted objectAtIndex:indexPath.row];
     return turn;
 }
 
 
 - (void)dealloc {
-    [playGameView release];
-    [turnTableView release];
-    [guessTextField release];
-    [guessButton release];
-    [guessToolbar release];
+    [_playGameView release];
+    [_turnTableView release];
+    [_guessTextField release];
+    [_guessButton release];
+    [_guessToolbar release];
     [super dealloc];
 }
 @end
