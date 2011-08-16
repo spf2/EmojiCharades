@@ -42,8 +42,6 @@
 	</array>
 	<key>CFBundleVersion</key>
 	<string>7</string>
-	<key>LSApplicationCategoryType</key>
-	<string></string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSMainNibFile</key>
