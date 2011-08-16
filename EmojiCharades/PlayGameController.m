@@ -14,8 +14,7 @@
 
 @implementation PlayGameController
 
-@synthesize hintLabel;
-@synthesize metadataLabel;
+@synthesize playGameView;
 @synthesize turnTableView;
 @synthesize guessTextField;
 @synthesize guessButton;
@@ -137,8 +136,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    hintLabel.text = game.hint;
-    metadataLabel.text = [NSString stringWithFormat:@"%@ at %@", game.owner.name, game.createdAt];
+    playGameView.hintLabel.text = game.hint;
+    playGameView.metadataLabel.text = [NSString stringWithFormat:@"%@ at %@", game.owner.name, game.createdAt];
     guessTextField.hidden = game.doneAt != nil;
    
     guessTextField.delegate = self;
@@ -159,11 +158,11 @@
 
 - (void)viewDidUnload
 {
-    [self setHintLabel:nil];
+    self.playGameView = nil;
     [self setTurnTableView:nil];
     [self setGuessTextField:nil];
     [self setGuessButton:nil];
-    [self setMetadataLabel:nil];
+
     [self setGuessToolbar:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
@@ -269,11 +268,10 @@ static BOOL userCanGiveResultFor(ECGame *game, ECTurn *turn) {
 
 
 - (void)dealloc {
-    [hintLabel release];
+    [playGameView release];
     [turnTableView release];
     [guessTextField release];
     [guessButton release];
-    [metadataLabel release];
     [guessToolbar release];
     [super dealloc];
 }
