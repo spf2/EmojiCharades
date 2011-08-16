@@ -18,6 +18,7 @@
 @interface CreateGameController : UIViewController <UITextFieldDelegate, RKObjectLoaderDelegate> {
     id<CreateGameDelegate> delegate;
     UIBarButtonItem *doneButton;
+    UITextView *hintTextView;
 }
 
 - (IBAction)createGameDone:(id)sender;
@@ -25,7 +26,7 @@
 
 
 @property (nonatomic, retain) id<CreateGameDelegate> delegate;
-@property (nonatomic, retain) IBOutlet UITextField *hintTextField;
 @property (nonatomic, retain) IBOutlet UIBarButtonItem *doneButton;
+@property (nonatomic, retain) IBOutlet UITextView *hintTextView;
 
 @end

@@ -7,12 +7,13 @@
 //
 
 #import "CreateGameController.h"
+#import <QuartzCore/QuartzCore.h>
 
 @implementation CreateGameController
 
 @synthesize doneButton;
+@synthesize hintTextView;
 @synthesize delegate;
-@synthesize hintTextField;
 
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -32,26 +33,26 @@
     // Release any cached data, images, etc that aren't in use.
 }
 
-- (BOOL)textFieldShouldReturn:(UITextField *)theTextField {
-    if (theTextField == self.hintTextField) {
-        [self createGameDone:theTextField];
+- (BOOL)textFieldShouldReturn:(id)sender {
+    if (sender == self.hintTextView) {
+        [self createGameDone:sender];
     }
     return YES;
 }
 
 - (IBAction)createGameDone:(id)sender {
-    if ([hintTextField.text length] > 0) {
+    if ([hintTextView.text length] > 0) {
         ECGame* newGame = [ECGame object];
-        newGame.hint = hintTextField.text;
+        newGame.hint = hintTextView.text;
         newGame.updatedAt = newGame.createdAt = [NSDate date];
         newGame.owner = [ECUser selfUser];
         [[RKObjectManager sharedManager] postObject:newGame delegate:self];
     }
-    [hintTextField resignFirstResponder];
+    [hintTextView resignFirstResponder];
 }
 
 - (IBAction)createGameCancel:(id)sender {
-    hintTextField.text = @"";
+    hintTextView.text = @"";
     [delegate gameCreatedOk: nil];
 }
 
@@ -80,11 +81,13 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    // Do any additional setup after loading the view from its nib.
+    hintTextView.layer.cornerRadius = 5;
+    hintTextView.clipsToBounds = YES;
 }
 
 - (void)viewDidUnload
 {
+    [self setHintTextView:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
@@ -96,4 +99,8 @@
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 
+- (void)dealloc {
+    [hintTextView release];
+    [super dealloc];
+}
 @end
