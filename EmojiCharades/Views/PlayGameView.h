@@ -14,8 +14,11 @@
   UIScrollView *_turnTableScrollView;
 }
 
+@property (nonatomic, retain) IBOutlet UITableView *turnTableView;
 @property (nonatomic, retain) IBOutlet UILabel *hintLabel;
 @property (nonatomic, retain) IBOutlet UILabel *metadataLabel;
 @property (nonatomic, retain) IBOutlet UIScrollView *turnTableScrollView;
+@property (nonatomic, retain) IBOutlet UITextField *guessTextField;
+@property (nonatomic, retain) IBOutlet UIToolbar *guessToolbar;
 
 @end

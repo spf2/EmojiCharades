@@ -17,10 +17,6 @@
 @interface PlayGameController : UIViewController<NSFetchedResultsControllerDelegate, RKObjectLoaderDelegate, UITextFieldDelegate, UITableViewDataSource, UITableViewDelegate, ResultControllerDelegate>
 
 @property (nonatomic, retain) IBOutlet PlayGameView *playGameView;
-@property (nonatomic, retain) IBOutlet UITableView *turnTableView;
-@property (nonatomic, retain) IBOutlet UITextField *guessTextField;
-@property (nonatomic, retain) IBOutlet UIBarButtonItem *guessButton;
-@property (nonatomic, retain) IBOutlet UIToolbar *guessToolbar;
 @property (nonatomic, retain) ECGame *game;
 
 - (void) moveTextViewForKeyboard:(NSNotification*)note up: (BOOL) up;

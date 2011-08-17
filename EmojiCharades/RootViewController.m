@@ -194,7 +194,7 @@
     if (game.doneAt) {        
         cell.textLabel.text = game.winningTurn.guess;
         cell.detailTextLabel.text = 
-        [NSString stringWithFormat:@"by %@ (%@ guess%@, solved by %@)", game.owner.name, game.numTurns, game.numTurns.intValue == 1 ? @"" : @"es", game.winningTurn.user.name];
+        [NSString stringWithFormat:@"by %@ (%@)", game.owner.name, game.winningTurn.user.name];
     } else {
         cell.textLabel.text = game.hint;
         cell.detailTextLabel.text = 

@@ -7,14 +7,14 @@
 //
 
 #import "CreateGameController.h"
-#import <QuartzCore/QuartzCore.h>
+#import "Views/CreateGameView.h"
+#import "ECGame.h"
+#import "ECUser.h"
 
 @implementation CreateGameController
 
-@synthesize doneButton = _doneButton;
-@synthesize hintTextView = _hintTextView;
+@synthesize createGameView = _createGameView;
 @synthesize delegate = _delegate;
-
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -33,26 +33,20 @@
     // Release any cached data, images, etc that aren't in use.
 }
 
-- (BOOL)textFieldShouldReturn:(id)sender {
-    if (sender == _hintTextView) {
-        [self createGameDone:sender];
-    }
-    return YES;
-}
-
 - (IBAction)createGameDone:(id)sender {
-    if ([_hintTextView.text length] > 0) {
+    NSString *trimmedHint = [_createGameView.hintTextView.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+    if ([trimmedHint length] > 0) {
         ECGame* newGame = [ECGame object];
-        newGame.hint = [_hintTextView.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+        newGame.hint = trimmedHint;
         newGame.updatedAt = newGame.createdAt = [NSDate date];
         newGame.owner = [ECUser selfUser];
         [[RKObjectManager sharedManager] postObject:newGame delegate:self];
     }
-    [_hintTextView resignFirstResponder];
+    [_createGameView.hintTextView resignFirstResponder];
 }
 
 - (IBAction)createGameCancel:(id)sender {
-    _hintTextView.text = @"";
+    _createGameView.hintTextView.text = @"";
     [_delegate gameCreatedOk: nil];
 }
 
@@ -81,27 +75,21 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    _hintTextView.layer.cornerRadius = 5;
-    _hintTextView.clipsToBounds = YES;
 }
 
 - (void)viewDidUnload
 {
-    [self setHintTextView:nil];
+    _createGameView = nil;
     [super viewDidUnload];
-    // Release any retained subviews of the main view.
-    // e.g. self.myOutlet = nil;
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
-    // Return YES for supported orientations
-    return (interfaceOrientation == UIInterfaceOrientationPortrait);
+    return NO;
 }
 
 - (void)dealloc {
-    [_doneButton release];
-    [_hintTextView release];
+    [_createGameView release];
     [super dealloc];
 }
 @end

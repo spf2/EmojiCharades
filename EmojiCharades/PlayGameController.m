@@ -15,11 +15,7 @@
 @implementation PlayGameController
 
 @synthesize playGameView = _playGameView;
-@synthesize turnTableView = _turnTableView;
-@synthesize guessTextField = _guessTextField;
-@synthesize guessButton = _guessButton;
 @synthesize game = _game;
-@synthesize guessToolbar = _guessToolbar;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -38,15 +34,15 @@
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)theTextField {
-    if (theTextField == self.guessTextField) {
-        [_guessTextField resignFirstResponder];
+    if (theTextField == _playGameView.guessTextField) {
+        [_playGameView.guessTextField resignFirstResponder];
         ECTurn* newTurn = [ECTurn object];
-        newTurn.guess = _guessTextField.text;
+        newTurn.guess = _playGameView.guessTextField.text;
         newTurn.updatedAt = newTurn.createdAt = [NSDate date];
         newTurn.user = [ECUser selfUser];
         newTurn.game = _game;
         [[RKObjectManager sharedManager] postObject:newTurn delegate:self];
-        _guessTextField.enabled = NO;
+        _playGameView.guessTextField.enabled = NO;
     }
     return YES;
 }
@@ -79,16 +75,16 @@
     [UIView setAnimationDuration:animationDuration];
     [UIView setAnimationCurve:animationCurve];
     
-    CGRect newToolbarFrame = _guessToolbar.frame;
-    CGRect newTableViewFrame = _turnTableView.frame;
+    CGRect newToolbarFrame = _playGameView.guessToolbar.frame;
+    CGRect newTableViewFrame = _playGameView.turnTableView.frame;
     CGRect keyboardFrame = [self.view convertRect:keyboardEndFrame toView:nil];
     int delta = keyboardFrame.size.height * (up ? 1 : -1);
     
     newTableViewFrame.size.height -= delta;
     newToolbarFrame.origin.y -= delta;
     
-    _guessToolbar.frame = newToolbarFrame;
-    _turnTableView.frame = newTableViewFrame;
+    _playGameView.guessToolbar.frame = newToolbarFrame;
+    _playGameView.turnTableView.frame = newTableViewFrame;
     
     [UIView commitAnimations];
 }
@@ -101,24 +97,24 @@
 - (void)resultOk:(ECTurn *)turn
 {
     [self.navigationController popViewControllerAnimated:YES];
-    [_turnTableView reloadData];
+    [_playGameView.turnTableView reloadData];
 }
 
 #pragma mark RKObjectLoaderDelegate methods
 
 - (void)objectLoader:(RKObjectLoader*)objectLoader didLoadObject:(id)_ 
 {
-    _guessTextField.enabled = YES;
-    _guessTextField.text = @"";
+    _playGameView.guessTextField.enabled = YES;
+    _playGameView.guessTextField.text = @"";
     if (_game.doneAt) {
-        _guessTextField.hidden = YES;
+        _playGameView.guessTextField.hidden = YES;
     }
-    [_turnTableView reloadData];
+    [_playGameView.turnTableView reloadData];
 }
 
 - (void)objectLoader:(RKObjectLoader*)objectLoader didFailWithError:(NSError*)error 
 {
-    _guessTextField.enabled = YES;
+    _playGameView.guessTextField.enabled = YES;
 	NSLog(@"Hit error: %@", error);
     UIAlertView *alert = [[UIAlertView alloc] 
                           initWithTitle:@"Error" 
@@ -141,11 +137,11 @@
     [super viewDidLoad];
     _playGameView.hintLabel.text = _game.hint;
     _playGameView.metadataLabel.text = [NSString stringWithFormat:@"%@ at %@", _game.owner.name, _game.createdAt];
-    _guessTextField.hidden = _game.doneAt != nil;
+    _playGameView.guessTextField.hidden = _game.doneAt != nil;
    
-    _guessTextField.delegate = self;
-    _turnTableView.dataSource = self;
-    _turnTableView.delegate = self;
+    _playGameView.guessTextField.delegate = self;
+    _playGameView.turnTableView.dataSource = self;
+    _playGameView.turnTableView.delegate = self;
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
@@ -154,11 +150,6 @@
 - (void)viewDidUnload
 {
     self.playGameView = nil;
-    [self setTurnTableView:nil];
-    [self setGuessTextField:nil];
-    [self setGuessButton:nil];
-
-    [self setGuessToolbar:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
@@ -262,10 +253,7 @@ static BOOL userCanGiveResultFor(ECGame *game, ECTurn *turn) {
 
 - (void)dealloc {
     [_playGameView release];
-    [_turnTableView release];
-    [_guessTextField release];
-    [_guessButton release];
-    [_guessToolbar release];
+    [_game release];
     [super dealloc];
 }
 @end
