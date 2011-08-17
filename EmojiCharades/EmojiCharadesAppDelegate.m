@@ -37,12 +37,6 @@
     // Add the navigation controller's view to the window and display.
     [self configure];
     
-#if !TARGET_IPHONE_SIMULATOR
-    // Register for alert notifications
-    [application registerForRemoteNotificationTypes:UIRemoteNotificationTypeAlert | UIRemoteNotificationTypeBadge];
-    //NSDictionary *pushInfo = [launchOptions valueForKey:UIApplicationLaunchOptionsRemoteNotificationKey];  
-#endif
-    
     [self initializeDataLayer];
 
     [self initializeIdentity];
@@ -276,6 +270,13 @@ didFailToRegisterForRemoteNotificationsWithError:(NSError*)error
     // Invoke viewDidAppear to trigger a refresh of content on resume.
     RootViewController *rootViewController = (RootViewController *)[self.navigationController topViewController];
     [rootViewController viewWillAppear:NO];
+    
+#if !TARGET_IPHONE_SIMULATOR
+    // Register for alert notifications
+    [application registerForRemoteNotificationTypes:UIRemoteNotificationTypeAlert | UIRemoteNotificationTypeBadge];
+    //NSDictionary *pushInfo = [launchOptions valueForKey:UIApplicationLaunchOptionsRemoteNotificationKey];  
+#endif
+    [application setApplicationIconBadgeNumber:0];
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application
