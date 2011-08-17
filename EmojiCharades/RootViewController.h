@@ -13,7 +13,9 @@
 #import "CreateGameController.h"
 #import "PlayGameController.h"
 
-@interface RootViewController : UITableViewController <NSFetchedResultsControllerDelegate,RKObjectLoaderDelegate, CreateGameDelegate>
+@interface RootViewController : UITableViewController <NSFetchedResultsControllerDelegate,RKObjectLoaderDelegate, CreateGameDelegate> {
+    BOOL _gameRequestInFlight;
+}
 
 @property (nonatomic, retain) NSFetchedResultsController *fetchedResultsController;
 @property (nonatomic, retain) CreateGameController *createGameController;

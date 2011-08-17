@@ -250,7 +250,6 @@ static BOOL userCanGiveResultFor(ECGame *game, ECTurn *turn) {
     }   
 }
 
-
 - (ECTurn *)turnAtIndexPath: (NSIndexPath *)indexPath {
     // TODO this resorts all turns for /each/ row... instead only sort when game changes.
     NSComparator byID = ^(id a, id b) {
@@ -260,7 +259,6 @@ static BOOL userCanGiveResultFor(ECGame *game, ECTurn *turn) {
     ECTurn *turn = [sorted objectAtIndex:indexPath.row];
     return turn;
 }
-
 
 - (void)dealloc {
     [_playGameView release];

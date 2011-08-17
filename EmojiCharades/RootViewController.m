@@ -13,6 +13,7 @@
 
 @interface RootViewController ()
 - (void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath;
+- (void)refreshData;
 @end
 
 @implementation RootViewController
@@ -24,6 +25,7 @@
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
+        _gameRequestInFlight = NO;
     }
     return self;
 }
@@ -41,12 +43,12 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    [self refreshData];
 }
 
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
-    [[RKObjectManager sharedManager] loadObjectsAtResourcePath:@"/game" delegate:self];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -59,15 +61,25 @@
 	[super viewDidDisappear:animated];
 }
 
+- (void)refreshData
+{
+    if (!_gameRequestInFlight) {
+        _gameRequestInFlight = YES;
+        [[RKObjectManager sharedManager] loadObjectsAtResourcePath:@"/game" delegate:self];
+    }
+}
+
 #pragma mark RKObjectLoaderDelegate methods
 
 - (void)objectLoader:(RKObjectLoader*)objectLoader didLoadObjects:(NSArray*)objects {
+    _gameRequestInFlight = NO;
 	[[NSUserDefaults standardUserDefaults] setObject:[NSDate date] forKey:@"LastUpdatedAt"];
 	[[NSUserDefaults standardUserDefaults] synchronize];
     NSLog(@"Games loaded ok: %d", [objects count]);
 }
 
 - (void)objectLoader:(RKObjectLoader*)objectLoader didFailWithError:(NSError*)error {
+    _gameRequestInFlight = NO;
 	UIAlertView* alert = [[[UIAlertView alloc] initWithTitle:@"Error" 
                                                      message:[error localizedDescription] 
                                                     delegate:nil 

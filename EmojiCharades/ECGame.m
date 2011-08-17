@@ -36,14 +36,14 @@
      @"num_turns", @"numTurns",
      @"winning_turn_id", @"winningTurnID",
      nil];
-    [mapping mapRelationship:@"owner" withMapping:userMapping];
+    [mapping mapKeyPath:@"owner" toRelationship:@"owner" withMapping:userMapping serialize:NO];
+    [mapping connectRelationship:@"owner" withObjectForPrimaryKeyAttribute:@"ownerID"];
     [mapping.dateFormatStrings addObject:ECDateFormat];
     [objectManager.mappingProvider registerMapping:mapping withRootKeyPath:@"game"];
     
     // tweak serialization
     RKObjectMapping *serializationMapping = [objectManager.mappingProvider serializationMappingForClass:ECGame.class];
     [serializationMapping removeMappingForKeyPath:@"ownerID"];
-    [serializationMapping removeMappingForKeyPath:@"owner"];
     [serializationMapping mapKeyPath:@"owner.userID" toAttribute:@"owner_id"];
     
     return mapping;
