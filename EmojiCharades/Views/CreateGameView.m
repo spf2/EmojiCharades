@@ -12,6 +12,7 @@
 @implementation CreateGameView
 
 @synthesize hintTextView = _hintTextView;
+@synthesize keyboardScrollView = _keyboardScrollView;
 
 - (void)layoutSubviews
 {
@@ -22,6 +23,7 @@
 - (void)dealloc
 {
     [_hintTextView release];
+    [_keyboardScrollView release];
     [super dealloc];
 }
 

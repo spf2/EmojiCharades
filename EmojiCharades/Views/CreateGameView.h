@@ -11,5 +11,6 @@
 @interface CreateGameView : UIView
 
 @property (nonatomic, retain) IBOutlet UITextView *hintTextView;
+@property (nonatomic, retain) IBOutlet UIScrollView *keyboardScrollView;
 
 @end
