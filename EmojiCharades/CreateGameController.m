@@ -10,6 +10,7 @@
 #import "Views/CreateGameView.h"
 #import "ECGame.h"
 #import "ECUser.h"
+#import "Constants.h"
 
 @implementation CreateGameController
 
@@ -65,7 +66,10 @@
     int len = _createGameView.hintTextView.text.length;
     if (len > 0) {
         NSRange deleteRange = _createGameView.hintTextView.selectedRange;
-        deleteRange.length -= 2;  // utf16
+        if (deleteRange.length == 0) {
+            deleteRange.location -= ECUTF16Width;
+            deleteRange.length = ECUTF16Width;
+        }
         _createGameView.hintTextView.text = [_createGameView.hintTextView.text stringByReplacingCharactersInRange:deleteRange withString:@""];
     }
 }

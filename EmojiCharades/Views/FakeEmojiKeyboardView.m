@@ -7,6 +7,7 @@
 //
 
 #import "FakeEmojiKeyboardView.h"
+#import "Constants.h"
 
 @interface FakeEmojiKeyboardView (PrivateMethods)
 - (void)layoutKeyboardPage:(int)page;
@@ -24,20 +25,19 @@
 
 - (void)layoutKeyboardPage:(int)page
 {
-    static int utf16CharWidth = 2;
     CGRect pageFrame = CGRectMake(0, 0, _scrollView.frame.size.width, _scrollView.frame.size.height);
     UIView *keyboardView = [[UIView alloc] initWithFrame:pageFrame];
     CGSize gridSize = CGSizeMake(7, 3);
     CGSize buttonSize = CGSizeMake(pageFrame.size.width / gridSize.width, pageFrame.size.height / gridSize.height);
     NSString* emojiChars = [_charPages objectAtIndex:page];
-    int emojiCharsLen = emojiChars.length / utf16CharWidth;
+    int emojiCharsLen = emojiChars.length / ECUTF16Width;
     int numPages = ceil(emojiCharsLen / (gridSize.width * gridSize.height));
     for (int i = 0; i < numPages; i++) {
         for (int y = 0; y < gridSize.height; y++) {
             for (int x = 0; x < gridSize.width; x++) {
                 int idx = (gridSize.width * gridSize.height * i) + (gridSize.width * y) + x;
                 if (idx >= emojiCharsLen) break;
-                NSString *emoji = [emojiChars substringWithRange:[emojiChars rangeOfComposedCharacterSequenceAtIndex:idx * utf16CharWidth]];
+                NSString *emoji = [emojiChars substringWithRange:[emojiChars rangeOfComposedCharacterSequenceAtIndex:idx * ECUTF16Width]];
                 CGRect buttonFrame = CGRectMake((i * pageFrame.size.width) + (x * buttonSize.width), y * buttonSize.height, buttonSize.width, buttonSize.height);
                 UIButton *button = [[UIButton alloc] initWithFrame:buttonFrame];
                 [button addTarget:_delegate action:@selector(emojiButtonTap:) forControlEvents:UIControlEventTouchUpInside];
