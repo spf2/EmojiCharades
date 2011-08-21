@@ -99,15 +99,14 @@
     for (CategoryEntry *entry in self.entries) {
         if (entry.buttonItem == sender) {
             [self switchToCategory:entry];
-            break;
         }
     }
 }
 
 - (void)switchToCategory:(CategoryEntry *)entry
 {
-    for (UIView *subview in _scrollView.subviews) {
-        [subview removeFromSuperview];
+    for (CategoryEntry *e in self.entries) {
+        [e.view removeFromSuperview];
     }
     [_scrollView addSubview: entry.view];
     _pageControl.numberOfPages = entry.numPages;
@@ -137,7 +136,7 @@ NSString * const _category1 = @"\U0001F4A6\U0001F3B6\U0001F3B5\U0001F525\U0001F4
             entry.chars = chars;
             [entries addObject:entry];
         }
-        self.entries = entries;
+        self.entries = [NSArray arrayWithArray: entries];
         [entries release];
     }
     return self;
