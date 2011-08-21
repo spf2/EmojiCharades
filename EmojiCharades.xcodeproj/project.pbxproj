@@ -16,9 +16,9 @@
 		E7309C9213EDFF5500F270F3 /* CreateGameController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E7309C9013EDFF5500F270F3 /* CreateGameController.xib */; };
 		E7309C9613EE4A0500F270F3 /* PlayGameController.m in Sources */ = {isa = PBXBuildFile; fileRef = E7309C9413EE4A0400F270F3 /* PlayGameController.m */; };
 		E7309C9713EE4A0500F270F3 /* PlayGameController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E7309C9513EE4A0400F270F3 /* PlayGameController.xib */; };
-		E77213F613FF145E00F4D91C /* FakeEmojiKeyboardViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E77213F513FF145E00F4D91C /* FakeEmojiKeyboardViewController.xib */; };
-		E77213F913FF15CC00F4D91C /* FakeEmojiKeyboardView.m in Sources */ = {isa = PBXBuildFile; fileRef = E77213F813FF15CC00F4D91C /* FakeEmojiKeyboardView.m */; };
-		E77213FC13FF3B0C00F4D91C /* FakeEmojiKeyboardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E77213FB13FF3B0C00F4D91C /* FakeEmojiKeyboardViewController.m */; };
+		E77213F613FF145E00F4D91C /* ECKeyboardViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E77213F513FF145E00F4D91C /* ECKeyboardViewController.xib */; };
+		E77213F913FF15CC00F4D91C /* ECKeyboardView.m in Sources */ = {isa = PBXBuildFile; fileRef = E77213F813FF15CC00F4D91C /* ECKeyboardView.m */; };
+		E77213FC13FF3B0C00F4D91C /* ECKeyboardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E77213FB13FF3B0C00F4D91C /* ECKeyboardViewController.m */; };
 		E77B278E13F8F2B0009BA273 /* emoji_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = E77B278C13F8F1C5009BA273 /* emoji_icon.png */; };
 		E77B279013F8F2B6009BA273 /* emoji_icon.png@2.png in Resources */ = {isa = PBXBuildFile; fileRef = E77B278F13F8F2B6009BA273 /* emoji_icon.png@2.png */; };
 		E77B279C13FA0E7C009BA273 /* libfacebook_ios_sdk.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E77B279913FA0E2E009BA273 /* libfacebook_ios_sdk.a */; };
@@ -173,16 +173,16 @@
 		E720AF8513E5EC1A007D1564 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		E720AF8713E5EC27007D1564 /* libxml2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libxml2.dylib; path = usr/lib/libxml2.dylib; sourceTree = SDKROOT; };
 		E7309C8E13EDFF5400F270F3 /* CreateGameController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CreateGameController.h; sourceTree = "<group>"; };
-		E7309C8F13EDFF5500F270F3 /* CreateGameController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CreateGameController.m; sourceTree = "<group>"; };
+		E7309C8F13EDFF5500F270F3 /* CreateGameController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = CreateGameController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		E7309C9013EDFF5500F270F3 /* CreateGameController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CreateGameController.xib; sourceTree = "<group>"; };
 		E7309C9313EE4A0400F270F3 /* PlayGameController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlayGameController.h; sourceTree = "<group>"; };
 		E7309C9413EE4A0400F270F3 /* PlayGameController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlayGameController.m; sourceTree = "<group>"; };
 		E7309C9513EE4A0400F270F3 /* PlayGameController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PlayGameController.xib; sourceTree = "<group>"; };
-		E77213F513FF145E00F4D91C /* FakeEmojiKeyboardViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FakeEmojiKeyboardViewController.xib; sourceTree = "<group>"; };
-		E77213F713FF15CC00F4D91C /* FakeEmojiKeyboardView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FakeEmojiKeyboardView.h; sourceTree = "<group>"; };
-		E77213F813FF15CC00F4D91C /* FakeEmojiKeyboardView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FakeEmojiKeyboardView.m; sourceTree = "<group>"; };
-		E77213FA13FF3B0C00F4D91C /* FakeEmojiKeyboardViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FakeEmojiKeyboardViewController.h; sourceTree = "<group>"; };
-		E77213FB13FF3B0C00F4D91C /* FakeEmojiKeyboardViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FakeEmojiKeyboardViewController.m; sourceTree = "<group>"; };
+		E77213F513FF145E00F4D91C /* ECKeyboardViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ECKeyboardViewController.xib; sourceTree = "<group>"; };
+		E77213F713FF15CC00F4D91C /* ECKeyboardView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ECKeyboardView.h; sourceTree = "<group>"; };
+		E77213F813FF15CC00F4D91C /* ECKeyboardView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ECKeyboardView.m; sourceTree = "<group>"; };
+		E77213FA13FF3B0C00F4D91C /* ECKeyboardViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ECKeyboardViewController.h; sourceTree = "<group>"; };
+		E77213FB13FF3B0C00F4D91C /* ECKeyboardViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ECKeyboardViewController.m; sourceTree = "<group>"; };
 		E77B278A13F71915009BA273 /* EmojiCharades 2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "EmojiCharades 2.xcdatamodel"; sourceTree = "<group>"; };
 		E77B278B13F8A921009BA273 /* EmojiCharades 3.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "EmojiCharades 3.xcdatamodel"; sourceTree = "<group>"; };
 		E77B278C13F8F1C5009BA273 /* emoji_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = emoji_icon.png; sourceTree = "<group>"; };
@@ -222,8 +222,8 @@
 		E7F809C713E5FD150077F0CE /* ECUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ECUser.m; sourceTree = "<group>"; };
 		E7F809C913E67D420077F0CE /* ECGame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ECGame.h; sourceTree = "<group>"; };
 		E7F809CA13E67D420077F0CE /* ECGame.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ECGame.m; sourceTree = "<group>"; };
-		E7F809CC13E67F600077F0CE /* Constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
-		E7F809CD13E67F600077F0CE /* Constants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Constants.m; sourceTree = "<group>"; };
+		E7F809CC13E67F600077F0CE /* Constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = Constants.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
+		E7F809CD13E67F600077F0CE /* Constants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = Constants.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		E7F809CF13E680720077F0CE /* ECTurn.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ECTurn.h; sourceTree = "<group>"; };
 		E7F809D013E680720077F0CE /* ECTurn.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ECTurn.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -272,8 +272,8 @@
 				00771AD013FA4FF400F2FBAA /* PlayGameView.m */,
 				E7ABEA1813FB8CFC00D634FC /* CreateGameView.h */,
 				E7ABEA1913FB8CFC00D634FC /* CreateGameView.m */,
-				E77213F713FF15CC00F4D91C /* FakeEmojiKeyboardView.h */,
-				E77213F813FF15CC00F4D91C /* FakeEmojiKeyboardView.m */,
+				E77213F713FF15CC00F4D91C /* ECKeyboardView.h */,
+				E77213F813FF15CC00F4D91C /* ECKeyboardView.m */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -331,9 +331,9 @@
 			children = (
 				00771ACE13FA4FF400F2FBAA /* Views */,
 				E7AF37B713E4B98300DB58CA /* EmojiCharadesAppDelegate.h */,
-				E77213FA13FF3B0C00F4D91C /* FakeEmojiKeyboardViewController.h */,
-				E77213FB13FF3B0C00F4D91C /* FakeEmojiKeyboardViewController.m */,
-				E77213F513FF145E00F4D91C /* FakeEmojiKeyboardViewController.xib */,
+				E77213FA13FF3B0C00F4D91C /* ECKeyboardViewController.h */,
+				E77213FB13FF3B0C00F4D91C /* ECKeyboardViewController.m */,
+				E77213F513FF145E00F4D91C /* ECKeyboardViewController.xib */,
 				E7AF37B813E4B98300DB58CA /* EmojiCharadesAppDelegate.m */,
 				E7F809CC13E67F600077F0CE /* Constants.h */,
 				E7F809CD13E67F600077F0CE /* Constants.m */,
@@ -590,7 +590,7 @@
 				E7E9BEC413F50BFD00C113F1 /* Entitlements.entitlements in Resources */,
 				E77B278E13F8F2B0009BA273 /* emoji_icon.png in Resources */,
 				E77B279013F8F2B6009BA273 /* emoji_icon.png@2.png in Resources */,
-				E77213F613FF145E00F4D91C /* FakeEmojiKeyboardViewController.xib in Resources */,
+				E77213F613FF145E00F4D91C /* ECKeyboardViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -639,8 +639,8 @@
 				E7D3B9C513EF2A1F007C5B19 /* ResultController.m in Sources */,
 				00771AD113FA4FF400F2FBAA /* PlayGameView.m in Sources */,
 				E7ABEA1A13FB8CFC00D634FC /* CreateGameView.m in Sources */,
-				E77213F913FF15CC00F4D91C /* FakeEmojiKeyboardView.m in Sources */,
-				E77213FC13FF3B0C00F4D91C /* FakeEmojiKeyboardViewController.m in Sources */,
+				E77213F913FF15CC00F4D91C /* ECKeyboardView.m in Sources */,
+				E77213FC13FF3B0C00F4D91C /* ECKeyboardViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

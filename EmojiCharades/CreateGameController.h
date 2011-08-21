@@ -8,7 +8,7 @@
 
 #import <RestKit/CoreData/CoreData.h>
 #import <UIKit/UIKit.h>
-#import "FakeEmojiKeyboardViewController.h"
+#import "ECKeyboardViewController.h"
 
 @class CreateGameView;
 @class ECGame;
@@ -19,8 +19,8 @@
 - (void) gameCreatedOk:(ECGame *)game;
 @end
 
-@interface CreateGameController : UIViewController <UITextFieldDelegate, RKObjectLoaderDelegate, FakeEmojiKeyboardDelegate> {
-    FakeEmojiKeyboardViewController *_emojiKeyboard;
+@interface CreateGameController : UIViewController <UITextFieldDelegate, RKObjectLoaderDelegate, ECKeyboardDelegate> {
+    ECKeyboardViewController *_emojiKeyboard;
 }
  
 - (IBAction)createGameDone:(id)sender;
@@ -28,6 +28,6 @@
 
 @property (nonatomic, retain) IBOutlet CreateGameView *createGameView;
 @property (nonatomic, retain) id<CreateGameDelegate> delegate;
-@property (nonatomic, retain) IBOutlet FakeEmojiKeyboardViewController *emojiKeyboard;
+@property (nonatomic, retain) IBOutlet ECKeyboardViewController *emojiKeyboard;
 
 @end

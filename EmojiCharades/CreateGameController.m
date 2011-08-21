@@ -54,7 +54,7 @@
     [_delegate gameCreatedOk: nil];
 }
 
-#pragma mark FakeEmojiKeyboardDelegate methods
+#pragma mark ECKeyboardDelegate methods
 
 - (void)emojiButtonTap:(UIButton *)emojiButton
 {
@@ -97,8 +97,8 @@
 
 - (void)viewDidLoad
 {
-    self.emojiKeyboard = [[[FakeEmojiKeyboardViewController alloc]
-                                  initWithNibName:@"FakeEmojiKeyboardViewController" bundle:nil] autorelease];
+    self.emojiKeyboard = [[[ECKeyboardViewController alloc]
+                                  initWithNibName:@"ECKeyboardViewController" bundle:nil] autorelease];
     _emojiKeyboard.delegate = self;
     _createGameView.hintTextView.inputView = _emojiKeyboard.view;
     [super viewDidLoad];
