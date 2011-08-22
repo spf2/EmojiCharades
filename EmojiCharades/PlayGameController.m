@@ -106,9 +106,6 @@
 {
     _playGameView.guessTextField.enabled = YES;
     _playGameView.guessTextField.text = @"";
-    if (_game.doneAt) {
-        _playGameView.guessTextField.hidden = YES;
-    }
     [_playGameView.turnTableView reloadData];
 }
 
@@ -137,7 +134,6 @@
     [super viewDidLoad];
     _playGameView.hintLabel.text = _game.hint;
     _playGameView.metadataLabel.text = [NSString stringWithFormat:@"%@ at %@", _game.owner.name, _game.createdAt];
-    _playGameView.guessTextField.hidden = _game.doneAt != nil;
    
     _playGameView.guessTextField.delegate = self;
     _playGameView.turnTableView.dataSource = self;
@@ -165,9 +161,7 @@
 #pragma mark UITableViewDelegate methods
 
 static BOOL userCanGiveResultFor(ECGame *game, ECTurn *turn) {
-    return !game.doneAt && 
-    (game.owner && game.owner.userID == [ECUser selfUser].userID) && 
-    (!turn.result || turn.result.intValue == ECResultNone);
+    return (game.owner && game.owner.userID == [ECUser selfUser].userID);
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
@@ -226,7 +220,6 @@ static BOOL userCanGiveResultFor(ECGame *game, ECTurn *turn) {
     }
 }
 
-// Override to support conditional editing of the table view.
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
 {
     ECTurn *turn = [self turnAtIndexPath:indexPath];

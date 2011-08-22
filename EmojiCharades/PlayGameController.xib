@@ -192,13 +192,14 @@
 											<string key="NSFrame">{{12, 7}, {298, 31}}</string>
 											<reference key="NSSuperview" ref="11731045"/>
 											<reference key="NSWindow"/>
+											<reference key="NSNextKeyView"/>
 											<bool key="IBUIOpaque">NO</bool>
 											<bool key="IBUIClipsSubviews">YES</bool>
 											<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 											<int key="IBUIContentVerticalAlignment">0</int>
 											<string key="IBUIText"/>
 											<int key="IBUIBorderStyle">3</int>
-											<string key="IBUIPlaceholder">Your guess</string>
+											<string key="IBUIPlaceholder">Add comment or guess</string>
 											<object class="NSColor" key="IBUITextColor">
 												<int key="NSColorSpace">3</int>
 												<bytes key="NSWhite">MAA</bytes>
@@ -596,7 +597,6 @@ AAMAAAABAAEAAAFTAAMAAAAEAAACAgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 						<bool key="EncodedWithXMLCoder">YES</bool>
 						<object class="NSArray" key="dict.sortedKeys">
 							<bool key="EncodedWithXMLCoder">YES</bool>
-							<string>guessButton</string>
 							<string>guessTextField</string>
 							<string>guessToolbar</string>
 							<string>hintLabel</string>
@@ -606,7 +606,6 @@ AAMAAAABAAEAAAFTAAMAAAAEAAACAgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
-							<string>UIBarButtonItem</string>
 							<string>UITextField</string>
 							<string>UIToolbar</string>
 							<string>UILabel</string>
@@ -619,7 +618,6 @@ AAMAAAABAAEAAAFTAAMAAAAEAAACAgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 						<bool key="EncodedWithXMLCoder">YES</bool>
 						<object class="NSArray" key="dict.sortedKeys">
 							<bool key="EncodedWithXMLCoder">YES</bool>
-							<string>guessButton</string>
 							<string>guessTextField</string>
 							<string>guessToolbar</string>
 							<string>hintLabel</string>
@@ -629,10 +627,6 @@ AAMAAAABAAEAAAFTAAMAAAAEAAACAgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
-							<object class="IBToOneOutletInfo">
-								<string key="name">guessButton</string>
-								<string key="candidateClassName">UIBarButtonItem</string>
-							</object>
 							<object class="IBToOneOutletInfo">
 								<string key="name">guessTextField</string>
 								<string key="candidateClassName">UITextField</string>

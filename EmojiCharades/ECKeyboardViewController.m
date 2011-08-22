@@ -12,7 +12,7 @@
 @interface ECKeyboardViewController (PrivateMethods);
 - (void)switchToCategory:(CategoryEntry *)entry;
 - (void)categoryButtonTap:(UIBarButtonItem *)sender;
-- (void)emojiButtonTapDone:(UIButton *)sender;
+- (void)emojiButtonTap:(UIButton *)sender;
 - (void)scrollToPage:(int)page animated:(BOOL)animated;
 @end
 
@@ -45,7 +45,7 @@
         entry.buttonItem.target = self;
         entry.buttonItem.action = @selector(categoryButtonTap:);
         for (UIButton *emojiButton in entry.view.subviews) {
-            [emojiButton addTarget:self action:@selector(emojiButtonTapDone:) forControlEvents:UIControlEventTouchUpInside];
+            [emojiButton addTarget:self action:@selector(emojiButtonTap:) forControlEvents:UIControlEventTouchUpInside];
         }
     }
     [self switchToCategory:[_kbdView.entries objectAtIndex:0]];
@@ -58,7 +58,7 @@
     CGFloat pageWidth = _kbdView.scrollView.frame.size.width;
     int page = floor((_kbdView.scrollView.contentOffset.x - pageWidth / 2) / pageWidth) + 1;
     _kbdView.pageControl.currentPage = page;
-    _currentEntry.curPage = page;
+    _currentEntry.currentPage = page;
 }
 
 - (void)scrollValueChanged:(id)sender
@@ -70,7 +70,7 @@
 {
     CGRect rect = CGRectMake(_kbdView.scrollView.frame.size.width * page, 0, _kbdView.scrollView.frame.size.width, _kbdView.scrollView.frame.size.height);
     [_kbdView.scrollView scrollRectToVisible:rect animated:animated];
-    _currentEntry.curPage = page;
+    _currentEntry.currentPage = page;
 }
 
 - (void)categoryButtonTap:(UIBarButtonItem *)sender
@@ -82,26 +82,25 @@
     }
 }
 
-- (void)emojiButtonTapDone:(UIButton *)sender
+- (void)emojiButtonTap:(UIButton *)sender
 {
-    [sender setBackgroundColor:[UIColor clearColor]];
     [_delegate emojiButtonTap:sender];
 }
 
 - (void)switchToCategory:(CategoryEntry *)entry
 {
     if (entry == _currentEntry) {
-        entry.curPage = 0;
+        entry.currentPage = 0;
     }
     _currentEntry = nil;
     for (CategoryEntry *e in _kbdView.entries) {
         [e.view removeFromSuperview];
     }
     [_kbdView.scrollView addSubview: entry.view];
-    _kbdView.pageControl.numberOfPages = entry.numPages;
-    _kbdView.scrollView.contentSize = CGSizeMake(_kbdView.scrollView.frame.size.width * entry.numPages, _kbdView.scrollView.frame.size.height);
+    _kbdView.pageControl.numberOfPages = entry.pageCount;
+    _kbdView.scrollView.contentSize = CGSizeMake(_kbdView.scrollView.frame.size.width * entry.pageCount, _kbdView.scrollView.frame.size.height);
     _currentEntry = entry;
-    [self scrollToPage:entry.curPage animated:NO];
+    [self scrollToPage:entry.currentPage animated:NO];
 
 }
 

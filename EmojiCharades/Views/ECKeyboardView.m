@@ -5,6 +5,11 @@
 //  Created by Steve Farrell on 8/19/11.
 //  Copyright 2011 __MyCompanyName__. All rights reserved.
 //
+//  TODO(spf): There's a noticeable pause when switching to a category for the first time.  
+//  Presumably this is due to lazy initialization of the buttons.  A possible optimization 
+//  would be to load a single image for each category, and determine the character by the
+//  offset of the tap on that image.
+//
 
 #import "ECKeyboardView.h"
 #import "Constants.h"
@@ -14,7 +19,7 @@
 @end
 
 @implementation CategoryEntry
-@synthesize chars = _chars, view = _view, buttonItem = _buttonItem, numPages = _numPages, curPage = _curPage;
+@synthesize chars = _chars, view = _view, buttonItem = _buttonItem, pageCount = _pageCount, currentPage = _currentPage;
 @end
 
 @implementation ECKeyboardView
@@ -55,10 +60,10 @@
     CGSize gridSize = CGSizeMake(7, 3);
     CGSize buttonSize = CGSizeMake(frame.size.width / gridSize.width, frame.size.height / gridSize.height);
     CGRect categoryFrame = frame;
-    entry.numPages = ceil(entry.chars.length / (gridSize.width * gridSize.height));
-    categoryFrame.size.width *= entry.numPages;
+    entry.pageCount = ceil(entry.chars.length / (gridSize.width * gridSize.height));
+    categoryFrame.size.width *= entry.pageCount;
     entry.view.frame = categoryFrame;
-    for (int page = 0; page < entry.numPages; page++) {
+    for (int page = 0; page < entry.pageCount; page++) {
         for (int y = 0; y < gridSize.height; y++) {
             for (int x = 0; x < gridSize.width; x++) {
                 int idx = (gridSize.width * gridSize.height * page) + (gridSize.width * y) + x;
