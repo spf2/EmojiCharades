@@ -13,6 +13,7 @@
 @protocol ECKeyboardDelegate
 - (void)emojiButtonTap:(UIButton *)emojiButton;
 - (void)backspaceButtonTap:(UIBarButtonItem *)sender;
+- (void)spaceButtonTap:(UIBarButtonItem *)sender;
 @end
 
 @interface ECKeyboardViewController : UIViewController<UIScrollViewDelegate>

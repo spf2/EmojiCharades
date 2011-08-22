@@ -76,6 +76,11 @@
     }
 }
 
+- (void)spaceButtonTap:(UIBarButtonItem *)sender
+{
+    _createGameView.hintTextView.text = [_createGameView.hintTextView.text stringByAppendingString:@" "];
+}
+
 #pragma mark RKObjectLoaderDelegate methods
 
 - (void)objectLoader:(RKObjectLoader*)objectLoader didLoadObject:(id)game {

@@ -24,10 +24,11 @@
 @synthesize toolbar = _toolbar;
 @synthesize entries = _entries;
 @synthesize backButton = _backButton;
+@synthesize spaceButton = _spaceButton;
 
 - (void)layoutKeyboard
 {    
-    NSMutableArray *items = [[NSMutableArray alloc] initWithObjects:self.backButton, nil];
+    NSMutableArray *items = [[NSMutableArray alloc] initWithObjects:_backButton, _spaceButton, nil];
     for (CategoryEntry *entry in self.entries) {
         UIView *categoryView = [[UIView alloc] init];
         entry.view = categoryView;
@@ -85,6 +86,7 @@
     [_pageControl release];
     [_toolbar release];
     [_backButton release];
+    [_spaceButton release];
     [_entries release];
     [super dealloc];
 }

@@ -12,7 +12,6 @@
 @interface ECKeyboardViewController (PrivateMethods);
 - (void)switchToCategory:(CategoryEntry *)entry;
 - (void)categoryButtonTap:(UIBarButtonItem *)sender;
-- (void)emojiButtonTapBegin:(UIButton *)sender;
 - (void)emojiButtonTapDone:(UIButton *)sender;
 - (void)scrollToPage:(int)page;
 @end
@@ -39,11 +38,12 @@
     [_kbdView layoutKeyboard];
     _kbdView.backButton.target = _delegate;
     _kbdView.backButton.action = @selector(backspaceButtonTap:);
+    _kbdView.spaceButton.target = _delegate;
+    _kbdView.spaceButton.action = @selector(spaceButtonTap:);
     for (CategoryEntry *entry in _kbdView.entries) {
         entry.buttonItem.target = self;
         entry.buttonItem.action = @selector(categoryButtonTap:);
         for (UIButton *emojiButton in entry.view.subviews) {
-            [emojiButton addTarget:self action:@selector(emojiButtonTapBegin:) forControlEvents:UIControlEventTouchDown];
             [emojiButton addTarget:self action:@selector(emojiButtonTapDone:) forControlEvents:UIControlEventTouchUpInside];
         }
     }
@@ -77,11 +77,6 @@
             [self switchToCategory:entry];
         }
     }
-}
-
-- (void)emojiButtonTapBegin:(UIButton *)sender
-{
-    [sender setBackgroundColor:[UIColor blueColor]];    
 }
 
 - (void)emojiButtonTapDone:(UIButton *)sender
