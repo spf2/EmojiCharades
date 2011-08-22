@@ -42,9 +42,6 @@
     _kbdView.spaceButton.target = _delegate;
     _kbdView.spaceButton.action = @selector(spaceButtonTap:);
     for (CategoryEntry *entry in _kbdView.entries) {
-        if (!_currentEntry) {
-            self.currentEntry = entry;
-        }
         entry.buttonItem.target = self;
         entry.buttonItem.action = @selector(categoryButtonTap:);
         for (UIButton *emojiButton in entry.view.subviews) {
