@@ -11,7 +11,6 @@
 
 @interface ECKeyboardView (PrivateMethods)
 - (void)layoutKeyboardCategoryEntry:(CategoryEntry *)entry;
-- (CGRect)pageFrame;
 @end
 
 @implementation CategoryEntry
@@ -30,7 +29,7 @@
 {    
     NSMutableArray *items = [[NSMutableArray alloc] initWithObjects:self.backButton, nil];
     for (CategoryEntry *entry in self.entries) {
-        UIView *categoryView = [[UIView alloc] initWithFrame:self.pageFrame];
+        UIView *categoryView = [[UIView alloc] init];
         entry.view = categoryView;
         NSString *title = [entry.chars substringToIndex:1];
         entry.buttonItem = [[UIBarButtonItem alloc] init];
@@ -44,18 +43,16 @@
     [items release];
 }
 
-- (CGRect)pageFrame
-{
-    return CGRectMake(0, 0, _scrollView.frame.size.width, _scrollView.frame.size.height);
-}
-
 - (void)layoutKeyboardCategoryEntry:(CategoryEntry *)entry
 {
-    CGRect frame = self.pageFrame;
+    CGRect frame = CGRectMake(0, 0, _scrollView.frame.size.width, _scrollView.frame.size.height);
     CGSize gridSize = CGSizeMake(7, 3);
     CGSize buttonSize = CGSizeMake(frame.size.width / gridSize.width, frame.size.height / gridSize.height);
     int emojiCharsLen = entry.chars.length;
     entry.numPages = ceil(emojiCharsLen / (gridSize.width * gridSize.height));
+    CGRect categoryFrame = frame;
+    categoryFrame.size.width *= entry.numPages;
+    entry.view.frame = categoryFrame;
     for (int page = 0; page < entry.numPages; page++) {
         for (int y = 0; y < gridSize.height; y++) {
             for (int x = 0; x < gridSize.width; x++) {
@@ -64,7 +61,6 @@
                 NSString *emoji = [entry.chars substringWithRange:[entry.chars rangeOfComposedCharacterSequenceAtIndex:idx]];
                 CGRect buttonFrame = CGRectMake((page * frame.size.width) + (x * buttonSize.width), y * buttonSize.height, buttonSize.width, buttonSize.height);
                 UIButton *button = [[UIButton alloc] initWithFrame:buttonFrame];
-                [button setTitleColor:[UIColor redColor] forState:UIControlStateHighlighted];
                 [button setTitle:emoji forState:UIControlStateNormal];
                 [entry.view addSubview:button];
                 [button release];
