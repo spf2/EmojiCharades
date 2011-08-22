@@ -48,17 +48,16 @@
     CGRect frame = CGRectMake(0, 0, _scrollView.frame.size.width, _scrollView.frame.size.height);
     CGSize gridSize = CGSizeMake(7, 3);
     CGSize buttonSize = CGSizeMake(frame.size.width / gridSize.width, frame.size.height / gridSize.height);
-    int emojiCharsLen = entry.chars.length;
-    entry.numPages = ceil(emojiCharsLen / (gridSize.width * gridSize.height));
     CGRect categoryFrame = frame;
+    entry.numPages = ceil(entry.chars.length / (gridSize.width * gridSize.height));
     categoryFrame.size.width *= entry.numPages;
     entry.view.frame = categoryFrame;
     for (int page = 0; page < entry.numPages; page++) {
         for (int y = 0; y < gridSize.height; y++) {
             for (int x = 0; x < gridSize.width; x++) {
                 int idx = (gridSize.width * gridSize.height * page) + (gridSize.width * y) + x;
-                if (idx >= emojiCharsLen) break;
-                NSString *emoji = [entry.chars substringWithRange:[entry.chars rangeOfComposedCharacterSequenceAtIndex:idx]];
+                if (idx >= entry.chars.length) break;
+                NSString *emoji = [entry.chars substringWithRange:NSMakeRange(idx, 1)];
                 CGRect buttonFrame = CGRectMake((page * frame.size.width) + (x * buttonSize.width), y * buttonSize.height, buttonSize.width, buttonSize.height);
                 UIButton *button = [[UIButton alloc] initWithFrame:buttonFrame];
                 [button setTitle:emoji forState:UIControlStateNormal];
