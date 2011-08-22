@@ -71,6 +71,8 @@
             deleteRange.length = 1;
         }
         _createGameView.hintTextView.text = [_createGameView.hintTextView.text stringByReplacingCharactersInRange:deleteRange withString:@""];
+        deleteRange.length = 0;
+        _createGameView.hintTextView.selectedRange = deleteRange;
     }
 }
 
