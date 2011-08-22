@@ -67,8 +67,8 @@
     if (len > 0) {
         NSRange deleteRange = _createGameView.hintTextView.selectedRange;
         if (deleteRange.length == 0) {
-            deleteRange.location -= ECUTF16Width;
-            deleteRange.length = ECUTF16Width;
+            deleteRange.location -= 1;
+            deleteRange.length = 1;
         }
         _createGameView.hintTextView.text = [_createGameView.hintTextView.text stringByReplacingCharactersInRange:deleteRange withString:@""];
     }

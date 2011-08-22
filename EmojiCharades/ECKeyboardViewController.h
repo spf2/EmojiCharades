@@ -9,10 +9,17 @@
 #import <UIKit/UIKit.h>
 #import "ECKeyboardView.h"
 
-@interface ECKeyboardViewController : UIViewController<ECKeyboardDelegate, UIScrollViewDelegate>
+
+@protocol ECKeyboardDelegate
+- (void)emojiButtonTap:(UIButton *)emojiButton;
+- (void)backspaceButtonTap:(UIBarButtonItem *)sender;
+@end
+
+@interface ECKeyboardViewController : UIViewController<UIScrollViewDelegate>
 
 - (IBAction)scrollValueChanged:(id)sender;
 
 @property (nonatomic, retain) id<ECKeyboardDelegate> delegate;
+@property (nonatomic, retain) ECKeyboardView *kbdView;
 
 @end

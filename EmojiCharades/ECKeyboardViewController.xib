@@ -69,7 +69,6 @@
 						<string key="NSFrame">{{0, 187}, {320, 44}}</string>
 						<reference key="NSSuperview" ref="820611911"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView"/>
 						<string key="NSReuseIdentifierKey">_NS:345</string>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClearsContextBeforeDrawing">NO</bool>
@@ -169,7 +168,7 @@
 						<reference key="source" ref="820611911"/>
 						<reference key="destination" ref="895893747"/>
 					</object>
-					<int key="connectionID">27</int>
+					<int key="connectionID">35</int>
 				</object>
 			</object>
 			<object class="IBMutableOrderedSet" key="objectRecords">
@@ -218,14 +217,14 @@
 						<reference key="parent" ref="820611911"/>
 					</object>
 					<object class="IBObjectRecord">
-						<int key="objectID">21</int>
-						<reference key="object" ref="895893747"/>
-						<reference key="parent" ref="874651965"/>
-					</object>
-					<object class="IBObjectRecord">
 						<int key="objectID">22</int>
 						<reference key="object" ref="476646868"/>
 						<reference key="parent" ref="820611911"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">34</int>
+						<reference key="object" ref="895893747"/>
+						<reference key="parent" ref="874651965"/>
 					</object>
 				</object>
 			</object>
@@ -239,8 +238,8 @@
 					<string>-2.IBPluginDependency</string>
 					<string>19.IBPluginDependency</string>
 					<string>20.IBPluginDependency</string>
-					<string>21.IBPluginDependency</string>
 					<string>22.IBPluginDependency</string>
+					<string>34.IBPluginDependency</string>
 					<string>5.CustomClassName</string>
 					<string>5.IBPluginDependency</string>
 				</object>
@@ -270,7 +269,7 @@
 				<reference key="dict.values" ref="0"/>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">32</int>
+			<int key="maxID">35</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">

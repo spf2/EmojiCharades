@@ -15,4 +15,3 @@ NSString * const ECWrong = @"👎";
 int const ECResultRight = 1;
 int const ECResultWrong = -1;
 int const ECResultNone = 0;
-int const ECUTF16Width = 2;
