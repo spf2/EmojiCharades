@@ -22,5 +22,6 @@
 
 @property (nonatomic, retain) id<ECKeyboardDelegate> delegate;
 @property (nonatomic, retain) ECKeyboardView *kbdView;
+@property (nonatomic, assign) CategoryEntry *currentEntry;
 
 @end

@@ -14,7 +14,7 @@
 @end
 
 @implementation CategoryEntry
-@synthesize chars = _chars, view = _view, numPages = _numPages, buttonItem = _buttonItem;
+@synthesize chars = _chars, view = _view, buttonItem = _buttonItem, numPages = _numPages, curPage = _curPage;
 @end
 
 @implementation ECKeyboardView
@@ -28,7 +28,8 @@
 
 - (void)layoutKeyboard
 {    
-    NSMutableArray *items = [[NSMutableArray alloc] initWithObjects:_backButton, _spaceButton, nil];
+    [self layoutSubviews];
+    NSMutableArray *items = [[NSMutableArray alloc] initWithObjects:_spaceButton, nil];
     for (CategoryEntry *entry in self.entries) {
         UIView *categoryView = [[UIView alloc] init];
         entry.view = categoryView;
@@ -40,8 +41,12 @@
         [self layoutKeyboardCategoryEntry:entry];
         [categoryView release];
     }
+    UIBarButtonItem *spacer = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
+    [items addObject: spacer];
+    [items addObject:_backButton];
     self.toolbar.items = items;
     [items release];
+    [spacer release];
 }
 
 - (void)layoutKeyboardCategoryEntry:(CategoryEntry *)entry
@@ -62,6 +67,8 @@
                 CGRect buttonFrame = CGRectMake((page * frame.size.width) + (x * buttonSize.width), y * buttonSize.height, buttonSize.width, buttonSize.height);
                 UIButton *button = [[UIButton alloc] initWithFrame:buttonFrame];
                 [button setTitle:emoji forState:UIControlStateNormal];
+                // Would be preferable to change font size, but that's not available with ios4.
+                button.transform = CGAffineTransformMakeScale(1.5, 1.5);
                 [entry.view addSubview:button];
                 [button release];
             }
@@ -72,7 +79,7 @@
 - (void)layoutSubviews
 {
     int pagerHeight = 10;
-    int toolbarHeight = 30;
+    int toolbarHeight = 40;
     _pageControl.frame = CGRectMake(0, 0, self.frame.size.width, pagerHeight);
     _scrollView.frame = CGRectMake(0, pagerHeight, self.frame.size.width, self.frame.size.height - pagerHeight - toolbarHeight);
     _toolbar.frame = CGRectMake(0, pagerHeight + _scrollView.frame.size.height, self.frame.size.width, toolbarHeight);

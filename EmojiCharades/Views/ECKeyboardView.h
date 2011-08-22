@@ -12,8 +12,9 @@
 
 @property (nonatomic, copy) NSString* chars;
 @property (nonatomic, retain) UIView* view;
-@property (nonatomic, assign) int numPages;
 @property (nonatomic, retain) UIBarButtonItem *buttonItem;
+@property (nonatomic, assign) int numPages;
+@property (nonatomic, assign) int curPage;
 
 @end
 

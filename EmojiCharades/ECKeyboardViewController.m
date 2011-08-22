@@ -13,13 +13,14 @@
 - (void)switchToCategory:(CategoryEntry *)entry;
 - (void)categoryButtonTap:(UIBarButtonItem *)sender;
 - (void)emojiButtonTapDone:(UIButton *)sender;
-- (void)scrollToPage:(int)page;
+- (void)scrollToPage:(int)page animated:(BOOL)animated;
 @end
 
 @implementation ECKeyboardViewController
 
 @synthesize delegate = _delegate;
 @synthesize kbdView = _kbdView;
+@synthesize currentEntry = _currentEntry;
 
 - (id)init
 {
@@ -41,6 +42,9 @@
     _kbdView.spaceButton.target = _delegate;
     _kbdView.spaceButton.action = @selector(spaceButtonTap:);
     for (CategoryEntry *entry in _kbdView.entries) {
+        if (!_currentEntry) {
+            self.currentEntry = entry;
+        }
         entry.buttonItem.target = self;
         entry.buttonItem.action = @selector(categoryButtonTap:);
         for (UIButton *emojiButton in entry.view.subviews) {
@@ -57,17 +61,19 @@
     CGFloat pageWidth = _kbdView.scrollView.frame.size.width;
     int page = floor((_kbdView.scrollView.contentOffset.x - pageWidth / 2) / pageWidth) + 1;
     _kbdView.pageControl.currentPage = page;
+    _currentEntry.curPage = page;
 }
 
 - (void)scrollValueChanged:(id)sender
 {
-    [self scrollToPage:_kbdView.pageControl.currentPage];
+    [self scrollToPage:_kbdView.pageControl.currentPage animated:YES];
 }
 
-- (void)scrollToPage:(int)page
+- (void)scrollToPage:(int)page animated:(BOOL)animated
 {
     CGRect rect = CGRectMake(_kbdView.scrollView.frame.size.width * page, 0, _kbdView.scrollView.frame.size.width, _kbdView.scrollView.frame.size.height);
-    [_kbdView.scrollView scrollRectToVisible:rect animated:YES];
+    [_kbdView.scrollView scrollRectToVisible:rect animated:animated];
+    _currentEntry.curPage = page;
 }
 
 - (void)categoryButtonTap:(UIBarButtonItem *)sender
@@ -87,16 +93,19 @@
 
 - (void)switchToCategory:(CategoryEntry *)entry
 {
-    BOOL same = _kbdView.scrollView.subviews.count > 0 && [[_kbdView.scrollView.subviews objectAtIndex:0] isEqual:entry.view];
+    if (entry == _currentEntry) {
+        entry.curPage = 0;
+    }
+    _currentEntry = nil;
     for (CategoryEntry *e in _kbdView.entries) {
         [e.view removeFromSuperview];
     }
     [_kbdView.scrollView addSubview: entry.view];
     _kbdView.pageControl.numberOfPages = entry.numPages;
-    if (same) {
-        [self scrollToPage:0];
-    }
     _kbdView.scrollView.contentSize = CGSizeMake(_kbdView.scrollView.frame.size.width * entry.numPages, _kbdView.scrollView.frame.size.height);
+    _currentEntry = entry;
+    [self scrollToPage:entry.curPage animated:NO];
+
 }
 
 - (void)dealloc

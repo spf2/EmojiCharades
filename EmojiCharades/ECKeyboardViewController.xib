@@ -48,7 +48,7 @@
 					<object class="IBUIScrollView" id="614996218">
 						<reference key="NSNextResponder" ref="820611911"/>
 						<int key="NSvFlags">274</int>
-						<string key="NSFrame">{{0, 36}, {320, 155}}</string>
+						<string key="NSFrame">{{0, 37}, {320, 123}}</string>
 						<reference key="NSSuperview" ref="820611911"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="874651965"/>
@@ -66,7 +66,7 @@
 					<object class="IBUIToolbar" id="874651965">
 						<reference key="NSNextResponder" ref="820611911"/>
 						<int key="NSvFlags">266</int>
-						<string key="NSFrame">{{0, 187}, {320, 44}}</string>
+						<string key="NSFrame">{{0, 156}, {320, 44}}</string>
 						<reference key="NSSuperview" ref="820611911"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView"/>
@@ -76,14 +76,14 @@
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 						<object class="NSMutableArray" key="IBUIItems">
 							<bool key="EncodedWithXMLCoder">YES</bool>
-							<object class="IBUIBarButtonItem" id="895893747">
-								<string key="IBUITitle">Back</string>
+							<object class="IBUIBarButtonItem" id="436808414">
+								<string key="IBUITitle">Space</string>
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 								<int key="IBUIStyle">1</int>
 								<reference key="IBUIToolbar" ref="874651965"/>
 							</object>
-							<object class="IBUIBarButtonItem" id="436808414">
-								<string key="IBUITitle">Space</string>
+							<object class="IBUIBarButtonItem" id="895893747">
+								<string key="IBUITitle">Back</string>
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 								<int key="IBUIStyle">1</int>
 								<reference key="IBUIToolbar" ref="874651965"/>
@@ -110,7 +110,7 @@
 						<int key="IBUINumberOfPages">3</int>
 					</object>
 				</object>
-				<string key="NSFrameSize">{320, 231}</string>
+				<string key="NSFrameSize">{320, 200}</string>
 				<reference key="NSSuperview"/>
 				<reference key="NSWindow"/>
 				<reference key="NSNextKeyView" ref="476646868"/>
