@@ -32,5 +32,5 @@
 
 @end
 
-unichar const _category0[7*16], _category1[7*7+4], _category2[7*19+2], _category3[7*10], _category4[7*14+3];
+unichar const _category0[7*16-3], _category1[7*7+4], _category2[7*19+2], _category3[7*10], _category4[7*14+3];
 
