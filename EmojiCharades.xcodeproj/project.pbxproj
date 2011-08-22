@@ -22,6 +22,7 @@
 		E77B278E13F8F2B0009BA273 /* emoji_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = E77B278C13F8F1C5009BA273 /* emoji_icon.png */; };
 		E77B279013F8F2B6009BA273 /* emoji_icon.png@2.png in Resources */ = {isa = PBXBuildFile; fileRef = E77B278F13F8F2B6009BA273 /* emoji_icon.png@2.png */; };
 		E77B279C13FA0E7C009BA273 /* libfacebook_ios_sdk.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E77B279913FA0E2E009BA273 /* libfacebook_ios_sdk.a */; };
+		E78F7B371403031B00120536 /* NSDate+timeAgo.m in Sources */ = {isa = PBXBuildFile; fileRef = E78F7B361403031B00120536 /* NSDate+timeAgo.m */; };
 		E7ABEA1A13FB8CFC00D634FC /* CreateGameView.m in Sources */ = {isa = PBXBuildFile; fileRef = E7ABEA1913FB8CFC00D634FC /* CreateGameView.m */; };
 		E7AF37A713E4B98300DB58CA /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E7AF37A613E4B98300DB58CA /* UIKit.framework */; };
 		E7AF37A913E4B98300DB58CA /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E7AF37A813E4B98300DB58CA /* Foundation.framework */; };
@@ -189,6 +190,8 @@
 		E77B278F13F8F2B6009BA273 /* emoji_icon.png@2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "emoji_icon.png@2.png"; sourceTree = "<group>"; };
 		E77B279113FA0E2D009BA273 /* facebook-ios-sdk.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = "facebook-ios-sdk.xcodeproj"; path = "facebook-ios-sdk/src/facebook-ios-sdk.xcodeproj"; sourceTree = "<group>"; };
 		E77B279D13FA2A30009BA273 /* EmojiCharades 4.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "EmojiCharades 4.xcdatamodel"; sourceTree = "<group>"; };
+		E78F7B351403031B00120536 /* NSDate+timeAgo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+timeAgo.h"; sourceTree = "<group>"; };
+		E78F7B361403031B00120536 /* NSDate+timeAgo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+timeAgo.m"; sourceTree = "<group>"; };
 		E7ABEA1813FB8CFC00D634FC /* CreateGameView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CreateGameView.h; sourceTree = "<group>"; };
 		E7ABEA1913FB8CFC00D634FC /* CreateGameView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CreateGameView.m; sourceTree = "<group>"; };
 		E7AF37A213E4B98300DB58CA /* EmojiCharades.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EmojiCharades.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -331,10 +334,10 @@
 			children = (
 				00771ACE13FA4FF400F2FBAA /* Views */,
 				E7AF37B713E4B98300DB58CA /* EmojiCharadesAppDelegate.h */,
+				E7AF37B813E4B98300DB58CA /* EmojiCharadesAppDelegate.m */,
 				E77213FA13FF3B0C00F4D91C /* ECKeyboardViewController.h */,
 				E77213FB13FF3B0C00F4D91C /* ECKeyboardViewController.m */,
 				E77213F513FF145E00F4D91C /* ECKeyboardViewController.xib */,
-				E7AF37B813E4B98300DB58CA /* EmojiCharadesAppDelegate.m */,
 				E7F809CC13E67F600077F0CE /* Constants.h */,
 				E7F809CD13E67F600077F0CE /* Constants.m */,
 				E7F809C613E5FD150077F0CE /* ECUser.h */,
@@ -358,6 +361,8 @@
 				E7D3B9C213EF2A1E007C5B19 /* ResultController.h */,
 				E7D3B9C313EF2A1E007C5B19 /* ResultController.m */,
 				E7D3B9C413EF2A1F007C5B19 /* ResultController.xib */,
+				E78F7B351403031B00120536 /* NSDate+timeAgo.h */,
+				E78F7B361403031B00120536 /* NSDate+timeAgo.m */,
 			);
 			path = EmojiCharades;
 			sourceTree = "<group>";
@@ -641,6 +646,7 @@
 				E7ABEA1A13FB8CFC00D634FC /* CreateGameView.m in Sources */,
 				E77213F913FF15CC00F4D91C /* ECKeyboardView.m in Sources */,
 				E77213FC13FF3B0C00F4D91C /* ECKeyboardViewController.m in Sources */,
+				E78F7B371403031B00120536 /* NSDate+timeAgo.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

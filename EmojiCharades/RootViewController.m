@@ -190,7 +190,6 @@
 {
     ECGame *game = [self.fetchedResultsController objectAtIndexPath:indexPath];
     
-
     if (game.doneAt) {        
         cell.textLabel.text = game.winningTurn.guess;
         cell.detailTextLabel.text = 

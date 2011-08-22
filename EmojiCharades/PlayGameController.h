@@ -18,6 +18,7 @@
 
 @property (nonatomic, retain) IBOutlet PlayGameView *playGameView;
 @property (nonatomic, retain) ECGame *game;
+@property (nonatomic, retain) NSTimer *timer;
 
 - (void) moveTextViewForKeyboard:(NSNotification*)note up: (BOOL) up;
 - (IBAction)guessEditingDidEnd:(id)sender;

@@ -7,15 +7,20 @@
 //
 
 #import "PlayGameController.h"
-
+#import "NSDate+timeAgo.h"
 #import "ResultController.h"
 #import "ECTurn.h"
 #import "Constants.h"
+
+@interface PlayGameController (PrivateMethods)
+-(void)refresh;
+@end
 
 @implementation PlayGameController
 
 @synthesize playGameView = _playGameView;
 @synthesize game = _game;
+@synthesize timer = _timer;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -128,12 +133,12 @@
 - (void)viewWillAppear:(BOOL)animated {
     // Trigger data refresh every time the user goes to, or returns to, this view.
     [[RKObjectManager sharedManager] getObject:_game delegate:self];
+    // And reset the timer, triggering a refresh now.
+    [self.timer setFireDate:[NSDate date]];
 }
 
 - (void)viewDidLoad {
-    [super viewDidLoad];
     _playGameView.hintLabel.text = _game.hint;
-    _playGameView.metadataLabel.text = [NSString stringWithFormat:@"%@ at %@", _game.owner.name, _game.createdAt];
    
     _playGameView.guessTextField.delegate = self;
     _playGameView.turnTableView.dataSource = self;
@@ -141,14 +146,26 @@
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
+    
+    if (_timer == nil) {
+        self.timer = [NSTimer timerWithTimeInterval:60.f target:self selector:@selector(refresh) userInfo:nil repeats:YES];
+        NSRunLoop *runner = [NSRunLoop currentRunLoop];
+        [runner addTimer:_timer forMode: NSDefaultRunLoopMode];
+    }
+    [super viewDidLoad];
+}
+
+- (void)refresh
+{
+    [_playGameView.turnTableView reloadData];
+    _playGameView.metadataLabel.text = [NSString stringWithFormat:@"%@ - %@", _game.owner.name, _game.createdAt.timeAgo];
 }
 
 - (void)viewDidUnload
 {
-    self.playGameView = nil;
+    [self.timer invalidate];
+    self.timer = nil;
     [super viewDidUnload];
-    // Release any retained subviews of the main view.
-    // e.g. self.myOutlet = nil;
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -210,7 +227,7 @@ static BOOL userCanGiveResultFor(ECGame *game, ECTurn *turn) {
         if (_game.doneAt) {
             cell.detailTextLabel.text = turn.user.name;    
         } else {
-            cell.detailTextLabel.text = [NSString stringWithFormat:@"%@ at %@", turn.user.name, turn.createdAt];
+            cell.detailTextLabel.text = [NSString stringWithFormat:@"%@ - %@", turn.user.name, turn.createdAt.timeAgo];
         }
         cell.detailTextLabel.textColor = [UIColor grayColor];
     }
@@ -247,6 +264,7 @@ static BOOL userCanGiveResultFor(ECGame *game, ECTurn *turn) {
 - (void)dealloc {
     [_playGameView release];
     [_game release];
+    [_timer release];
     [super dealloc];
 }
 @end
