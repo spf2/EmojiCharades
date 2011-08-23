@@ -8,6 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		00771AD113FA4FF400F2FBAA /* PlayGameView.m in Sources */ = {isa = PBXBuildFile; fileRef = 00771AD013FA4FF400F2FBAA /* PlayGameView.m */; };
+		00C85F6A14036ACB00A2E5B6 /* GameCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 00C85F6914036ACB00A2E5B6 /* GameCellView.m */; };
+		00C85F6F14036AF000A2E5B6 /* YKLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 00C85F6B14036AF000A2E5B6 /* YKLayout.m */; };
+		00C85F7014036AF000A2E5B6 /* YKUIView.m in Sources */ = {isa = PBXBuildFile; fileRef = 00C85F6D14036AF000A2E5B6 /* YKUIView.m */; };
+		00C85F7C14036BF900A2E5B6 /* YKCGUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 00C85F7A14036BF900A2E5B6 /* YKCGUtils.m */; };
 		E720AF8213E5EBEF007D1564 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E720AF8113E5EBEF007D1564 /* CFNetwork.framework */; };
 		E720AF8413E5EC10007D1564 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E720AF8313E5EC10007D1564 /* MobileCoreServices.framework */; };
 		E720AF8613E5EC1A007D1564 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E720AF8513E5EC1A007D1564 /* SystemConfiguration.framework */; };
@@ -169,6 +173,14 @@
 /* Begin PBXFileReference section */
 		00771ACF13FA4FF400F2FBAA /* PlayGameView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlayGameView.h; sourceTree = "<group>"; };
 		00771AD013FA4FF400F2FBAA /* PlayGameView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlayGameView.m; sourceTree = "<group>"; };
+		00C85F6814036ACB00A2E5B6 /* GameCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameCellView.h; sourceTree = "<group>"; };
+		00C85F6914036ACB00A2E5B6 /* GameCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameCellView.m; sourceTree = "<group>"; };
+		00C85F6B14036AF000A2E5B6 /* YKLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YKLayout.m; sourceTree = "<group>"; };
+		00C85F6C14036AF000A2E5B6 /* YKLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YKLayout.h; sourceTree = "<group>"; };
+		00C85F6D14036AF000A2E5B6 /* YKUIView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YKUIView.m; sourceTree = "<group>"; };
+		00C85F6E14036AF000A2E5B6 /* YKUIView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YKUIView.h; sourceTree = "<group>"; };
+		00C85F7A14036BF900A2E5B6 /* YKCGUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YKCGUtils.m; sourceTree = "<group>"; };
+		00C85F7B14036BF900A2E5B6 /* YKCGUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YKCGUtils.h; sourceTree = "<group>"; };
 		E720AF8113E5EBEF007D1564 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		E720AF8313E5EC10007D1564 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 		E720AF8513E5EC1A007D1564 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
@@ -272,12 +284,20 @@
 		00771ACE13FA4FF400F2FBAA /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				00C85F7B14036BF900A2E5B6 /* YKCGUtils.h */,
+				00C85F7A14036BF900A2E5B6 /* YKCGUtils.m */,
+				00C85F6C14036AF000A2E5B6 /* YKLayout.h */,
+				00C85F6B14036AF000A2E5B6 /* YKLayout.m */,
+				00C85F6E14036AF000A2E5B6 /* YKUIView.h */,
+				00C85F6D14036AF000A2E5B6 /* YKUIView.m */,
 				00771ACF13FA4FF400F2FBAA /* PlayGameView.h */,
 				00771AD013FA4FF400F2FBAA /* PlayGameView.m */,
 				E7ABEA1813FB8CFC00D634FC /* CreateGameView.h */,
 				E7ABEA1913FB8CFC00D634FC /* CreateGameView.m */,
 				E77213F713FF15CC00F4D91C /* ECKeyboardView.h */,
 				E77213F813FF15CC00F4D91C /* ECKeyboardView.m */,
+				00C85F6814036ACB00A2E5B6 /* GameCellView.h */,
+				00C85F6914036ACB00A2E5B6 /* GameCellView.m */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -648,6 +668,10 @@
 				E77213F913FF15CC00F4D91C /* ECKeyboardView.m in Sources */,
 				E77213FC13FF3B0C00F4D91C /* ECKeyboardViewController.m in Sources */,
 				E78F7B371403031B00120536 /* NSDate+timeAgo.m in Sources */,
+				00C85F6A14036ACB00A2E5B6 /* GameCellView.m in Sources */,
+				00C85F6F14036AF000A2E5B6 /* YKLayout.m in Sources */,
+				00C85F7014036AF000A2E5B6 /* YKUIView.m in Sources */,
+				00C85F7C14036BF900A2E5B6 /* YKCGUtils.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -785,6 +809,10 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)\"",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "EmojiCharades/EmojiCharades-Prefix.pch";
 				INFOPLIST_FILE = "EmojiCharades/EmojiCharades-Info.plist";
@@ -801,6 +829,10 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)\"",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "EmojiCharades/EmojiCharades-Prefix.pch";
 				INFOPLIST_FILE = "EmojiCharades/EmojiCharades-Info.plist";
@@ -883,6 +915,10 @@
 				"CODE_SIGN_ENTITLEMENTS[sdk=*]" = Entitlements.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)\"",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "EmojiCharades/EmojiCharades-Prefix.pch";
 				INFOPLIST_FILE = "EmojiCharades/EmojiCharades-Info.plist";

@@ -10,9 +10,10 @@
 #import "RootViewController.h"
 #import "ECGame.h"
 #import "Constants.h"
+#import "GameCellView.h"
 
 @interface RootViewController ()
-- (void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath;
+- (void)configureCell:(GameTableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath;
 @end
 
 @implementation RootViewController
@@ -32,11 +33,13 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-        
-    UIBarButtonItem *createButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(showCreateGame)];
+    self.tableView.backgroundColor = [UIColor colorWithWhite:0.8 alpha:1.0];
+    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    UIBarButtonItem *createButton = [[UIBarButtonItem alloc] initWithTitle:@"New Game" style:UIBarButtonItemStyleBordered target:self action:@selector(showCreateGame)];
     self.navigationItem.rightBarButtonItem = createButton;
-    self.navigationItem.title = @"Games";
+    self.navigationItem.title = @"Emojinary";
     [createButton release];
+    self.navigationController.navigationBar.tintColor = [UIColor colorWithWhite:0.4 alpha:1.0];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -122,11 +125,11 @@
 // Customize the appearance of table view cells.
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *CellIdentifier = @"Cell";
+    static NSString *CellIdentifier = @"GameTableViewCell";
     
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    GameTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
-        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier] autorelease];
+        cell = [[[GameTableViewCell alloc] initWithReuseIdentifier:CellIdentifier] autorelease];
     }
 
     // Configure the cell.
@@ -153,6 +156,12 @@
 {
     // The table view should not be re-orderable.
     return NO;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath 
+{
+  UITableViewCell *cell = [self tableView:tableView cellForRowAtIndexPath:indexPath];
+  return [cell sizeThatFits:CGSizeMake(tableView.frame.size.width, FLT_MAX)].height;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
@@ -185,18 +194,16 @@
     [super dealloc];
 }
 
-- (void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath
+- (void)configureCell:(GameTableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath
 {
     ECGame *game = [self.fetchedResultsController objectAtIndexPath:indexPath];
     
     if (game.doneAt) {        
-        cell.textLabel.text = game.winningTurn.guess;
-        cell.detailTextLabel.text = 
-        [NSString stringWithFormat:@"by %@ (%@)", game.owner.name, game.winningTurn.user.name];
+      NSString *status = [NSString stringWithFormat:@"✓ %@ (%@ got it!)", game.winningTurn.guess, game.winningTurn.user.name];
+      [cell.gameCellView setUserName:game.owner.name lastModifiedDate:game.updatedAt hint:game.hint status:status];
     } else {
-        cell.textLabel.text = game.hint;
-        cell.detailTextLabel.text = 
-        [NSString stringWithFormat:@"by %@ (%@ guess%@)", game.owner.name, game.numTurns, game.numTurns.intValue == 1 ? @"" : @"es"];
+      NSString *status = [NSString stringWithFormat:@"%@ guess%@", game.numTurns, game.numTurns.intValue == 1 ? @"" : @"es"];
+      [cell.gameCellView setUserName:game.owner.name lastModifiedDate:game.updatedAt hint:game.hint status:status];
     }
     cell.selectionStyle = UITableViewCellSelectionStyleBlue;
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
@@ -308,7 +315,7 @@
             break;
             
         case NSFetchedResultsChangeUpdate:
-            [self configureCell:[tableView cellForRowAtIndexPath:indexPath] atIndexPath:indexPath];
+            [self configureCell:(GameTableViewCell *)[tableView cellForRowAtIndexPath:indexPath] atIndexPath:indexPath];
             break;
             
         case NSFetchedResultsChangeMove:
