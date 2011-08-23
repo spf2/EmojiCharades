@@ -10,10 +10,10 @@
 #import "RootViewController.h"
 #import "ECGame.h"
 #import "Constants.h"
-#import "GameCellView.h"
+#import "ECGameCellView.h"
 
 @interface RootViewController ()
-- (void)configureCell:(GameTableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath;
+- (void)configureCell:(ECGameTableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath;
 @end
 
 @implementation RootViewController
@@ -125,11 +125,11 @@
 // Customize the appearance of table view cells.
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *CellIdentifier = @"GameTableViewCell";
+    static NSString *CellIdentifier = @"ECGameTableViewCell";
     
-    GameTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    ECGameTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
-        cell = [[[GameTableViewCell alloc] initWithReuseIdentifier:CellIdentifier] autorelease];
+        cell = [[[ECGameTableViewCell alloc] initWithReuseIdentifier:CellIdentifier] autorelease];
     }
 
     // Configure the cell.
@@ -194,16 +194,18 @@
     [super dealloc];
 }
 
-- (void)configureCell:(GameTableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath
+- (void)configureCell:(ECGameTableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath
 {
     ECGame *game = [self.fetchedResultsController objectAtIndexPath:indexPath];
+  
+    NSString *userImageURLString = [NSString stringWithFormat:@"http://graph.facebook.com/%@/picture", game.owner.facebookID];
     
     if (game.doneAt) {        
       NSString *status = [NSString stringWithFormat:@"✓ %@ (%@ got it!)", game.winningTurn.guess, game.winningTurn.user.name];
-      [cell.gameCellView setUserName:game.owner.name lastModifiedDate:game.updatedAt hint:game.hint status:status];
+      [cell.gameCellView setUserName:game.owner.name userImageURLString:userImageURLString lastModifiedDate:game.updatedAt hint:game.hint status:status];
     } else {
       NSString *status = [NSString stringWithFormat:@"%@ guess%@", game.numTurns, game.numTurns.intValue == 1 ? @"" : @"es"];
-      [cell.gameCellView setUserName:game.owner.name lastModifiedDate:game.updatedAt hint:game.hint status:status];
+      [cell.gameCellView setUserName:game.owner.name userImageURLString:userImageURLString lastModifiedDate:game.updatedAt hint:game.hint status:status];
     }
     cell.selectionStyle = UITableViewCellSelectionStyleBlue;
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
@@ -315,7 +317,7 @@
             break;
             
         case NSFetchedResultsChangeUpdate:
-            [self configureCell:(GameTableViewCell *)[tableView cellForRowAtIndexPath:indexPath] atIndexPath:indexPath];
+            [self configureCell:(ECGameTableViewCell *)[tableView cellForRowAtIndexPath:indexPath] atIndexPath:indexPath];
             break;
             
         case NSFetchedResultsChangeMove:
