@@ -9,8 +9,8 @@
 #import "Constants.h"
 
 NSString * const ECDateFormat = @"yyyy-MM-dd'T'HH:mm:ss'Z'";
-NSString * const ECRight = @"👍";
-NSString * const ECWrong = @"👎";
+NSString * const ECRight = @"\ue00e";
+NSString * const ECWrong = @"\ue421";
 
 NSString * const ECFacebookAppID = @"245855945445328";
 

@@ -58,7 +58,11 @@
 
 - (void)emojiButtonTap:(UIButton *)emojiButton
 {
-    _createGameView.hintTextView.text = [_createGameView.hintTextView.text stringByAppendingString:emojiButton.titleLabel.text];
+    NSRange replaceRange = _createGameView.hintTextView.selectedRange;
+    _createGameView.hintTextView.text = [_createGameView.hintTextView.text stringByReplacingCharactersInRange:replaceRange withString:emojiButton.titleLabel.text];
+    replaceRange.length = 0;
+    replaceRange.location += 1;
+    _createGameView.hintTextView.selectedRange = replaceRange;
 }
 
 - (void)backspaceButtonTap:(UIBarButtonItem *)backspaceButton
