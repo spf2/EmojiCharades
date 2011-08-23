@@ -30,6 +30,7 @@
 @synthesize serviceURL = _serviceURL;
 @synthesize apsToken = _apsToken;
 @synthesize facebook = _facebook;
+@dynamic ready;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
@@ -63,6 +64,11 @@
     //RKLogConfigureByName("RestKit/ObjectMapping", RKLogLevelTrace);
     //RKLogConfigureByName("RestKit/Network*", RKLogLevelDebug);
 #endif
+}
+
+- (BOOL)ready
+{
+    return RKObjectManager.sharedManager.client.username != nil;
 }
 
 - (void)initializeDataLayer 
@@ -274,9 +280,10 @@ didFailToRegisterForRemoteNotificationsWithError:(NSError*)error
      Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
      */
     
-    // Invoke viewDidAppear to trigger a refresh of content on resume.
-    RootViewController *rootViewController = (RootViewController *)[self.navigationController topViewController];
-    [rootViewController viewWillAppear:NO];
+    if (self.ready) {
+        RootViewController *rootViewController = (RootViewController *)[self.navigationController topViewController];
+        [rootViewController refreshData];
+    }
     
 #if !TARGET_IPHONE_SIMULATOR
     // Register for alert notifications

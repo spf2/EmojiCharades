@@ -19,5 +19,6 @@
 @property (nonatomic, copy) NSString *serviceURL;
 @property (nonatomic, copy) NSString *apsToken;
 @property (nonatomic, retain) Facebook *facebook;
+@property (nonatomic, readonly) BOOL ready;
 
 @end
