@@ -127,7 +127,7 @@
 {
     static NSString *CellIdentifier = @"ECGameTableViewCell";
     
-    ECGameTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    ECGameTableViewCell *cell = (ECGameTableViewCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
         cell = [[[ECGameTableViewCell alloc] initWithReuseIdentifier:CellIdentifier] autorelease];
     }
@@ -202,10 +202,10 @@
     
     if (game.doneAt) {        
       NSString *status = [NSString stringWithFormat:@"✓ %@ (%@ got it!)", game.winningTurn.guess, game.winningTurn.user.name];
-      [cell.gameCellView setUserName:game.owner.name userImageURLString:userImageURLString lastModifiedDate:game.updatedAt hint:game.hint status:status];
+      [cell.gameCellView setUserName:game.owner.name userImageURLString:userImageURLString lastModifiedDate:game.createdAt hint:game.hint status:status];
     } else {
       NSString *status = [NSString stringWithFormat:@"%@ guess%@", game.numTurns, game.numTurns.intValue == 1 ? @"" : @"es"];
-      [cell.gameCellView setUserName:game.owner.name userImageURLString:userImageURLString lastModifiedDate:game.updatedAt hint:game.hint status:status];
+      [cell.gameCellView setUserName:game.owner.name userImageURLString:userImageURLString lastModifiedDate:game.createdAt hint:game.hint status:status];
     }
     cell.selectionStyle = UITableViewCellSelectionStyleBlue;
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
