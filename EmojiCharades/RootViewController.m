@@ -13,7 +13,6 @@
 
 @interface RootViewController ()
 - (void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath;
-- (void)refreshData;
 @end
 
 @implementation RootViewController
@@ -43,7 +42,7 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    [self refreshData];
+    // refresh
 }
 
 - (void)viewDidAppear:(BOOL)animated

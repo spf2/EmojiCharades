@@ -182,7 +182,7 @@ didFailToRegisterForRemoteNotificationsWithError:(NSError*)error
 
 - (void)initializeIdentity
 {
-    self.facebook = [[Facebook alloc] initWithAppId:@"245855945445328" andDelegate:self];
+    self.facebook = [[Facebook alloc] initWithAppId:ECFacebookAppID andDelegate:self];
     _facebook.accessToken = [[NSUserDefaults standardUserDefaults] valueForKey:@"facebookAccessToken"];
     _facebook.expirationDate = [[NSUserDefaults standardUserDefaults] valueForKey:@"facebookExpirationDate"];
     if (_facebook.isSessionValid) {
@@ -223,14 +223,21 @@ didFailToRegisterForRemoteNotificationsWithError:(NSError*)error
     }
     user.name = [resultDict valueForKey:@"name"];
     user.facebookID = [NSString stringWithFormat:@"%@", [resultDict valueForKey:@"id"]];
+    user.facebookAccessToken = _facebook.accessToken;
     user.updatedAt = user.createdAt = [NSDate date];
     user.apsToken = self.apsToken;
-    [[RKObjectManager sharedManager] putObject:user delegate:self];
+    RKObjectManager *om = [RKObjectManager sharedManager];
+    om.client.username = [NSString stringWithFormat:@"%@", user.userID];
+    om.client.password = _facebook.accessToken;
+    [om.client forceBasicAuthentication];
+    [om putObject:user delegate:self];
 }
 
 - (void)objectLoader:(RKObjectLoader*)objectLoader didLoadObject:(id)user {
     NSLog(@"user setup ok");
-    [ECUser setSelfUser:user];
+    [ECUser setSelfUser:user];    
+    RootViewController *rootViewController = (RootViewController *)[self.navigationController topViewController];
+    [rootViewController refreshData];
 }
 
 - (void)objectLoader:(RKObjectLoader*)objectLoader didFailWithError:(NSError*)error {

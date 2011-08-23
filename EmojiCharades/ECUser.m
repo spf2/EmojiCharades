@@ -17,6 +17,7 @@
 @dynamic name;
 @dynamic apsToken;
 @dynamic facebookID;
+@dynamic facebookAccessToken;
 
 static ECUser* selfUser = nil;
 
@@ -30,6 +31,7 @@ static ECUser* selfUser = nil;
      @"updated_at", @"updatedAt",
      @"aps_token", @"apsToken",
      @"facebook_id", @"facebookID",
+     @"facebook_access_token", @"facebookAccessToken",
      nil];
     [mapping.dateFormatStrings addObject:ECDateFormat];
     [objectManager.mappingProvider registerMapping:mapping withRootKeyPath:@"user"];
@@ -75,7 +77,7 @@ static ECUser* selfUser = nil;
 
 + (ECUser *)userByName:(NSString *)name
 {
-   return [self userByPredicate:[NSPredicate predicateWithFormat:@"(name = %@)", name]];
+    return [self userByPredicate:[NSPredicate predicateWithFormat:@"(name = %@)", name]];
 }
 
 + (ECUser *)selfUser 
@@ -88,6 +90,5 @@ static ECUser* selfUser = nil;
     }
     return selfUser;
 }
-
 
 @end

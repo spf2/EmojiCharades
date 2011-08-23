@@ -192,6 +192,7 @@
 		E77B279D13FA2A30009BA273 /* EmojiCharades 4.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "EmojiCharades 4.xcdatamodel"; sourceTree = "<group>"; };
 		E78F7B351403031B00120536 /* NSDate+timeAgo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+timeAgo.h"; sourceTree = "<group>"; };
 		E78F7B361403031B00120536 /* NSDate+timeAgo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+timeAgo.m"; sourceTree = "<group>"; };
+		E78F7B381403131400120536 /* EmojiCharades 5.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "EmojiCharades 5.xcdatamodel"; sourceTree = "<group>"; };
 		E7ABEA1813FB8CFC00D634FC /* CreateGameView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CreateGameView.h; sourceTree = "<group>"; };
 		E7ABEA1913FB8CFC00D634FC /* CreateGameView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CreateGameView.m; sourceTree = "<group>"; };
 		E7AF37A213E4B98300DB58CA /* EmojiCharades.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EmojiCharades.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -950,6 +951,7 @@
 		E7AF37BA13E4B98300DB58CA /* EmojiCharades.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				E78F7B381403131400120536 /* EmojiCharades 5.xcdatamodel */,
 				E77B278A13F71915009BA273 /* EmojiCharades 2.xcdatamodel */,
 				E7AF37BB13E4B98300DB58CA /* EmojiCharades.xcdatamodel */,
 				E77B279D13FA2A30009BA273 /* EmojiCharades 4.xcdatamodel */,

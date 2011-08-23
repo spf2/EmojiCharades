@@ -12,6 +12,8 @@ NSString * const ECDateFormat = @"yyyy-MM-dd'T'HH:mm:ss'Z'";
 NSString * const ECRight = @"👍";
 NSString * const ECWrong = @"👎";
 
+NSString * const ECFacebookAppID = @"245855945445328";
+
 int const ECResultRight = 1;
 int const ECResultWrong = -1;
 int const ECResultNone = 0;

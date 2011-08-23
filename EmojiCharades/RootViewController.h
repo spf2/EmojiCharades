@@ -20,4 +20,6 @@
 @property (nonatomic, retain) NSFetchedResultsController *fetchedResultsController;
 @property (nonatomic, retain) CreateGameController *createGameController;
 
+- (void)refreshData;
+
 @end
