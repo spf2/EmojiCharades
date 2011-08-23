@@ -232,16 +232,16 @@ didFailToRegisterForRemoteNotificationsWithError:(NSError*)error
     user.facebookAccessToken = _facebook.accessToken;
     user.updatedAt = user.createdAt = [NSDate date];
     user.apsToken = self.apsToken;
+    [[RKObjectManager sharedManager] putObject:user delegate:self];
+}
+
+- (void)objectLoader:(RKObjectLoader*)objectLoader didLoadObject:(ECUser *)user {
+    NSLog(@"user setup ok");
+    [ECUser setSelfUser:user];    
     RKObjectManager *om = [RKObjectManager sharedManager];
     om.client.username = [NSString stringWithFormat:@"%@", user.userID];
     om.client.password = _facebook.accessToken;
     [om.client forceBasicAuthentication];
-    [om putObject:user delegate:self];
-}
-
-- (void)objectLoader:(RKObjectLoader*)objectLoader didLoadObject:(id)user {
-    NSLog(@"user setup ok");
-    [ECUser setSelfUser:user];    
     RootViewController *rootViewController = (RootViewController *)[self.navigationController topViewController];
     [rootViewController refreshData];
 }
