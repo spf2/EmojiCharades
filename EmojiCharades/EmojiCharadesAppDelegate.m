@@ -58,7 +58,7 @@
     self.serviceURL = [properties valueForKey:@"Service URL"];
     
 #if TARGET_IPHONE_SIMULATOR
-    //self.serviceURL = @"http://localhost:3000";
+    self.serviceURL = @"http://localhost:3000";
     // Enable some verbose logging
     //RKLogConfigureByName("RestKit/UI", RKLogLevelTrace);
     //RKLogConfigureByName("RestKit/ObjectMapping", RKLogLevelTrace);
