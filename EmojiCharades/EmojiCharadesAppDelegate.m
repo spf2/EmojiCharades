@@ -17,6 +17,7 @@
 @interface EmojiCharadesAppDelegate (PrivateMethods)
 - (void)initializeDataLayer;
 - (void)initializeIdentity;
+- (void)initializeAuthentication:(ECUser *)selfUser;
 - (void)showMessage:(NSString *)message;
 - (void)showError:(NSError *)error;
 - (void)configure;
@@ -184,6 +185,16 @@ didFailToRegisterForRemoteNotificationsWithError:(NSError*)error
     [self.objectManager.objectStore deletePersistantStore];
 }
 
+- (void)initializeAuthentication
+{
+    if (ECUser.selfUser.userID) {
+        RKObjectManager *om = [RKObjectManager sharedManager];
+        om.client.username = [NSString stringWithFormat:@"%@", ECUser.selfUser.userID];
+        om.client.password = _facebook.accessToken;
+        [om.client forceBasicAuthentication];
+    }
+}
+
 #pragma mark Facebook
 
 - (void)initializeIdentity
@@ -195,6 +206,7 @@ didFailToRegisterForRemoteNotificationsWithError:(NSError*)error
         // TODO(spf): this updates the user every time.  instead, we should validate user and only
         // refresh if needed.
         [_facebook requestWithGraphPath:@"me" andDelegate:self];
+        [self initializeAuthentication];
     } else {
         NSArray *permissions = [NSArray arrayWithObjects:@"offline_access", nil];
         [_facebook authorize:permissions];
@@ -237,11 +249,8 @@ didFailToRegisterForRemoteNotificationsWithError:(NSError*)error
 
 - (void)objectLoader:(RKObjectLoader*)objectLoader didLoadObject:(ECUser *)user {
     NSLog(@"user setup ok");
-    [ECUser setSelfUser:user];    
-    RKObjectManager *om = [RKObjectManager sharedManager];
-    om.client.username = [NSString stringWithFormat:@"%@", user.userID];
-    om.client.password = _facebook.accessToken;
-    [om.client forceBasicAuthentication];
+    [ECUser setSelfUser:user];
+    [self initializeAuthentication];
     RootViewController *rootViewController = (RootViewController *)[self.navigationController topViewController];
     [rootViewController refreshData];
 }
