@@ -7,16 +7,14 @@
 //
 
 #import "YKUIView.h"
-#import "ECImageLoader.h"
+#import "YKUIImageView.h"
 
-@interface ECGameCellView : YKUIView <ECImageLoaderDelegate> {
-  UIImageView *_userImageView;
+@interface ECGameCellView : YKUIView {
+  YKUIImageView *_userImageView;
   UILabel *_userNameLabel;
   UILabel *_timeAgoLabel;
   UILabel *_hintLabel;
-  UILabel *_statusLabel;  
-  
-  ECImageLoader *_imageLoader;
+  UILabel *_statusLabel;
 }
 
 - (void)setUserName:(NSString *)userName userImageURLString:(NSString *)userImageURLString lastModifiedDate:(NSDate *)lastModifiedDate hint:(NSString *)hint status:(NSString *)status;

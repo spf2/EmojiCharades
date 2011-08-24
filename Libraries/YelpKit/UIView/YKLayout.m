@@ -29,6 +29,7 @@
 
 #import "YKLayout.h"
 #import "YKCGUtils.h"
+#import "YKDefines.h"
 
 
 @interface YKLayout ()
@@ -94,7 +95,7 @@ static NSMutableDictionary *gDebugStats = NULL;
 #endif
     return _cachedLayoutSize;
   }
-
+  
   _apply = apply;
   _cachedSize = size;
   if (_apply) {
@@ -284,13 +285,13 @@ void YKLayoutAssert(UIView *view, id<YKLayout> layout) {
 
 + (void)dumpStats {
 #if DEBUG
-  NSLog(@"\n\n");
-  NSLog(@"Layout stats");
-  NSLog(@"-------------------------------------");
+  YKDebug(@"\n\n");
+  YKDebug(@"Layout stats");
+  YKDebug(@"-------------------------------------");
   for (NSString *name in gDebugStats) {
-    NSLog(@"name=%@, stats=%@", name, [gDebugStats objectForKey:name]);
+    YKDebug(@"name=%@, stats=%@", name, [gDebugStats objectForKey:name]);
   }
-  NSLog(@"-------------------------------------\n\n");
+  YKDebug(@"-------------------------------------\n\n");
   [gDebugStats release];
   gDebugStats = nil;
 #endif

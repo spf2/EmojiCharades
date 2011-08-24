@@ -12,8 +12,9 @@
 
 #import "CreateGameController.h"
 #import "PlayGameController.h"
+#import "YKUIRefreshTableView.h"
 
-@interface RootViewController : UITableViewController <NSFetchedResultsControllerDelegate,RKObjectLoaderDelegate, CreateGameDelegate> {
+@interface RootViewController : UITableViewController <NSFetchedResultsControllerDelegate, RKObjectLoaderDelegate, CreateGameDelegate, YKUIRefreshTableViewDelegate> {
     BOOL _gameRequestInFlight;
 }
 
@@ -21,5 +22,7 @@
 @property (nonatomic, retain) CreateGameController *createGameController;
 
 - (void)refreshData;
+
+- (YKUIRefreshTableView *)refreshTableView;
 
 @end

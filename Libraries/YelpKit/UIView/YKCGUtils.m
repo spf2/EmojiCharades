@@ -28,8 +28,7 @@
 //
 
 #import "YKCGUtils.h"
-
-#define YKIsEqualWithAccuracy(n1, n2, accuracy) (n1 >= (n2-accuracy) && n1 <= (n2+accuracy))
+#import "YKDefines.h"
 
 void _YKCGContextDrawStyledRect(CGContextRef context, CGRect rect, YKUIBorderStyle style, CGColorRef fillColor, CGColorRef strokeColor, CGFloat strokeWidth, CGFloat cornerRadius);
 void _horizontalEdgeColorBlendFunctionImpl(void *info, const CGFloat *in, CGFloat *out, BOOL reverse);
@@ -63,7 +62,7 @@ CGPathRef YKCGPathCreateLine(CGFloat x1, CGFloat y1, CGFloat x2, CGFloat y2) {
 CGPathRef YKCGPathCreateRoundedRect(CGRect rect, CGFloat strokeWidth, CGFloat cornerRadius) { 
   
   CGMutablePathRef path = CGPathCreateMutable();
-
+  
   CGFloat fw, fh;
   
   CGRect insetRect = CGRectInset(rect, strokeWidth/2.0, strokeWidth/2.0);
@@ -72,7 +71,7 @@ CGPathRef YKCGPathCreateRoundedRect(CGRect rect, CGFloat strokeWidth, CGFloat co
   CGAffineTransform transform = CGAffineTransformIdentity;
   transform = CGAffineTransformTranslate(transform, CGRectGetMinX(insetRect), CGRectGetMinY(insetRect));
   transform = CGAffineTransformScale(transform, cornerWidth, cornerHeight);
-
+  
   fw = CGRectGetWidth(insetRect) / cornerWidth;
   fh = CGRectGetHeight(insetRect) / cornerHeight;
   CGPathMoveToPoint(path, &transform, fw, fh/2); 
@@ -183,7 +182,7 @@ CGRect YKCGRectScaleAspectAndCenter(CGSize size, CGSize inSize, BOOL fill) {
   CGRect rect;
   CGFloat widthScaleRatio = inSize.width / size.width;
   CGFloat heightScaleRatio = inSize.height / size.height;
-    
+  
   if (widthScaleRatio < heightScaleRatio) {
     if (fill) {
       CGFloat height = inSize.height;
@@ -409,11 +408,11 @@ CGPathRef YKCGPathCreateStyledRect(CGRect rect, YKUIBorderStyle style, CGFloat s
       // Inset stroke width except for bottom border
       insetBounds = CGRectMake(rect.origin.x + strokeInset, rect.origin.y + strokeInset, rect.size.width - (strokeInset * 2), rect.size.height - strokeInset);
       break;
-
+      
     case YKUIBorderStyleTop:
       insetBounds = CGRectMake(rect.origin.x, rect.origin.y + strokeInset, rect.size.width, rect.size.height - strokeInset);
       break;
-
+      
     case YKUIBorderStyleTopBottom:
       insetBounds = CGRectMake(rect.origin.x, rect.origin.y + strokeInset, rect.size.width, rect.size.height - (strokeInset * 2));
       break;
@@ -421,11 +420,11 @@ CGPathRef YKCGPathCreateStyledRect(CGRect rect, YKUIBorderStyle style, CGFloat s
     case YKUIBorderStyleBottom:
       insetBounds = CGRectMake(rect.origin.x, rect.origin.y + strokeInset, rect.size.width, rect.size.height - strokeInset);
       break;
-
+      
     case YKUIBorderStyleNormal:
       insetBounds = CGRectMake(rect.origin.x + strokeInset, rect.origin.y + strokeInset, rect.size.width - (strokeInset * 2), rect.size.height - (strokeInset * 2));
       break;
-
+      
     default:
       insetBounds = CGRectMake(rect.origin.x, rect.origin.y, 0, 0);
       break;
@@ -468,7 +467,7 @@ CGPathRef YKCGPathCreateStyledRect(CGRect rect, YKUIBorderStyle style, CGFloat s
       CGPathMoveToPoint(path, &transform, fw, 0);
       CGPathAddLineToPoint(path, &transform, 0, 0);
       break;
-
+      
     case YKUIBorderStyleBottom:
       CGPathMoveToPoint(path, &transform, fw, fh);
       CGPathAddLineToPoint(path, &transform, 0, fh);
@@ -480,7 +479,7 @@ CGPathRef YKCGPathCreateStyledRect(CGRect rect, YKUIBorderStyle style, CGFloat s
       CGPathMoveToPoint(path, &transform, fw, fh);
       CGPathAddLineToPoint(path, &transform, 0, fh);
       break;
-
+      
     case YKUIBorderStyleLeftRightWithAlternateTop:
       // Go +/- 2 in order to clip the top and bottom border; Only draw left, right border
       CGPathMoveToPoint(path, &transform, 0, fh + 2);
@@ -499,13 +498,13 @@ CGPathRef YKCGPathCreateStyledRect(CGRect rect, YKUIBorderStyle style, CGFloat s
       break;
       
       /*
-    case YKUIBorderStyleTopBottomRight:
-      CGPathMoveToPoint(path, &transform, -2, fh);
-      CGPathAddLineToPoint(path, &transform, -2, 0);
-      CGPathAddLineToPoint(path, &transform, fw, 0);      
-      CGPathAddLineToPoint(path, &transform, fw, fh);
-      CGPathAddLineToPoint(path, &transform, -2, fh);
-      break;
+       case YKUIBorderStyleTopBottomRight:
+       CGPathMoveToPoint(path, &transform, -2, fh);
+       CGPathAddLineToPoint(path, &transform, -2, 0);
+       CGPathAddLineToPoint(path, &transform, fw, 0);      
+       CGPathAddLineToPoint(path, &transform, fw, fh);
+       CGPathAddLineToPoint(path, &transform, -2, fh);
+       break;
        */
     default:
       break;
@@ -552,7 +551,7 @@ void _YKCGContextDrawStyledRect(CGContextRef context, CGRect rect, YKUIBorderSty
 }
 
 void YKCGContextDrawBorder(CGContextRef context, CGRect rect, YKUIBorderStyle style, CGColorRef fillColor, CGColorRef strokeColor, CGFloat strokeWidth, CGFloat alternateStrokeWidth, CGFloat cornerRadius) {
-
+  
   _YKCGContextDrawStyledRect(context, rect, style, fillColor, strokeColor, strokeWidth, cornerRadius);
   
   if (alternateStrokeWidth > 0) {
@@ -623,7 +622,7 @@ void _horizontalEdgeColorBlendFunctionImpl(void *info, const CGFloat *in, CGFloa
 
 void _metalEdgeColorBlendFunctionImpl(void *info, const CGFloat *in, CGFloat *out) {
   _YKUIColors *colors = (_YKUIColors *)info;
-
+  
   float v = *in;
   if (v < 0.5) {
     v = (v * 2.0);
@@ -687,8 +686,8 @@ void YKCGContextDrawShadingWithHeight(CGContextRef context, CGColorRef color, CG
 }
 
 void YKCGContextDrawShading(CGContextRef context, CGColorRef color, CGColorRef color2, CGColorRef color3, CGColorRef color4, CGPoint start, CGPoint end, YKUIShadingType shadingType, 
-                          BOOL extendStart, BOOL extendEnd) {
-
+                            BOOL extendStart, BOOL extendEnd) {
+  
   const CGFunctionCallbacks *callbacks;
   
   switch (shadingType) {
@@ -835,9 +834,9 @@ void YKCGContextDrawLinearGradient(CGContextRef context, CGRect rect, CGColorRef
   if (startColorSpace != endColorSpace) {
     return;
   }
-
+  
   CGFloat locations[] = { 0.0, 1.0 };
-
+  
   NSArray *colors = [NSArray arrayWithObjects:(id)startColor, (id)endColor, nil];
   
   CGGradientRef gradient = CGGradientCreateWithColors(startColorSpace, (CFArrayRef) colors, locations);
@@ -855,16 +854,16 @@ void YKCGContextDrawLinearGradient(CGContextRef context, CGRect rect, CGColorRef
 }
 
 UIImage *YKCreateVerticalGradientImage(CGFloat height, CGColorRef topColor, CGColorRef bottomColor) {
-
+  
   // If there are performance issues with tiling a lot of skinny images,
   // maybe this could be increased or made into a parameter
   CGFloat width = 1;
-
+  
   // Create new offscreen context with desired size
   UIGraphicsBeginImageContext(CGSizeMake(width, height));
-
+  
   CGContextRef context = UIGraphicsGetCurrentContext();
-
+  
   YKCGContextDrawRect(context, CGRectMake(0, 0, width, height), [UIColor whiteColor].CGColor, [UIColor whiteColor].CGColor, 0.0);
   YKCGContextDrawLinearGradient(context, CGRectMake(0, 0, width, height), topColor, bottomColor);
   
@@ -873,7 +872,7 @@ UIImage *YKCreateVerticalGradientImage(CGFloat height, CGColorRef topColor, CGCo
   
   // end context
   UIGraphicsEndImageContext();
-
+  
   return outputImg;
 }
 

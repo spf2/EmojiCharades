@@ -168,7 +168,7 @@ BOOL YKCGPointIsEqual(CGPoint p1, CGPoint p2);
  Check if equal.
  @param size1
  @param size2
-*/
+ */
 BOOL YKCGSizeIsEqual(CGSize size1, CGSize size2);
 
 /*!
@@ -256,7 +256,7 @@ CGRect YKCGRectSetX(CGRect rect, CGFloat x);
  Set y on rect.
  */
 CGRect YKCGRectSetY(CGRect rect, CGFloat y);
-  
+
 
 CGRect YKCGRectSetOrigin(CGRect rect, CGFloat x, CGFloat y);
 
@@ -359,7 +359,7 @@ typedef enum {
 void YKCGContextDrawShadingWithHeight(CGContextRef context, CGColorRef color, CGColorRef color2, CGColorRef color3, CGColorRef color4, CGFloat height, YKUIShadingType shadingType);
 
 void YKCGContextDrawShading(CGContextRef context, CGColorRef color, CGColorRef color2, CGColorRef color3, CGColorRef color4, CGPoint start, CGPoint end, YKUIShadingType shadingType, 
-                          BOOL extendStart, BOOL extendEnd);
+                            BOOL extendStart, BOOL extendEnd);
 
 
 /*!
