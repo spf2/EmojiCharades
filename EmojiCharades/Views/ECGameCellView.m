@@ -17,7 +17,9 @@
     self.backgroundColor = [UIColor colorWithWhite:0.9 alpha:1.0];
     self.layout = [YKLayout layoutForView:self];
 
-    _userImageView = [[UIImageView alloc] init];
+    _userImageView = [[YKUIImageView alloc] init];
+    _userImageView.cornerRadius = 6.0;
+    _userImageView.backgroundColor = [UIColor clearColor];
     [self addSubview:_userImageView];
     [_userImageView release];
     
@@ -65,19 +67,12 @@
   return self;
 }
 
-- (void)dealloc {
-  _imageLoader.delegate = nil;
-  [_imageLoader release];
-  [super dealloc];
-}
-
 - (CGSize)layout:(id<YKLayout>)layout size:(CGSize)size {
   CGFloat x = 12;
   CGFloat y = 6;
   
-  // Uncomment after we set up image loader
-  //CGRect userImageViewFrame = [layout setFrame:CGRectMake(x, y, 20, 20) view:_userImageView];
-  //x += userImageViewFrame.size.width + 9;
+  CGRect userImageViewFrame = [layout setFrame:CGRectMake(x, y, 20, 20) view:_userImageView];
+  x += userImageViewFrame.size.width + 9;
   
   CGRect userNameLabelFrame = [layout setFrame:CGRectMake(x, y, 154, 20) view:_userNameLabel];
   x += userNameLabelFrame.size.width + 12;
@@ -102,15 +97,7 @@
   _hintLabel.text = hint;
   _statusLabel.text = status;
   
-  _userImageView.image = nil;
-  // TODO(gabe): Setup image loader
-  /*
-  _imageLoader.delegate = nil;
-  [_imageLoader release];
-  _imageLoader = [[ECImageLoader alloc] init];
-  _imageLoader.delegate = self;
-  [_imageLoader loadWithURL:[NSURL URLWithString:userImageURLString]];
-   */
+  [_userImageView setURLString:userImageURLString];
   [self setNeedsLayout];
 }
 
@@ -124,18 +111,6 @@
   
   YKCGContextDrawLine(context, 0, 0.5, self.frame.size.width, 0.5, [UIColor colorWithWhite:0.6 alpha:1.0].CGColor, 1.0); // Top border
   YKCGContextDrawLine(context, 0, 1.5, self.frame.size.width, 1.5, [UIColor whiteColor].CGColor, 1.0);
-}
-
-#pragma mark -
-
-- (void)imageLoader:(ECImageLoader *)loader didLoadImage:(UIImage *)image {
-  _userImageView.image = image;
-  [self setNeedsDisplay];
-}
-
-- (void)imageLoader:(ECImageLoader *)loader didError:(NSError *)error {
-  _userImageView.image = nil;
-  [self setNeedsDisplay];
 }
 
 @end

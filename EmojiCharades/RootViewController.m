@@ -40,6 +40,8 @@
     self.navigationItem.title = @"Emojinary";
     [createButton release];
     self.navigationController.navigationBar.tintColor = [UIColor colorWithWhite:0.4 alpha:1.0];
+    [[self refreshTableView] setRefreshHeaderEnabled:YES];
+    [[self refreshTableView] setRefreshDelegate:self];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -63,17 +65,29 @@
 	[super viewDidDisappear:animated];
 }
 
+- (YKUIRefreshTableView *)refreshTableView {
+  return (YKUIRefreshTableView *)self.tableView;
+}
+
 - (void)refreshData
 {
+    [[self refreshTableView] setRefreshing:YES];
     if (!_gameRequestInFlight) {
         _gameRequestInFlight = YES;
         [[RKObjectManager sharedManager] loadObjectsAtResourcePath:@"/game" delegate:self];
     }
 }
 
+#pragma mark Delegates (YKUIRefreshTableView)
+
+- (void)refreshTableViewShouldRefresh:(YKUIRefreshTableView *)refreshTableView {
+  [self refreshData];
+}
+
 #pragma mark RKObjectLoaderDelegate methods
 
 - (void)objectLoader:(RKObjectLoader*)objectLoader didLoadObjects:(NSArray*)objects {
+  [[self refreshTableView] setRefreshing:NO];
     _gameRequestInFlight = NO;
 	[[NSUserDefaults standardUserDefaults] setObject:[NSDate date] forKey:@"LastUpdatedAt"];
 	[[NSUserDefaults standardUserDefaults] synchronize];
@@ -81,6 +95,7 @@
 }
 
 - (void)objectLoader:(RKObjectLoader*)objectLoader didFailWithError:(NSError*)error {
+  [[self refreshTableView] setRefreshing:NO];
     _gameRequestInFlight = NO;
 	UIAlertView* alert = [[[UIAlertView alloc] initWithTitle:@"Error" 
                                                      message:[error localizedDescription] 
@@ -173,6 +188,14 @@
     [playGameController release];
 }
 
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+  [(YKUIRefreshTableView *)self.tableView scrollViewDidScroll:scrollView];
+}
+
+- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate {
+  [(YKUIRefreshTableView *)self.tableView scrollViewDidEndDragging:scrollView willDecelerate:decelerate];
+}
+
 - (void)didReceiveMemoryWarning {
     // Releases the view if it doesn't have a superview.
     [super didReceiveMemoryWarning];
@@ -198,7 +221,8 @@
 {
     ECGame *game = [self.fetchedResultsController objectAtIndexPath:indexPath];
   
-    NSString *userImageURLString = [NSString stringWithFormat:@"http://graph.facebook.com/%@/picture", game.owner.facebookID];
+  // TODO(steve): Need a valid Facebook id for the picture
+  NSString *userImageURLString = (game.owner.facebookID ? [NSString stringWithFormat:@"http://graph.facebook.com/%@/picture", game.owner.facebookID] : nil);
     
     if (game.doneAt) {        
       NSString *status = [NSString stringWithFormat:@"✓ %@ (%@ got it!)", game.winningTurn.guess, game.winningTurn.user.name];

@@ -31,32 +31,32 @@
  YKLayout options used in 
  
  @code
-   - (CGSize)layout:(id<YKLayout>)layout size:(CGSize)size;
+ - (CGSize)layout:(id<YKLayout>)layout size:(CGSize)size;
  @endcode
  
  If option YKLayoutOptionsSizeToFit, then the view width may be shrunk, 
  you can also pass in a 0 height, if it is variable.
  
  For example, 
-  @code
-  CGRect titleLabelFrame = [layout setFrame:CGRectMake(x, y, 400, 0) view:_titleLabel options:YKLayoutOptionsSizeToFit];
-  // titleLabelFrame may have a different width and will have a valid height
-  @endcode
+ @code
+ CGRect titleLabelFrame = [layout setFrame:CGRectMake(x, y, 400, 0) view:_titleLabel options:YKLayoutOptionsSizeToFit];
+ // titleLabelFrame may have a different width and will have a valid height
+ @endcode
  
  You can combine YKLayoutOptionsSizeToFit and YKLayoutOptionsCenter to have it be centered with a variable height. 
  For example,
-  @code
-  CGRect titleLabelFrame = [layout setFrame:CGRectMake(x, y, 400, 0) view:_titleLabel options:YKLayoutOptionsSizeToFit|YKLayoutOptionsCenter];
-  // titleLabelFrame may have a different width and will have a valid height and will have an x position so it is centered
-  @endcode
-  
+ @code
+ CGRect titleLabelFrame = [layout setFrame:CGRectMake(x, y, 400, 0) view:_titleLabel options:YKLayoutOptionsSizeToFit|YKLayoutOptionsCenter];
+ // titleLabelFrame may have a different width and will have a valid height and will have an x position so it is centered
+ @endcode
+ 
  You can also combine YKLayoutOptionsSizeToFit with YKLayoutOptionsConstraintWidth 
  to make sure the width isn't set larger than expected. For example, 
-  @code
-  CGRect titleLabelFrame = [layout setFrame:CGRectMake(x, y, 400, 0) view:_titleLabel options:YKLayoutOptionsSizeToFit|YKLayoutOptionsConstraintWidth];
-  // titleLabelFrame may have a different width but it won't be larger than 400
-  @endcode
-
+ @code
+ CGRect titleLabelFrame = [layout setFrame:CGRectMake(x, y, 400, 0) view:_titleLabel options:YKLayoutOptionsSizeToFit|YKLayoutOptionsConstraintWidth];
+ // titleLabelFrame may have a different width but it won't be larger than 400
+ @endcode
+ 
  You can combine YKLayoutOptionsSizeToFit, YKLayoutOptionsConstraintWidth, and YKLayoutOptionsDefaultWidth to make sure
  a view sizes to fit with max and default width (when 0).  
  */
@@ -114,7 +114,7 @@ typedef enum {
  @param view
  @param sizeToFit
  @result The view frame. 
-    Use this value instead of view.frame since the views frame might not have been set.
+ Use this value instead of view.frame since the views frame might not have been set.
  */
 - (CGRect)setFrame:(CGRect)frame view:(UIView *)view sizeToFit:(BOOL)sizeToFit;
 
@@ -124,7 +124,7 @@ typedef enum {
  @param view
  @param options Options for setFrame; See YKLayoutOptions for more info
  @result The view frame. 
-    Use this value instead of view.frame since the views frame might not have been set.
+ Use this value instead of view.frame since the views frame might not have been set.
  */
 - (CGRect)setFrame:(CGRect)frame view:(UIView *)view options:(YKLayoutOptions)options;
 
@@ -134,7 +134,7 @@ typedef enum {
  @param origin
  @param view
  @result The view frame. 
-    Use this value instead of view.frame since the views frame might not have been set.
+ Use this value instead of view.frame since the views frame might not have been set.
  */
 - (CGRect)setOrigin:(CGPoint)origin view:(UIView *)view;
 
@@ -243,10 +243,10 @@ typedef enum {
 
 /*!
  Add subview.
-
+ 
  Call YKLayout#drawSubviews in the superview drawRect: method to
  draw YKLayout managed subviews.
-
+ 
  Subviews managed by the layout don't automatically handle re-display,
  or touches. Layout managed subviews are intended for simple views
  or views in table view cells that need better scrolling performance.
