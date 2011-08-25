@@ -290,8 +290,10 @@ didFailToRegisterForRemoteNotificationsWithError:(NSError*)error
      */
     
     if (self.ready) {
-        RootViewController *rootViewController = (RootViewController *)[self.navigationController topViewController];
-        [rootViewController refreshData];
+        UIViewController *currentView = [self.navigationController topViewController];
+        if ([currentView respondsToSelector:@selector(refreshData)]) {
+            [currentView performSelector:@selector(refreshData)];
+        }
     }
     
 #if !TARGET_IPHONE_SIMULATOR

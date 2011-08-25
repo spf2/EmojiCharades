@@ -13,7 +13,8 @@
 #import "Constants.h"
 
 @interface PlayGameController (PrivateMethods)
--(void)refresh;
+-(void)refreshUI;
+-(void)refreshData;
 @end
 
 @implementation PlayGameController
@@ -128,13 +129,27 @@
     [alert release];    
     
 }
-#pragma mark - View lifecycle
 
-- (void)viewWillAppear:(BOOL)animated {
+- (void)refreshData
+{
     // Trigger data refresh every time the user goes to, or returns to, this view.
     [[RKObjectManager sharedManager] getObject:_game delegate:self];
     // And reset the timer, triggering a refresh now.
     [self.timer setFireDate:[NSDate date]];
+
+}
+
+- (void)refreshUI
+{
+    [_playGameView.turnTableView reloadData];
+    _playGameView.metadataLabel.text = [NSString stringWithFormat:@"%@ - %@", _game.owner.name, _game.createdAt.timeAgo];
+}
+
+#pragma mark - View lifecycle
+
+- (void)viewWillAppear:(BOOL)animated {
+    [self refreshData];
+    [super viewWillAppear:animated];
 }
 
 - (void)viewDidLoad {
@@ -148,17 +163,11 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
     
     if (_timer == nil) {
-        self.timer = [NSTimer timerWithTimeInterval:60.f target:self selector:@selector(refresh) userInfo:nil repeats:YES];
+        self.timer = [NSTimer timerWithTimeInterval:60.f target:self selector:@selector(refreshUI) userInfo:nil repeats:YES];
         NSRunLoop *runner = [NSRunLoop currentRunLoop];
         [runner addTimer:_timer forMode: NSDefaultRunLoopMode];
     }
     [super viewDidLoad];
-}
-
-- (void)refresh
-{
-    [_playGameView.turnTableView reloadData];
-    _playGameView.metadataLabel.text = [NSString stringWithFormat:@"%@ - %@", _game.owner.name, _game.createdAt.timeAgo];
 }
 
 - (void)viewDidUnload
