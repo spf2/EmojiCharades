@@ -17,9 +17,9 @@
     if (deltaMinutes < 1) {
         return @"just now";
     } else if (deltaMinutes < 2) {
-        return @"a minute ago";
+        return @"a min ago";
     } else if (deltaMinutes < 60){
-        return [NSString stringWithFormat:@"%d minutes ago", (int)floor(deltaMinutes)];
+        return [NSString stringWithFormat:@"%d mins ago", (int)floor(deltaMinutes)];
     } else if (deltaMinutes < 120) {
         return @"an hour ago";
     } else if (deltaMinutes < (24 * 60)) {
