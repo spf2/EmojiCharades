@@ -20,6 +20,7 @@
 - (void)initializeAuthentication:(ECUser *)selfUser;
 - (void)showMessage:(NSString *)message;
 - (void)showError:(NSError *)error;
+- (void)refreshCurrentView;
 - (void)configure;
 @end
 
@@ -247,12 +248,21 @@ didFailToRegisterForRemoteNotificationsWithError:(NSError*)error
     [[RKObjectManager sharedManager] putObject:user delegate:self];
 }
 
+- (void)refreshCurrentView
+{
+    if (self.ready) {
+        UIViewController *currentView = [self.navigationController topViewController];
+        if ([currentView respondsToSelector:@selector(refreshData)]) {
+            [currentView performSelector:@selector(refreshData)];
+        }
+    }
+}
+
 - (void)objectLoader:(RKObjectLoader*)objectLoader didLoadObject:(ECUser *)user {
     NSLog(@"user setup ok");
     [ECUser setSelfUser:user];
     [self initializeAuthentication];
-    RootViewController *rootViewController = (RootViewController *)[self.navigationController topViewController];
-    [rootViewController refreshData];
+    [self refreshCurrentView];
 }
 
 - (void)objectLoader:(RKObjectLoader*)objectLoader didFailWithError:(NSError*)error {
@@ -289,19 +299,13 @@ didFailToRegisterForRemoteNotificationsWithError:(NSError*)error
      Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
      */
     
-    if (self.ready) {
-        UIViewController *currentView = [self.navigationController topViewController];
-        if ([currentView respondsToSelector:@selector(refreshData)]) {
-            [currentView performSelector:@selector(refreshData)];
-        }
-    }
-    
 #if !TARGET_IPHONE_SIMULATOR
     // Register for alert notifications
     [application registerForRemoteNotificationTypes:UIRemoteNotificationTypeAlert | UIRemoteNotificationTypeBadge];
     //NSDictionary *pushInfo = [launchOptions valueForKey:UIApplicationLaunchOptionsRemoteNotificationKey];  
 #endif
     [application setApplicationIconBadgeNumber:0];
+    [self refreshCurrentView];
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application
