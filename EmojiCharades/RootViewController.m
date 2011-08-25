@@ -368,6 +368,7 @@
 
 - (void)refreshScrollViewShouldRefresh:(YKUIRefreshTableView *)refreshScrollView
 {
+    [self refreshData];
 }
 
 @end
