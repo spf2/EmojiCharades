@@ -226,10 +226,10 @@
     
     if (game.doneAt) {        
       NSString *status = [NSString stringWithFormat:@"✓ %@ (%@ got it!)", game.winningTurn.guess, game.winningTurn.user.name];
-      [cell.gameCellView setUserName:game.owner.name userImageURLString:userImageURLString lastModifiedDate:game.createdAt hint:game.hint status:status];
+      [cell.gameCellView setUserName:game.owner.name userImageURLString:userImageURLString lastModifiedDate:game.updatedAt hint:game.hint status:status];
     } else {
       NSString *status = [NSString stringWithFormat:@"%@ guess%@", game.numTurns, game.numTurns.intValue == 1 ? @"" : @"es"];
-      [cell.gameCellView setUserName:game.owner.name userImageURLString:userImageURLString lastModifiedDate:game.createdAt hint:game.hint status:status];
+      [cell.gameCellView setUserName:game.owner.name userImageURLString:userImageURLString lastModifiedDate:game.updatedAt hint:game.hint status:status];
     }
     cell.selectionStyle = UITableViewCellSelectionStyleBlue;
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
@@ -244,7 +244,7 @@
     
     // If appropriate, configure the new managed object.
     // Normally you should use accessor methods, but using KVC here avoids the need to add a custom class to the template.
-    [newManagedObject setValue:[NSDate date] forKey:@"createdAt"];
+    //[newManagedObject setValue:[NSDate date] forKey:@"updatedAt"];
     
     // Save the context.
     NSError *error = nil;
@@ -275,7 +275,7 @@
     [fetchRequest setEntity:entity];
     [fetchRequest setFetchBatchSize:20];
     NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc]
-                                        initWithKey:@"createdAt"
+                                        initWithKey:@"updatedAt"
                                         ascending:NO];
     NSArray *sortDescriptors = [[NSArray alloc] initWithObjects:sortDescriptor, nil];
     
