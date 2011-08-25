@@ -11,6 +11,7 @@
 #import "ResultController.h"
 #import "ECTurn.h"
 #import "Constants.h"
+#import "ECTurnCellView.h"
 
 @interface PlayGameController (PrivateMethods)
 -(void)refreshUI;
@@ -194,11 +195,18 @@ static BOOL userCanGiveResultFor(ECGame *game, ECTurn *turn) {
 {
     ECTurn* turn = [self turnAtIndexPath:indexPath];
     if (userCanGiveResultFor(_game, turn)) {
-        ResultController *resultController = [[ResultController alloc] initWithNibName:@"ResultController" bundle:nil];
-        resultController.delegate = self;
-        resultController.turn = turn;
-        [self.navigationController pushViewController:resultController animated:YES];
-        [resultController release];
+        _selectedTurn = turn;
+        UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:turn.guess delegate:self cancelButtonTitle:@”Cancel” destructiveButtonTitle:nil otherButtonTitles: @"Yup", @"Nope", nil];
+        [actionSheet showInView:self.view];
+        [actionSheet release];
+    }
+}
+
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
+    if (buttonIndex == 1) {
+        
+        _turn.result = [NSNumber numberWithInt:ECResultRight];
+        [[RKObjectManager sharedManager] putObject:_turn delegate:self];
     }
 }
 
@@ -210,11 +218,11 @@ static BOOL userCanGiveResultFor(ECGame *game, ECTurn *turn) {
 // Customize the appearance of table view cells.
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *CellIdentifier = @"Cell";
+    static NSString *CellIdentifier = @"ECTurnTableViewCell";
     
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    ECTurnTableViewCell *cell = (ECTurnTableViewCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
-        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier] autorelease];
+        cell = [[[ECTurnTableViewCell alloc] initWithReuseIdentifier:CellIdentifier] autorelease];
     }
     
     // Configure the cell.
@@ -222,25 +230,16 @@ static BOOL userCanGiveResultFor(ECGame *game, ECTurn *turn) {
     return cell;
 }
 
-- (void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath {
+- (void)configureCell:(ECTurnTableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath
+{
     ECTurn* turn = [self turnAtIndexPath:indexPath];
     cell.textLabel.text = turn.guess;
     
-    if (turn.result.intValue == ECResultWrong) {
-        cell.detailTextLabel.text = [NSString stringWithFormat:@"%@ is wrong", turn.user.name];
-        cell.detailTextLabel.textColor = [UIColor redColor];
-    } else if (turn.result.intValue == ECResultRight) {
-        cell.detailTextLabel.text = [NSString stringWithFormat:@"%@ is right", turn.user.name];
-        cell.detailTextLabel.textColor = [UIColor colorWithRed:0 green:0.5 blue:0 alpha:1];        
-    } else {
-        if (_game.doneAt) {
-            cell.detailTextLabel.text = turn.user.name;    
-        } else {
-            cell.detailTextLabel.text = [NSString stringWithFormat:@"%@ - %@", turn.user.name, turn.createdAt.timeAgo];
-        }
-        cell.detailTextLabel.textColor = [UIColor grayColor];
-    }
+    NSString *userImageURLString = (turn.user.facebookID ? [NSString stringWithFormat:@"http://graph.facebook.com/%@/picture",turn.user.facebookID] : nil);
     
+    [cell.turnCellView setUserName:turn.user.name userImageURLString:userImageURLString lastModifiedDate:turn.createdAt text:turn.guess 
+                            status:turn.result.intValue];
+    cell.selectionStyle = UITableViewCellSelectionStyleBlue;
     if (userCanGiveResultFor(_game, turn)) {
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     }
