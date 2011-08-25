@@ -366,4 +366,8 @@
 }
  */
 
+- (void)refreshScrollViewShouldRefresh:(YKUIRefreshTableView *)refreshScrollView
+{
+}
+
 @end
