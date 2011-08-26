@@ -85,7 +85,7 @@
     self.facebook.accessToken = [[NSUserDefaults standardUserDefaults] valueForKey:@"facebookAccessToken"];
     self.facebook.expirationDate = [[NSUserDefaults standardUserDefaults] valueForKey:@"facebookExpirationDate"];
     if (self.facebook.isSessionValid && [ECUser selfUser]) {
-        _rootView.facebookButton.titleLabel.text = @"Sign out of Facebook";
+        [_rootView.facebookButton setTitle:@"Sign out of Facebook" forState:UIControlStateNormal];
         [self showGames];
     } else {
         _rootView.playButtonItem.enabled = NO;
@@ -131,7 +131,7 @@
 
 - (void)fbDidLogin
 {
-     _rootView.facebookButton.titleLabel.text = @"Sign out of Facebook";
+    [_rootView.facebookButton setTitle:@"Sign out of Facebook" forState:UIControlStateNormal];
     [self.facebook requestWithGraphPath:@"me" andDelegate:self];
     [_rootView.activityView startAnimating];
     _rootView.facebookButton.enabled = NO;
@@ -139,7 +139,7 @@
 
 - (void)fbDidLogout
 {
-     _rootView.facebookButton.titleLabel.text = @"Sign in with Facebook";
+    [_rootView.facebookButton setTitle:@"Sign in with Facebook" forState:UIControlStateNormal];
      _rootView.playButtonItem.enabled = NO;
 }
 

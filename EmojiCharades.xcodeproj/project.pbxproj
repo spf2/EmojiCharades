@@ -557,13 +557,13 @@
 				E7309C8E13EDFF5400F270F3 /* CreateGameController.h */,
 				E7309C8F13EDFF5500F270F3 /* CreateGameController.m */,
 				E7309C9013EDFF5500F270F3 /* CreateGameController.xib */,
-				E7AF37BA13E4B98300DB58CA /* EmojiCharades.xcdatamodeld */,
-				E7AF37AF13E4B98300DB58CA /* Supporting Files */,
 				E7D3B9C213EF2A1E007C5B19 /* ResultController.h */,
 				E7D3B9C313EF2A1E007C5B19 /* ResultController.m */,
 				E7D3B9C413EF2A1F007C5B19 /* ResultController.xib */,
 				E78F7B351403031B00120536 /* NSDate+timeAgo.h */,
 				E78F7B361403031B00120536 /* NSDate+timeAgo.m */,
+				E7AF37BA13E4B98300DB58CA /* EmojiCharades.xcdatamodeld */,
+				E7AF37AF13E4B98300DB58CA /* Supporting Files */,
 			);
 			path = EmojiCharades;
 			sourceTree = "<group>";
