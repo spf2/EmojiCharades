@@ -11,14 +11,20 @@
 #import "Restkit/CoreData/CoreData.h"
 #import "FBConnect.h"
 
-@interface EmojiCharadesAppDelegate : NSObject <UIApplicationDelegate, RKManagedObjectStoreDelegate, RKObjectLoaderDelegate, FBSessionDelegate, FBRequestDelegate>
+@class ECUser;
+@class Facebook;
+
+@interface EmojiCharadesAppDelegate : NSObject <UIApplicationDelegate, RKManagedObjectStoreDelegate, FBSessionDelegate>
 
 @property (nonatomic, retain) IBOutlet UIWindow *window;
 @property (nonatomic, retain) IBOutlet UINavigationController *navigationController;
 @property (nonatomic, retain) RKObjectManager *objectManager;
 @property (nonatomic, copy) NSString *serviceURL;
-@property (nonatomic, copy) NSString *apsToken;
-@property (nonatomic, retain) Facebook *facebook;
 @property (nonatomic, readonly) BOOL ready;
+@property (nonatomic, retain) Facebook *facebook;
+@property (nonatomic, copy) NSString *apsToken;
+@property (nonatomic, retain) id<FBSessionDelegate> fbSessionDelegate;
+
+- (void)refreshCurrentView;
 
 @end

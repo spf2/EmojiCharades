@@ -16,11 +16,8 @@
 
 @interface EmojiCharadesAppDelegate (PrivateMethods)
 - (void)initializeDataLayer;
-- (void)initializeIdentity;
-- (void)initializeAuthentication:(ECUser *)selfUser;
 - (void)showMessage:(NSString *)message;
 - (void)showError:(NSError *)error;
-- (void)refreshCurrentView;
 - (void)configure;
 @end
 
@@ -30,9 +27,11 @@
 @synthesize window = _window;
 @synthesize navigationController = _navigationController;
 @synthesize serviceURL = _serviceURL;
-@synthesize apsToken = _apsToken;
 @synthesize facebook = _facebook;
+@synthesize apsToken = _apsToken;
+@synthesize fbSessionDelegate = _fbSessionDelegate;
 @dynamic ready;
+
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
@@ -41,8 +40,6 @@
     [self configure];
     
     [self initializeDataLayer];
-
-    [self initializeIdentity];
     
     // Start visuals
     self.window.rootViewController = self.navigationController;
@@ -93,6 +90,69 @@
     [ECGame setupObjectRouter:self.objectManager.router];
 }
 
+- (void)showMessage:(NSString *)message
+{
+    UIAlertView *alert = [[UIAlertView alloc] 
+                          initWithTitle:@"Error" 
+                          message:message delegate:nil 
+                          cancelButtonTitle:@"Ok" 
+                          otherButtonTitles:nil];
+    [alert show];
+    [alert release];    
+}
+
+- (void)showError:(NSError *)error
+{
+    [self showMessage:[error localizedDescription]];
+}
+
+- (void)managedObjectStore:(RKManagedObjectStore *)objectStore didFailToCreatePersistentStoreCoordinatorWithError:(NSError *)error 
+{
+    NSLog(@"Error with persistent store: %@", [error localizedDescription]);
+    [self showError:error];
+    [self.objectManager.objectStore deletePersistantStore];
+}
+
+- (void)refreshCurrentView
+{
+    if (self.ready) {
+        UIViewController *currentView = [self.navigationController topViewController];
+        if ([currentView respondsToSelector:@selector(refreshData)]) {
+            [currentView performSelector:@selector(refreshData)];
+        }
+    }
+}
+
+# pragma mark Facebook
+
+- (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url
+{
+    return [self.facebook handleOpenURL:url];
+}
+
+- (void)fbDidLogin
+{
+    [[NSUserDefaults standardUserDefaults] setValue:self.facebook.accessToken forKey:@"facebookAccessToken"];
+    [[NSUserDefaults standardUserDefaults] setValue:self.facebook.expirationDate forKey:@"facebookExpirationDate"];
+	[[NSUserDefaults standardUserDefaults] synchronize];
+    [_fbSessionDelegate fbDidLogin];
+}
+
+- (void)fbDidLogout
+{
+    [[NSUserDefaults standardUserDefaults] setValue:nil forKey:@"facebookAccessToken"];
+    [_fbSessionDelegate fbDidLogout];
+}
+
+- (void)fbDidNotLogin:(BOOL)cancelled
+{
+    NSLog(@"User canceled: %d", cancelled);
+    [_fbSessionDelegate fbDidNotLogin:cancelled];
+}
+
+#pragma mark - Urban Airship
+
+
 // See http://mobile.tutsplus.com/tutorials/iphone/ios-sdk_push-notifications_part-2/
 - (void)application:(UIApplication*)application
 didRegisterForRemoteNotificationsWithDeviceToken:(NSData*)deviceToken
@@ -103,7 +163,7 @@ didRegisterForRemoteNotificationsWithDeviceToken:(NSData*)deviceToken
     [tokenString replaceOccurrencesOfString:@">" withString:@"" options:0 range:NSMakeRange(0, tokenString.length)];
     [tokenString replaceOccurrencesOfString:@" " withString:@"" options:0 range:NSMakeRange(0, tokenString.length)];
     self.apsToken = tokenString;
-
+    
     NSString *urlFormat = @"https://go.urbanairship.com/api/device_tokens/%@";
     NSURL *registrationURL = [NSURL URLWithString:[NSString stringWithFormat:urlFormat, tokenString]];
     NSMutableURLRequest *registrationRequest = [[NSMutableURLRequest alloc] initWithURL:registrationURL];
@@ -134,7 +194,14 @@ didReceiveAuthenticationChallenge:(NSURLAuthenticationChallenge *)challenge
 
 - (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error
 {
-    [self showError:error];
+    UIAlertView *alert = [[UIAlertView alloc] 
+                          initWithTitle:@"Error" 
+                          message:[error localizedDescription] 
+                          delegate:nil 
+                          cancelButtonTitle:@"Ok" 
+                          otherButtonTitles:nil];
+    [alert show];
+    [alert release];    
 }
 
 - (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response
@@ -144,7 +211,14 @@ didReceiveAuthenticationChallenge:(NSURLAuthenticationChallenge *)challenge
         NSLog(@"We successfully registered for push notifications");
     } else {
         NSLog(@"We failed to register for push notifications");
-        [self showMessage:[NSHTTPURLResponse localizedStringForStatusCode:httpResponse.statusCode]];
+        UIAlertView *alert = [[UIAlertView alloc] 
+                              initWithTitle:@"Error" 
+                              message:[NSHTTPURLResponse localizedStringForStatusCode:httpResponse.statusCode] 
+                              delegate:nil 
+                              cancelButtonTitle:@"Ok" 
+                              otherButtonTitles:nil];
+        [alert show];
+        [alert release];    
     }
 }
 
@@ -163,112 +237,7 @@ didFailToRegisterForRemoteNotificationsWithError:(NSError*)error
     [failureAlert release];
 }
 
-- (void)showMessage:(NSString *)message
-{
-    UIAlertView *alert = [[UIAlertView alloc] 
-                          initWithTitle:@"Error" 
-                          message:message delegate:nil 
-                          cancelButtonTitle:@"Ok" 
-                          otherButtonTitles:nil];
-    [alert show];
-    [alert release];    
-}
 
-- (void)showError:(NSError *)error
-{
-    [self showMessage:[error localizedDescription]];
-}
-
-- (void)managedObjectStore:(RKManagedObjectStore *)objectStore didFailToCreatePersistentStoreCoordinatorWithError:(NSError *)error 
-{
-    NSLog(@"Error with persistent store: %@", [error localizedDescription]);
-    [self showError:error];
-    [self.objectManager.objectStore deletePersistantStore];
-}
-
-- (void)initializeAuthentication
-{
-    if (ECUser.selfUser.userID) {
-        RKObjectManager *om = [RKObjectManager sharedManager];
-        om.client.username = [NSString stringWithFormat:@"%@", ECUser.selfUser.userID];
-        om.client.password = _facebook.accessToken;
-        [om.client forceBasicAuthentication];
-    }
-}
-
-#pragma mark Facebook
-
-- (void)initializeIdentity
-{
-    self.facebook = [[Facebook alloc] initWithAppId:ECFacebookAppID andDelegate:self];
-    _facebook.accessToken = [[NSUserDefaults standardUserDefaults] valueForKey:@"facebookAccessToken"];
-    _facebook.expirationDate = [[NSUserDefaults standardUserDefaults] valueForKey:@"facebookExpirationDate"];
-    if (_facebook.isSessionValid) {
-        // TODO(spf): this updates the user every time.  instead, we should validate user and only
-        // refresh if needed.
-        [_facebook requestWithGraphPath:@"me" andDelegate:self];
-        [self initializeAuthentication];
-    } else {
-        NSArray *permissions = [NSArray arrayWithObjects:@"offline_access", nil];
-        [_facebook authorize:permissions];
-    }
-}
-
-- (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url
-{
-    return [self.facebook handleOpenURL:url];
-}
-
-- (void)fbDidLogin
-{
-    [[NSUserDefaults standardUserDefaults] setValue:_facebook.accessToken forKey:@"facebookAccessToken"];
-    [[NSUserDefaults standardUserDefaults] setValue:_facebook.expirationDate forKey:@"facebookExpirationDate"];
-	[[NSUserDefaults standardUserDefaults] synchronize];
-    [_facebook requestWithGraphPath:@"me" andDelegate:self];
-}
-
-- (void)request:(FBRequest *)request didFailWithError:(NSError *)error
-{
-    NSLog(@"Error with facebook: %@", [error localizedDescription]);
-    [self showError:error];
-}
-
-- (void)request:(FBRequest *)request didLoad:(id)result
-{
-    NSDictionary *resultDict = (NSDictionary *)result;
-    ECUser *user = [ECUser selfUser];
-    if (!user) {
-        user = [ECUser object];
-    }
-    user.name = [resultDict valueForKey:@"name"];
-    user.facebookID = [NSString stringWithFormat:@"%@", [resultDict valueForKey:@"id"]];
-    user.facebookAccessToken = _facebook.accessToken;
-    user.updatedAt = user.createdAt = [NSDate date];
-    user.apsToken = self.apsToken;
-    [[RKObjectManager sharedManager] putObject:user delegate:self];
-}
-
-- (void)refreshCurrentView
-{
-    if (self.ready) {
-        UIViewController *currentView = [self.navigationController topViewController];
-        if ([currentView respondsToSelector:@selector(refreshData)]) {
-            [currentView performSelector:@selector(refreshData)];
-        }
-    }
-}
-
-- (void)objectLoader:(RKObjectLoader*)objectLoader didLoadObject:(ECUser *)user {
-    NSLog(@"user setup ok");
-    [ECUser setSelfUser:user];
-    [self initializeAuthentication];
-    [self refreshCurrentView];
-}
-
-- (void)objectLoader:(RKObjectLoader*)objectLoader didFailWithError:(NSError*)error {
-    NSLog(@"user setup failed %@", [error localizedDescription]);
-    [self showError:error];
-}
 
 - (void)applicationWillResignActive:(UIApplication *)application
 {

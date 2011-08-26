@@ -10,4 +10,8 @@
 
 @interface RootView : UIView
 
+@property (nonatomic, retain) IBOutlet UIButton *facebookButton;
+@property (nonatomic, retain) IBOutlet UIBarButtonItem *playButtonItem;
+@property (nonatomic, retain) IBOutlet UIActivityIndicatorView *activityView;
+
 @end

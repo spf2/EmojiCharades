@@ -39,9 +39,9 @@
 		E77213F613FF145E00F4D91C /* ECKeyboardViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E77213F513FF145E00F4D91C /* ECKeyboardViewController.xib */; };
 		E77213F913FF15CC00F4D91C /* ECKeyboardView.m in Sources */ = {isa = PBXBuildFile; fileRef = E77213F813FF15CC00F4D91C /* ECKeyboardView.m */; };
 		E77213FC13FF3B0C00F4D91C /* ECKeyboardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E77213FB13FF3B0C00F4D91C /* ECKeyboardViewController.m */; };
-		E77B278E13F8F2B0009BA273 /* emoji_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = E77B278C13F8F1C5009BA273 /* emoji_icon.png */; };
-		E77B279013F8F2B6009BA273 /* emoji_icon.png@2.png in Resources */ = {isa = PBXBuildFile; fileRef = E77B278F13F8F2B6009BA273 /* emoji_icon.png@2.png */; };
 		E77B279C13FA0E7C009BA273 /* libfacebook_ios_sdk.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E77B279913FA0E2E009BA273 /* libfacebook_ios_sdk.a */; };
+		E780219114076D2D00150BAF /* emojinary.png in Resources */ = {isa = PBXBuildFile; fileRef = E780219014076D2D00150BAF /* emojinary.png */; };
+		E78021951407739400150BAF /* emojinary-retina.png in Resources */ = {isa = PBXBuildFile; fileRef = E78021941407739400150BAF /* emojinary-retina.png */; };
 		E78F7B371403031B00120536 /* NSDate+timeAgo.m in Sources */ = {isa = PBXBuildFile; fileRef = E78F7B361403031B00120536 /* NSDate+timeAgo.m */; };
 		E79931271406EFF700B4A94E /* ShowGamesView.m in Sources */ = {isa = PBXBuildFile; fileRef = E79931261406EFF700B4A94E /* ShowGamesView.m */; };
 		E7ABEA1A13FB8CFC00D634FC /* CreateGameView.m in Sources */ = {isa = PBXBuildFile; fileRef = E7ABEA1913FB8CFC00D634FC /* CreateGameView.m */; };
@@ -254,10 +254,10 @@
 		E77213FB13FF3B0C00F4D91C /* ECKeyboardViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ECKeyboardViewController.m; sourceTree = "<group>"; };
 		E77B278A13F71915009BA273 /* EmojiCharades 2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "EmojiCharades 2.xcdatamodel"; sourceTree = "<group>"; };
 		E77B278B13F8A921009BA273 /* EmojiCharades 3.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "EmojiCharades 3.xcdatamodel"; sourceTree = "<group>"; };
-		E77B278C13F8F1C5009BA273 /* emoji_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = emoji_icon.png; sourceTree = "<group>"; };
-		E77B278F13F8F2B6009BA273 /* emoji_icon.png@2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "emoji_icon.png@2.png"; sourceTree = "<group>"; };
 		E77B279113FA0E2D009BA273 /* facebook-ios-sdk.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = "facebook-ios-sdk.xcodeproj"; path = "facebook-ios-sdk/src/facebook-ios-sdk.xcodeproj"; sourceTree = "<group>"; };
 		E77B279D13FA2A30009BA273 /* EmojiCharades 4.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "EmojiCharades 4.xcdatamodel"; sourceTree = "<group>"; };
+		E780219014076D2D00150BAF /* emojinary.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = emojinary.png; sourceTree = "<group>"; };
+		E78021941407739400150BAF /* emojinary-retina.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "emojinary-retina.png"; sourceTree = "<group>"; };
 		E78F7B351403031B00120536 /* NSDate+timeAgo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+timeAgo.h"; sourceTree = "<group>"; };
 		E78F7B361403031B00120536 /* NSDate+timeAgo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+timeAgo.m"; sourceTree = "<group>"; };
 		E78F7B381403131400120536 /* EmojiCharades 5.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "EmojiCharades 5.xcdatamodel"; sourceTree = "<group>"; };
@@ -270,7 +270,7 @@
 		E7ACA6931406F7DB002A04AA /* RootViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RootViewController.xib; sourceTree = "<group>"; };
 		E7ACA6961406F833002A04AA /* RootView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RootView.h; sourceTree = "<group>"; };
 		E7ACA6971406F833002A04AA /* RootView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RootView.m; sourceTree = "<group>"; };
-		E7ACA69914072EEF002A04AA /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
+		E7ACA69914072EEF002A04AA /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = Settings.bundle; path = EmojiCharades/Settings.bundle; sourceTree = "<group>"; };
 		E7AF37A213E4B98300DB58CA /* EmojiCharades.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EmojiCharades.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E7AF37A613E4B98300DB58CA /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		E7AF37A813E4B98300DB58CA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -488,15 +488,16 @@
 		E7AF379713E4B98200DB58CA = {
 			isa = PBXGroup;
 			children = (
+				E78021941407739400150BAF /* emojinary-retina.png */,
+				E780219014076D2D00150BAF /* emojinary.png */,
 				E77B279113FA0E2D009BA273 /* facebook-ios-sdk.xcodeproj */,
 				E7F8099313E5F0C90077F0CE /* RestKit.xcodeproj */,
 				E720AF8113E5EBEF007D1564 /* CFNetwork.framework */,
 				E720AF8313E5EC10007D1564 /* MobileCoreServices.framework */,
 				E720AF8513E5EC1A007D1564 /* SystemConfiguration.framework */,
 				00175CF71404E3D700657265 /* QuartzCore.framework */,
-				E77B278F13F8F2B6009BA273 /* emoji_icon.png@2.png */,
-				E77B278C13F8F1C5009BA273 /* emoji_icon.png */,
 				E7E9BEC313F50BFD00C113F1 /* Entitlements.entitlements */,
+				E7ACA69914072EEF002A04AA /* Settings.bundle */,
 				E7AF37AE13E4B98300DB58CA /* EmojiCharades */,
 				00175C961404C33000657265 /* Libraries */,
 				E7AF37D413E4B98300DB58CA /* EmojiCharadesTests */,
@@ -553,7 +554,6 @@
 				E7ACA6911406F7DB002A04AA /* RootViewController.h */,
 				E7ACA6921406F7DB002A04AA /* RootViewController.m */,
 				E7ACA6931406F7DB002A04AA /* RootViewController.xib */,
-				E7ACA69914072EEF002A04AA /* Settings.bundle */,
 				E7309C8E13EDFF5400F270F3 /* CreateGameController.h */,
 				E7309C8F13EDFF5500F270F3 /* CreateGameController.m */,
 				E7309C9013EDFF5500F270F3 /* CreateGameController.xib */,
@@ -794,12 +794,12 @@
 				E7309C9713EE4A0500F270F3 /* PlayGameController.xib in Resources */,
 				E7D3B9C613EF2A1F007C5B19 /* ResultController.xib in Resources */,
 				E7E9BEC413F50BFD00C113F1 /* Entitlements.entitlements in Resources */,
-				E77B278E13F8F2B0009BA273 /* emoji_icon.png in Resources */,
-				E77B279013F8F2B6009BA273 /* emoji_icon.png@2.png in Resources */,
 				E77213F613FF145E00F4D91C /* ECKeyboardViewController.xib in Resources */,
 				E71D89BB1406D5AB0077F98E /* pull_to_refresh_icon.png in Resources */,
 				E7ACA6951406F7DB002A04AA /* RootViewController.xib in Resources */,
 				E7ACA69A14072EF0002A04AA /* Settings.bundle in Resources */,
+				E780219114076D2D00150BAF /* emojinary.png in Resources */,
+				E78021951407739400150BAF /* emojinary-retina.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

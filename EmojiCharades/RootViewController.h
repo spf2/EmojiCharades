@@ -7,13 +7,16 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "RootView.h"
+#import "RestKit/RestKit.h"
+#import "Restkit/CoreData/CoreData.h"
+#import "FBConnect.h"
+#import "ShowGamesController.h"
 
-@class ShowGamesController;
+@interface RootViewController : UIViewController<RKObjectLoaderDelegate, FBRequestDelegate, FBSessionDelegate>
 
-@interface RootViewController : UIViewController {
-    UIBarButtonItem *playButtonItem;
-}
-
-@property (nonatomic, retain) IBOutlet UIBarButtonItem *playButtonItem;
+@property (nonatomic, retain) IBOutlet RootView *rootView;
+@property (nonatomic, assign) Facebook *facebook;
+@property (nonatomic, retain) ShowGamesController *showGamesController;
 
 @end

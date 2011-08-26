@@ -10,6 +10,10 @@
 
 @implementation RootView
 
+@synthesize facebookButton = _facebookButton;
+@synthesize playButtonItem = _playButtonItem;
+@synthesize activityView = _activityView;
+
 - (id)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
@@ -17,6 +21,13 @@
         // Initialization code
     }
     return self;
+}
+
+- (void)dealloc
+{
+    [_playButtonItem release];
+    [_facebookButton release];
+    [super dealloc];
 }
 
 /*
