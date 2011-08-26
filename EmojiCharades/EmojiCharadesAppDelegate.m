@@ -291,6 +291,13 @@ didFailToRegisterForRemoteNotificationsWithError:(NSError*)error
     /*
      Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
      */
+    
+    // Notify the current view, if it cares.
+    UIViewController *currentView = [self.navigationController topViewController];
+    if ([currentView respondsToSelector:@selector(applicationWillEnterForeground)]) {
+        [currentView performSelector:@selector(applicationWillEnterForeground)];
+    }
+
 }
 
 - (void)applicationDidBecomeActive:(UIApplication *)application

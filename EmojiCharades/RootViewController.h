@@ -2,27 +2,18 @@
 //  RootViewController.h
 //  EmojiCharades
 //
-//  Created by Steve Farrell on 7/30/11.
+//  Created by Steve Farrell on 8/25/11.
 //  Copyright 2011 __MyCompanyName__. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
-#import <CoreData/CoreData.h>
-#import <RestKit/RestKit.h>
 
-#import "CreateGameController.h"
-#import "PlayGameController.h"
-#import "YKUIRefreshTableView.h"
+@class ShowGamesController;
 
-@interface RootViewController : UITableViewController <NSFetchedResultsControllerDelegate, RKObjectLoaderDelegate, CreateGameDelegate, YKUIRefreshTableViewDelegate> {
-    BOOL _gameRequestInFlight;
+@interface RootViewController : UIViewController {
+    UIBarButtonItem *playButtonItem;
 }
 
-@property (nonatomic, retain) NSFetchedResultsController *fetchedResultsController;
-@property (nonatomic, retain) CreateGameController *createGameController;
-
-- (void)refreshData;
-
-- (YKUIRefreshTableView *)refreshTableView;
+@property (nonatomic, retain) IBOutlet UIBarButtonItem *playButtonItem;
 
 @end
