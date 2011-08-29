@@ -23,11 +23,10 @@
     [self addSubview:_userImageView];
     [_userImageView release];
     
-    UIColor *textColor = [UIColor colorWithWhite:0.4 alpha:1.0];
-    
     _userNameLabel = [[UILabel alloc] init];
+    _userNameLabel.highlightedTextColor = [UIColor whiteColor];
+    _userNameLabel.textColor = [UIColor colorWithWhite:0.4 alpha:1.0];
     _userNameLabel.font = [UIFont systemFontOfSize:14];
-    _userNameLabel.textColor = textColor;
     _userNameLabel.backgroundColor = [UIColor clearColor];
     _userNameLabel.shadowColor = [UIColor whiteColor];
     _userNameLabel.shadowOffset = CGSizeMake(0, 1);
@@ -36,8 +35,9 @@
     [_userNameLabel release];
     
     _timeAgoLabel = [[UILabel alloc] init];
+    _timeAgoLabel.textColor = [UIColor colorWithWhite:0.4 alpha:1.0];
+    _timeAgoLabel.highlightedTextColor = [UIColor whiteColor];
     _timeAgoLabel.font = [UIFont systemFontOfSize:14];
-    _timeAgoLabel.textColor = textColor;
     _timeAgoLabel.backgroundColor = [UIColor clearColor];
     _timeAgoLabel.shadowColor = [UIColor whiteColor];
     _timeAgoLabel.shadowOffset = CGSizeMake(0, 1);
@@ -54,9 +54,10 @@
     [_hintLabel release];
     
     _statusLabel = [[UILabel alloc] init];
+    _statusLabel.textColor = [UIColor colorWithWhite:0.4 alpha:1.0];    
+    _statusLabel.highlightedTextColor = [UIColor whiteColor];
     _statusLabel.backgroundColor = [UIColor clearColor];
     _statusLabel.font = [UIFont systemFontOfSize:14];
-    _statusLabel.textColor = textColor;
     _statusLabel.shadowColor = [UIColor whiteColor];
     _statusLabel.shadowOffset = CGSizeMake(0, 1);
     _statusLabel.numberOfLines = 0;
@@ -91,6 +92,20 @@
   return CGSizeMake(size.width, y);
 }
 
+- (void)setHighlighted:(BOOL)highlighted animated:(BOOL)animated {
+  _highlighted = highlighted;
+  if (highlighted) {
+    _userNameLabel.shadowColor = nil;
+    _timeAgoLabel.shadowColor = nil;
+    _statusLabel.shadowColor = nil;
+  } else {
+    _userNameLabel.shadowColor = [UIColor whiteColor];
+    _timeAgoLabel.shadowColor = [UIColor whiteColor];
+    _statusLabel.shadowColor = [UIColor whiteColor];
+  }
+  [self setNeedsDisplay];
+}
+
 - (void)setUserName:(NSString *)userName userImageURLString:(NSString *)userImageURLString lastModifiedDate:(NSDate *)lastModifiedDate hint:(NSString *)hint status:(NSString *)status {
   _userNameLabel.text = [NSString stringWithFormat:@"By %@", userName];
   _timeAgoLabel.text = [lastModifiedDate timeAgo];
@@ -109,8 +124,10 @@
   YKCGContextDrawLine(context, 0, self.frame.size.height - 0.5, self.frame.size.width, self.frame.size.height - 0.5, [UIColor colorWithWhite:0.6 alpha:1.0].CGColor, 1.0); // Bottom border
    */
   
-  YKCGContextDrawLine(context, 0, 0.5, self.frame.size.width, 0.5, [UIColor colorWithWhite:0.6 alpha:1.0].CGColor, 1.0); // Top border
-  YKCGContextDrawLine(context, 0, 1.5, self.frame.size.width, 1.5, [UIColor whiteColor].CGColor, 1.0);
+  if (!_highlighted) {
+    YKCGContextDrawLine(context, 0, 0.5, self.frame.size.width, 0.5, [UIColor colorWithWhite:0.6 alpha:1.0].CGColor, 1.0); // Top border
+    YKCGContextDrawLine(context, 0, 1.5, self.frame.size.width, 1.5, [UIColor whiteColor].CGColor, 1.0);
+  }
 }
 
 @end
@@ -132,6 +149,11 @@
 - (void)layoutSubviews {
   [super layoutSubviews];
   _gameCellView.frame = CGRectMake(0, 0, self.frame.size.width, self.frame.size.height);
+}
+
+- (void)setHighlighted:(BOOL)highlighted animated:(BOOL)animated {
+  [super setHighlighted:highlighted animated:animated];
+  [_gameCellView setHighlighted:highlighted animated:NO];
 }
 
 - (CGSize)sizeThatFits:(CGSize)size {
