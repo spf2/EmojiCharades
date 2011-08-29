@@ -196,7 +196,7 @@
 #pragma mark UITableViewDelegate methods
 
 static BOOL userCanGiveResultFor(ECGame *game, ECTurn *turn) {
-    return YES;//(game.owner && game.owner.userID == [ECUser selfUser].userID);
+    return (game.owner && game.owner.userID == [ECUser selfUser].userID);
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
