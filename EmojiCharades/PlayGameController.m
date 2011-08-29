@@ -216,9 +216,11 @@ static BOOL userCanGiveResultFor(ECGame *game, ECTurn *turn) {
     if (buttonIndex == 0) {
         _selectedTurn.result = [NSNumber numberWithInt:ECResultRight];
         [[RKObjectManager sharedManager] putObject:_selectedTurn delegate:self];
+        [self.view setNeedsDisplay];
     } else if (buttonIndex == 1) {
         _selectedTurn.result = [NSNumber numberWithInt:ECResultWrong];
         [[RKObjectManager sharedManager] putObject:_selectedTurn delegate:self];
+        [self.view setNeedsDisplay];
     }
 }
 

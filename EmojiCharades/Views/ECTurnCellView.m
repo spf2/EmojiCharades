@@ -82,12 +82,16 @@
 - (void)setUserName:(NSString *)userName userImageURLString:(NSString *)userImageURLString lastModifiedDate:(NSDate *)lastModifiedDate text:(NSString *)text status:(int)status {
     _userNameLabel.text = [NSString stringWithFormat:@"By %@", userName];
     _timeAgoLabel.text = [lastModifiedDate timeAgo];
-    _textLabel.text = text;
     
-//    if (status == ECResultWrong) {
-//    } else if (status == ECResultRight) {    
-//    } else {
-//    }
+    NSString *resultAndText = text;
+    if (status == ECResultRight) {
+        resultAndText = [NSString stringWithFormat:@"%@ %@", ECRight, text];
+        _textLabel.textColor = [UIColor colorWithRed:0 green:0.5 blue:0 alpha:1];
+    } else if (status == ECResultWrong) {
+        resultAndText = [NSString stringWithFormat:@"%@ %@", ECWrong, text];
+        _textLabel.textColor = [UIColor redColor];
+    }
+    _textLabel.text = resultAndText;
     
     [_userImageView setURLString:userImageURLString];
     [self setNeedsLayout];
