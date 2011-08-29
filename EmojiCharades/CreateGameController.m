@@ -54,15 +54,20 @@
     [_delegate gameCreatedOk: nil];
 }
 
+- (void)insertAtCursor:(NSString *)text
+{
+    NSRange replaceRange = _createGameView.hintTextView.selectedRange;
+    _createGameView.hintTextView.text = [_createGameView.hintTextView.text stringByReplacingCharactersInRange:replaceRange withString:text];
+    replaceRange.length = 0;
+    replaceRange.location += 1;
+    _createGameView.hintTextView.selectedRange = replaceRange;
+}
+
 #pragma mark ECKeyboardDelegate methods
 
 - (void)emojiButtonTap:(UIButton *)emojiButton
 {
-    NSRange replaceRange = _createGameView.hintTextView.selectedRange;
-    _createGameView.hintTextView.text = [_createGameView.hintTextView.text stringByReplacingCharactersInRange:replaceRange withString:emojiButton.titleLabel.text];
-    replaceRange.length = 0;
-    replaceRange.location += 1;
-    _createGameView.hintTextView.selectedRange = replaceRange;
+    [self insertAtCursor:emojiButton.titleLabel.text];
 }
 
 - (void)backspaceButtonTap:(UIBarButtonItem *)backspaceButton
@@ -82,7 +87,7 @@
 
 - (void)spaceButtonTap:(UIBarButtonItem *)sender
 {
-    _createGameView.hintTextView.text = [_createGameView.hintTextView.text stringByAppendingString:@" "];
+    [self insertAtCursor:ECSeparator];
 }
 
 #pragma mark RKObjectLoaderDelegate methods
