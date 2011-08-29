@@ -11,6 +11,7 @@
 #import "ECGame.h"
 #import "Constants.h"
 #import "ECGameCellView.h"
+#import "ECTableShadowView.h"
 
 @interface ShowGamesController ()
 - (void)configureCell:(ECGameTableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath;
@@ -38,6 +39,9 @@
     [super viewDidLoad];
     self.tableView.backgroundColor = [UIColor colorWithWhite:0.8 alpha:1.0];
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    ECTableShadowView *footer = [[ECTableShadowView alloc] initWithFrame:self.tableView.frame];
+    self.tableView.tableFooterView = footer;
+    [footer release];
     self.navigationItem.titleView = _filterSegmentedControl;
     self.navigationItem.rightBarButtonItem = _newGameButton;
     _newGameButton.target = self;
