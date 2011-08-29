@@ -56,13 +56,23 @@
 
 #pragma mark ECKeyboardDelegate methods
 
-- (void)emojiButtonTap:(UIButton *)emojiButton
+- (void)updateHintByAdding:(NSString *)text 
 {
     NSRange replaceRange = _createGameView.hintTextView.selectedRange;
-    _createGameView.hintTextView.text = [_createGameView.hintTextView.text stringByReplacingCharactersInRange:replaceRange withString:emojiButton.titleLabel.text];
+    _createGameView.hintTextView.text = [_createGameView.hintTextView.text stringByReplacingCharactersInRange:replaceRange withString:text];
     replaceRange.length = 0;
     replaceRange.location += 1;
-    _createGameView.hintTextView.selectedRange = replaceRange;
+    _createGameView.hintTextView.selectedRange = replaceRange;    
+}
+
+- (void)emojiButtonTap:(UIButton *)emojiButton
+{
+    [self updateHintByAdding:emojiButton.titleLabel.text];
+}
+
+- (void)spaceButtonTap:(UIBarButtonItem *)sender
+{
+    [self updateHintByAdding:@" "];
 }
 
 - (void)backspaceButtonTap:(UIBarButtonItem *)backspaceButton
@@ -78,11 +88,6 @@
         deleteRange.length = 0;
         _createGameView.hintTextView.selectedRange = deleteRange;
     }
-}
-
-- (void)spaceButtonTap:(UIBarButtonItem *)sender
-{
-    _createGameView.hintTextView.text = [_createGameView.hintTextView.text stringByAppendingString:@" "];
 }
 
 #pragma mark RKObjectLoaderDelegate methods

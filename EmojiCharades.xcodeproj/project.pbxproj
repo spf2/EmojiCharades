@@ -270,7 +270,7 @@
 		E7ACA6931406F7DB002A04AA /* RootViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RootViewController.xib; sourceTree = "<group>"; };
 		E7ACA6961406F833002A04AA /* RootView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RootView.h; sourceTree = "<group>"; };
 		E7ACA6971406F833002A04AA /* RootView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RootView.m; sourceTree = "<group>"; };
-		E7ACA69914072EEF002A04AA /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = Settings.bundle; path = EmojiCharades/Settings.bundle; sourceTree = "<group>"; };
+		E7ACA69914072EEF002A04AA /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		E7AF37A213E4B98300DB58CA /* EmojiCharades.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EmojiCharades.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E7AF37A613E4B98300DB58CA /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		E7AF37A813E4B98300DB58CA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -296,7 +296,7 @@
 		E7D3B9C213EF2A1E007C5B19 /* ResultController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ResultController.h; sourceTree = "<group>"; };
 		E7D3B9C313EF2A1E007C5B19 /* ResultController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ResultController.m; sourceTree = "<group>"; };
 		E7D3B9C413EF2A1F007C5B19 /* ResultController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ResultController.xib; sourceTree = "<group>"; };
-		E7E9BEC313F50BFD00C113F1 /* Entitlements.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = Entitlements.entitlements; sourceTree = "<group>"; };
+		E7E9BEC313F50BFD00C113F1 /* Entitlements.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = Entitlements.entitlements; path = ../Entitlements.entitlements; sourceTree = "<group>"; };
 		E7F8099313E5F0C90077F0CE /* RestKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RestKit.xcodeproj; path = RestKit/RestKit.xcodeproj; sourceTree = "<group>"; };
 		E7F809C613E5FD150077F0CE /* ECUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ECUser.h; sourceTree = "<group>"; };
 		E7F809C713E5FD150077F0CE /* ECUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ECUser.m; sourceTree = "<group>"; };
@@ -477,6 +477,19 @@
 			path = Examples;
 			sourceTree = "<group>";
 		};
+		E753DE7D140AC10C00E5B8C9 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				E7F809C613E5FD150077F0CE /* ECUser.h */,
+				E7F809C713E5FD150077F0CE /* ECUser.m */,
+				E7F809C913E67D420077F0CE /* ECGame.h */,
+				E7F809CA13E67D420077F0CE /* ECGame.m */,
+				E7F809CF13E680720077F0CE /* ECTurn.h */,
+				E7F809D013E680720077F0CE /* ECTurn.m */,
+			);
+			name = Models;
+			sourceTree = "<group>";
+		};
 		E77B279213FA0E2D009BA273 /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -496,8 +509,6 @@
 				E720AF8313E5EC10007D1564 /* MobileCoreServices.framework */,
 				E720AF8513E5EC1A007D1564 /* SystemConfiguration.framework */,
 				00175CF71404E3D700657265 /* QuartzCore.framework */,
-				E7E9BEC313F50BFD00C113F1 /* Entitlements.entitlements */,
-				E7ACA69914072EEF002A04AA /* Settings.bundle */,
 				E7AF37AE13E4B98300DB58CA /* EmojiCharades */,
 				00175C961404C33000657265 /* Libraries */,
 				E7AF37D413E4B98300DB58CA /* EmojiCharadesTests */,
@@ -530,6 +541,7 @@
 		E7AF37AE13E4B98300DB58CA /* EmojiCharades */ = {
 			isa = PBXGroup;
 			children = (
+				E753DE7D140AC10C00E5B8C9 /* Models */,
 				00771ACE13FA4FF400F2FBAA /* Views */,
 				E7AF37B713E4B98300DB58CA /* EmojiCharadesAppDelegate.h */,
 				E7AF37B813E4B98300DB58CA /* EmojiCharadesAppDelegate.m */,
@@ -539,12 +551,6 @@
 				E77213F513FF145E00F4D91C /* ECKeyboardViewController.xib */,
 				E7F809CC13E67F600077F0CE /* Constants.h */,
 				E7F809CD13E67F600077F0CE /* Constants.m */,
-				E7F809C613E5FD150077F0CE /* ECUser.h */,
-				E7F809C713E5FD150077F0CE /* ECUser.m */,
-				E7F809C913E67D420077F0CE /* ECGame.h */,
-				E7F809CA13E67D420077F0CE /* ECGame.m */,
-				E7F809CF13E680720077F0CE /* ECTurn.h */,
-				E7F809D013E680720077F0CE /* ECTurn.m */,
 				E7309C9313EE4A0400F270F3 /* PlayGameController.h */,
 				E7309C9413EE4A0400F270F3 /* PlayGameController.m */,
 				E7309C9513EE4A0400F270F3 /* PlayGameController.xib */,
@@ -571,6 +577,8 @@
 		E7AF37AF13E4B98300DB58CA /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				E7E9BEC313F50BFD00C113F1 /* Entitlements.entitlements */,
+				E7ACA69914072EEF002A04AA /* Settings.bundle */,
 				E7AF37B013E4B98300DB58CA /* EmojiCharades-Info.plist */,
 				E7AF37B113E4B98300DB58CA /* InfoPlist.strings */,
 				E7AF37B413E4B98300DB58CA /* main.m */,
