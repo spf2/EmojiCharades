@@ -2,27 +2,21 @@
 //  RootViewController.h
 //  EmojiCharades
 //
-//  Created by Steve Farrell on 7/30/11.
+//  Created by Steve Farrell on 8/25/11.
 //  Copyright 2011 __MyCompanyName__. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
-#import <CoreData/CoreData.h>
-#import <RestKit/RestKit.h>
+#import "RootView.h"
+#import "RestKit/RestKit.h"
+#import "Restkit/CoreData/CoreData.h"
+#import "FBConnect.h"
+#import "ShowGamesController.h"
 
-#import "CreateGameController.h"
-#import "PlayGameController.h"
-#import "YKUIRefreshTableView.h"
+@interface RootViewController : UIViewController<RKObjectLoaderDelegate, FBRequestDelegate, FBSessionDelegate>
 
-@interface RootViewController : UITableViewController <NSFetchedResultsControllerDelegate, RKObjectLoaderDelegate, CreateGameDelegate, YKUIRefreshTableViewDelegate> {
-    BOOL _gameRequestInFlight;
-}
-
-@property (nonatomic, retain) NSFetchedResultsController *fetchedResultsController;
-@property (nonatomic, retain) CreateGameController *createGameController;
-
-- (void)refreshData;
-
-- (YKUIRefreshTableView *)refreshTableView;
+@property (nonatomic, retain) IBOutlet RootView *rootView;
+@property (nonatomic, assign) Facebook *facebook;
+@property (nonatomic, retain) ShowGamesController *showGamesController;
 
 @end

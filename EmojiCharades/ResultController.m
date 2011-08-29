@@ -42,6 +42,7 @@
 - (void)rightButtonPressed:(id)sender 
 {
     _turn.result = [NSNumber numberWithInt:ECResultRight];
+    _turn.game.winningTurn = _turn;
     [[RKObjectManager sharedManager] putObject:_turn delegate:self];
 }
 

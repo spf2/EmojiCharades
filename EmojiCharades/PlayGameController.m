@@ -51,6 +51,10 @@
         newTurn.game = _game;
         [[RKObjectManager sharedManager] postObject:newTurn delegate:self];
         _playGameView.guessTextField.enabled = NO;
+        
+        // Perform some business logic so we don't have to wait for server.
+        _game.updatedAt = [NSDate date];
+        _game.numTurns = [NSNumber numberWithInt:_game.numTurns.intValue + 1];
     }
     return YES;
 }
@@ -129,7 +133,6 @@
                           otherButtonTitles:nil];
     [alert show];
     [alert release];    
-    
 }
 
 - (void)refreshData

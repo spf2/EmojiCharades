@@ -15,7 +15,11 @@
   UILabel *_timeAgoLabel;
   UILabel *_hintLabel;
   UILabel *_statusLabel;
+  
+  BOOL _highlighted;
 }
+
+- (void)setHighlighted:(BOOL)highlighted animated:(BOOL)animated;
 
 - (void)setUserName:(NSString *)userName userImageURLString:(NSString *)userImageURLString lastModifiedDate:(NSDate *)lastModifiedDate hint:(NSString *)hint status:(NSString *)status;
 
