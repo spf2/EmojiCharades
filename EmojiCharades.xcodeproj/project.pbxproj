@@ -12,6 +12,7 @@
 		003E1C74140385FD006331DA /* ECImageLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = 003E1C73140385FD006331DA /* ECImageLoader.m */; };
 		00771AD113FA4FF400F2FBAA /* PlayGameView.m in Sources */ = {isa = PBXBuildFile; fileRef = 00771AD013FA4FF400F2FBAA /* PlayGameView.m */; };
 		00C85F6A14036ACB00A2E5B6 /* ECGameCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 00C85F6914036ACB00A2E5B6 /* ECGameCellView.m */; };
+		0DAAFA64140B4C7000CE6FF5 /* ECTableShadowView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DAAFA63140B4C7000CE6FF5 /* ECTableShadowView.m */; };
 		BF693B221406DA3E009076A4 /* ECTurnCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = BF693B211406DA3E009076A4 /* ECTurnCellView.m */; };
 		E71D89B51406D5AB0077F98E /* YKImageLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = E71D898A1406D5AB0077F98E /* YKImageLoader.m */; };
 		E71D89B61406D5AB0077F98E /* YKUIActivityLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = E71D898D1406D5AB0077F98E /* YKUIActivityLabel.m */; };
@@ -196,6 +197,8 @@
 		00771AD013FA4FF400F2FBAA /* PlayGameView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlayGameView.m; sourceTree = "<group>"; };
 		00C85F6814036ACB00A2E5B6 /* ECGameCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = ECGameCellView.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		00C85F6914036ACB00A2E5B6 /* ECGameCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = ECGameCellView.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
+		0DAAFA62140B4C7000CE6FF5 /* ECTableShadowView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ECTableShadowView.h; sourceTree = "<group>"; };
+		0DAAFA63140B4C7000CE6FF5 /* ECTableShadowView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ECTableShadowView.m; sourceTree = "<group>"; };
 		BF693B201406DA3E009076A4 /* ECTurnCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ECTurnCellView.h; sourceTree = "<group>"; };
 		BF693B211406DA3E009076A4 /* ECTurnCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ECTurnCellView.m; sourceTree = "<group>"; };
 		E71D89881406D5AB0077F98E /* README */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README; sourceTree = "<group>"; };
@@ -355,11 +358,13 @@
 				E77213F713FF15CC00F4D91C /* ECKeyboardView.h */,
 				E77213F813FF15CC00F4D91C /* ECKeyboardView.m */,
 				00C85F6814036ACB00A2E5B6 /* ECGameCellView.h */,
+				00C85F6914036ACB00A2E5B6 /* ECGameCellView.m */,
 				BF693B201406DA3E009076A4 /* ECTurnCellView.h */,
 				BF693B211406DA3E009076A4 /* ECTurnCellView.m */,
-				00C85F6914036ACB00A2E5B6 /* ECGameCellView.m */,
 				003E1C72140385FD006331DA /* ECImageLoader.h */,
 				003E1C73140385FD006331DA /* ECImageLoader.m */,
+				0DAAFA62140B4C7000CE6FF5 /* ECTableShadowView.h */,
+				0DAAFA63140B4C7000CE6FF5 /* ECTableShadowView.m */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -852,6 +857,7 @@
 				E71D89C61406D5AB0077F98E /* YKError.m in Sources */,
 				E71D89C71406D5AB0077F98E /* YKLocalized.m in Sources */,
 				BF693B221406DA3E009076A4 /* ECTurnCellView.m in Sources */,
+				0DAAFA64140B4C7000CE6FF5 /* ECTableShadowView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

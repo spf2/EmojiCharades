@@ -73,8 +73,8 @@
     x = 12; // Reset x
     
     // Leave padding on right for disclosure icon
-    CGRect hintLabelFrame = [layout setFrame:CGRectMake(x, y, size.width - x - 25, 0) view:_textLabel sizeToFit:YES];
-    y += hintLabelFrame.size.height + 4;
+    CGRect textLabelFrame = [layout setFrame:CGRectMake(x, y, size.width - x - 25, 0) view:_textLabel sizeToFit:YES];
+    y += textLabelFrame.size.height + 4;
     
     return CGSizeMake(size.width, y);
 }

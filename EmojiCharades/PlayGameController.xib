@@ -2,9 +2,9 @@
 <archive type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="7.10">
 	<data>
 		<int key="IBDocument.SystemTarget">1280</int>
-		<string key="IBDocument.SystemVersion">11A2063</string>
+		<string key="IBDocument.SystemVersion">11B26</string>
 		<string key="IBDocument.InterfaceBuilderVersion">1617</string>
-		<string key="IBDocument.AppKitVersion">1138.1</string>
+		<string key="IBDocument.AppKitVersion">1138</string>
 		<string key="IBDocument.HIToolboxVersion">566.00</string>
 		<object class="NSMutableDictionary" key="IBDocument.PluginVersions">
 			<string key="NS.key.0">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
@@ -149,7 +149,7 @@
 													<reference key="NSNextKeyView" ref="11731045"/>
 													<object class="NSColor" key="IBUIBackgroundColor">
 														<int key="NSColorSpace">3</int>
-														<bytes key="NSWhite">MQA</bytes>
+														<bytes key="NSWhite">MC44AA</bytes>
 													</object>
 													<bool key="IBUIClipsSubviews">YES</bool>
 													<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
@@ -177,7 +177,7 @@
 									<reference key="NSNextKeyView" ref="1041585980"/>
 									<object class="NSColor" key="IBUIBackgroundColor">
 										<int key="NSColorSpace">3</int>
-										<bytes key="NSWhite">MSAwAA</bytes>
+										<bytes key="NSWhite">MC44AA</bytes>
 									</object>
 									<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 								</object>
@@ -192,7 +192,6 @@
 											<string key="NSFrame">{{12, 7}, {298, 31}}</string>
 											<reference key="NSSuperview" ref="11731045"/>
 											<reference key="NSWindow"/>
-											<reference key="NSNextKeyView"/>
 											<bool key="IBUIOpaque">NO</bool>
 											<bool key="IBUIClipsSubviews">YES</bool>
 											<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
@@ -473,11 +472,6 @@ AAMAAAABAAEAAAFTAAMAAAAEAAACAgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 						<string key="objectName">Play Game View</string>
 					</object>
 					<object class="IBObjectRecord">
-						<int key="objectID">35</int>
-						<reference key="object" ref="1041585980"/>
-						<reference key="parent" ref="484626859"/>
-					</object>
-					<object class="IBObjectRecord">
 						<int key="objectID">42</int>
 						<reference key="object" ref="548557911"/>
 						<reference key="parent" ref="484626859"/>
@@ -495,6 +489,11 @@ AAMAAAABAAEAAAFTAAMAAAAEAAACAgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 						<int key="objectID">37</int>
 						<reference key="object" ref="1005185173"/>
 						<reference key="parent" ref="718136542"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">35</int>
+						<reference key="object" ref="1041585980"/>
+						<reference key="parent" ref="484626859"/>
 					</object>
 				</object>
 			</object>
