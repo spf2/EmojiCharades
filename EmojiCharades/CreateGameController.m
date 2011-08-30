@@ -56,7 +56,7 @@
 
 #pragma mark ECKeyboardDelegate methods
 
-- (void)updateHintByAdding:(NSString *)text 
+- (void)insertAtCursor:(NSString *)text
 {
     NSRange replaceRange = _createGameView.hintTextView.selectedRange;
     _createGameView.hintTextView.text = [_createGameView.hintTextView.text stringByReplacingCharactersInRange:replaceRange withString:text];
@@ -67,12 +67,12 @@
 
 - (void)emojiButtonTap:(UIButton *)emojiButton
 {
-    [self updateHintByAdding:emojiButton.titleLabel.text];
+    [self insertAtCursor:emojiButton.titleLabel.text];
 }
 
 - (void)spaceButtonTap:(UIBarButtonItem *)sender
 {
-    [self updateHintByAdding:@" "];
+    [self insertAtCursor:ECSeparator];
 }
 
 - (void)backspaceButtonTap:(UIBarButtonItem *)backspaceButton

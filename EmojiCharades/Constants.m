@@ -11,6 +11,7 @@
 NSString * const ECDateFormat = @"yyyy-MM-dd'T'HH:mm:ss'Z'";
 NSString * const ECRight = @"\ue00e";
 NSString * const ECWrong = @"\ue421";
+NSString * const ECSeparator = @"\u2022";
 
 NSString * const ECFacebookAppID = @"245855945445328";
 
