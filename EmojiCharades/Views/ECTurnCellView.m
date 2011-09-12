@@ -90,6 +90,8 @@
     } else if (status == ECResultWrong) {
         resultAndText = [NSString stringWithFormat:@"%@ %@", ECWrong, text];
         _textLabel.textColor = [UIColor redColor];
+    } else {
+        _textLabel.textColor = [UIColor blackColor];
     }
     _textLabel.text = resultAndText;
     
