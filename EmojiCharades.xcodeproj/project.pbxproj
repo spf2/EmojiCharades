@@ -735,7 +735,6 @@
 		E7F809AE13E5F0C90077F0CE /* libRestKitJSONParser+NXJSON.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
-			name = "libRestKitJSONParser+NXJSON.a";
 			path = libRestKitJSONParserNXJSON.a;
 			remoteRef = E7F809AD13E5F0C90077F0CE /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
@@ -785,7 +784,7 @@
 		E7F809BC13E5F0C90077F0CE /* UISpec.app */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.application;
-			path = UISpec.app;
+			path = RestKitSpecs.app;
 			remoteRef = E7F809BB13E5F0C90077F0CE /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
