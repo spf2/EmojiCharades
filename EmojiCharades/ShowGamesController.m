@@ -23,7 +23,7 @@
 @synthesize fetchedResultsController = _fetchedResultsController;
 @synthesize createGameController = _createGameController;
 @synthesize filterSegmentedControl = _filterSegmentedControl;
-@synthesize newGameButton = _newGameButton;
+@synthesize newGameButton = _theNewGameButton;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -43,9 +43,9 @@
     self.tableView.tableFooterView = footer;
     [footer release];
     self.navigationItem.titleView = _filterSegmentedControl;
-    self.navigationItem.rightBarButtonItem = _newGameButton;
-    _newGameButton.target = self;
-    _newGameButton.action = @selector(showCreateGame);
+    self.navigationItem.rightBarButtonItem = _theNewGameButton;
+    _theNewGameButton.target = self;
+    _theNewGameButton.action = @selector(showCreateGame);
     self.navigationController.navigationBar.tintColor = [UIColor colorWithWhite:0.4 alpha:1.0];
     [[self refreshTableView] setRefreshHeaderEnabled:YES];
     [[self refreshTableView] setRefreshDelegate:self];
@@ -251,7 +251,7 @@
 {
     [_fetchedResultsController release];
     [_filterSegmentedControl release];
-    [_newGameButton release];
+    [_theNewGameButton release];
     [super dealloc];
 }
 
@@ -259,7 +259,6 @@
 {
     ECGame *game = [self.fetchedResultsController objectAtIndexPath:indexPath];
     
-    // TODO(steve): Need a valid Facebook id for the picture
     NSString *userImageURLString = (game.owner.facebookID ? [NSString stringWithFormat:@"http://graph.facebook.com/%@/picture", game.owner.facebookID] : nil);
     
     if (game.doneAt) {   

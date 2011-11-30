@@ -33,7 +33,6 @@ static ECUser* selfUser = nil;
      @"facebook_id", @"facebookID",
      @"facebook_access_token", @"facebookAccessToken",
      nil];
-    [mapping.dateFormatStrings addObject:ECDateFormat];
     [objectManager.mappingProvider registerMapping:mapping withRootKeyPath:@"user"];
     
     return mapping;

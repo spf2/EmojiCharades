@@ -37,8 +37,6 @@
      @"winning_turn_id", @"winningTurnID",
      nil];
     [mapping mapKeyPath:@"owner" toRelationship:@"owner" withMapping:userMapping serialize:NO];
-    [mapping connectRelationship:@"owner" withObjectForPrimaryKeyAttribute:@"ownerID"];
-    [mapping.dateFormatStrings addObject:ECDateFormat];
     [objectManager.mappingProvider registerMapping:mapping withRootKeyPath:@"game"];
     
     // tweak serialization

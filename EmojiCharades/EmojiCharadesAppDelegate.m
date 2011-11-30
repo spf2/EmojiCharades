@@ -73,7 +73,7 @@
 - (void)initializeDataLayer 
 {
     self.objectManager = [RKObjectManager objectManagerWithBaseURL:self.serviceURL];
-    [RKRequestQueue sharedQueue].showsNetworkActivityIndicatorWhenBusy = YES;    
+    [RKClient sharedClient].requestQueue.showsNetworkActivityIndicatorWhenBusy = YES;    
     self.objectManager.serializationMIMEType = RKMIMETypeJSON;
     NSString *databaseName = @"EmojiCharades.sqlite";
     self.objectManager.objectStore = [RKManagedObjectStore objectStoreWithStoreFilename:databaseName usingSeedDatabaseName:nil managedObjectModel:nil delegate:self];

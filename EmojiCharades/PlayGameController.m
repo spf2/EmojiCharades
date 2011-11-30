@@ -114,11 +114,15 @@
 
 #pragma mark RKObjectLoaderDelegate methods
 
-- (void)objectLoader:(RKObjectLoader*)objectLoader didLoadObject:(id)_ 
+- (void)objectLoader:(RKObjectLoader*)objectLoader didLoadObject:(id)object 
 {
-    _playGameView.guessTextField.enabled = YES;
-    _playGameView.guessTextField.text = @"";
-    [_playGameView.turnTableView reloadData];
+    if ([object respondsToSelector:@selector(game)]) {
+        _playGameView.guessTextField.enabled = YES;
+        _playGameView.guessTextField.text = @"";
+        [_playGameView.turnTableView reloadData];
+        // Issue a secondary request to refresh game
+        [[RKObjectManager sharedManager] getObject:[object performSelector:@selector(game)] delegate:self];
+    }
 }
 
 - (void)objectLoader:(RKObjectLoader*)objectLoader didFailWithError:(NSError*)error 

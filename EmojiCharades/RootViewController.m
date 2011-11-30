@@ -10,6 +10,7 @@
 #import "Constants.h"
 #import "EmojiCharadesAppDelegate.h"
 #import "FBConnect.h"
+#import <RestKit/RestKit.h>
 
 @interface RootViewController (PrivateMethods)
 - (void)showGames;
@@ -49,7 +50,7 @@
         RKObjectManager *om = [RKObjectManager sharedManager];
         om.client.username = [NSString stringWithFormat:@"%@", user.userID];
         om.client.password = user.facebookAccessToken;
-        [om.client forceBasicAuthentication];
+        om.client.authenticationType = RKRequestAuthenticationTypeHTTPBasic;
     }
 }
 

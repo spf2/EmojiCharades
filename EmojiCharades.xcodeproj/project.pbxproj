@@ -622,14 +622,14 @@
 				E7F809A813E5F0C90077F0CE /* libRestKitNetwork.a */,
 				E7F809AA13E5F0C90077F0CE /* libRestKitObjectMapping.a */,
 				E7F809AC13E5F0C90077F0CE /* libRestKitSupport.a */,
-				E7F809AE13E5F0C90077F0CE /* libRestKitJSONParser+NXJSON.a */,
+				E7F809AE13E5F0C90077F0CE /* libRestKitJSONParserNXJSON.a */,
 				E7F809B013E5F0C90077F0CE /* libRestKitJSONParserYAJL.a */,
 				E7F809B213E5F0C90077F0CE /* libRestKitJSONParserSBJSON.a */,
 				E7F809B413E5F0C90077F0CE /* libRestKitJSONParserJSONKit.a */,
 				E7F809B613E5F0C90077F0CE /* libRestKitXMLParserLibxml.a */,
 				E7F809B813E5F0C90077F0CE /* libRestKitCoreData.a */,
 				E7F809BA13E5F0C90077F0CE /* libRestKitThree20.a */,
-				E7F809BC13E5F0C90077F0CE /* UISpec.app */,
+				E7F809BC13E5F0C90077F0CE /* RestKitSpecs.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -740,10 +740,9 @@
 			remoteRef = E7F809AB13E5F0C90077F0CE /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		E7F809AE13E5F0C90077F0CE /* libRestKitJSONParser+NXJSON.a */ = {
+		E7F809AE13E5F0C90077F0CE /* libRestKitJSONParserNXJSON.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
-			name = "libRestKitJSONParser+NXJSON.a";
 			path = libRestKitJSONParserNXJSON.a;
 			remoteRef = E7F809AD13E5F0C90077F0CE /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
@@ -790,10 +789,10 @@
 			remoteRef = E7F809B913E5F0C90077F0CE /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		E7F809BC13E5F0C90077F0CE /* UISpec.app */ = {
+		E7F809BC13E5F0C90077F0CE /* RestKitSpecs.app */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.application;
-			path = UISpec.app;
+			path = RestKitSpecs.app;
 			remoteRef = E7F809BB13E5F0C90077F0CE /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
